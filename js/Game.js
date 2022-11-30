@@ -7,6 +7,9 @@ class Game {
       this.tileMap = tileMap;
 
       this.player = new Player(this.tileMap.pacman, 0, 0, 32, 32);
+      this.player.centerInScreen(this.tileMap.width, this.tileMap.height);
+
+      this.camera = new Camera(0, 0, 608, 512, this.player, this.tileMap);
    }
 
    loop = () => {
@@ -17,11 +20,13 @@ class Game {
 
    update() {
       this.player.update();
+      this.camera.update();
    }
 
    draw() {
       this.context.save();
 
+      this.camera.draw(this.context);
       this.tileMap.draw(this.canvas, this.context);
       this.player.draw(this.context);
 
