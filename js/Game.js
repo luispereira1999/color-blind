@@ -16,7 +16,7 @@ class Game {
    }
 
    update() {
-
+      this.player.update();
    }
 
    draw() {
