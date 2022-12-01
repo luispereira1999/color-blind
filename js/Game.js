@@ -26,6 +26,10 @@ class Game {
    draw() {
       this.context.save();
 
+      // fundo
+      this.context.fillStyle = "black";
+      this.context.fillRect(0, 0, canvas.width, canvas.height);
+
       this.camera.draw(this.context);
       this.tileMap.draw(this.context);
       this.player.draw(this.context);
