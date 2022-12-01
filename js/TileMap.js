@@ -20,7 +20,7 @@ class TileMap {
       return img;
    }
 
-   draw(canvas, context) {
+   draw(context) {
       this.drawMap(context);
    }
 

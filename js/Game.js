@@ -27,7 +27,7 @@ class Game {
       this.context.save();
 
       this.camera.draw(this.context);
-      this.tileMap.draw(this.canvas, this.context);
+      this.tileMap.draw(this.context);
       this.player.draw(this.context);
 
       this.context.restore();

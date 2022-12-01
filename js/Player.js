@@ -8,23 +8,16 @@ class Player {
       this.width = width;
       this.height = height;
 
+      this.speed = 1;
+
       this.moveLeft = false;
       this.moveRight = false;
       this.moveUp = false;
       this.moveDown = false;
 
-      this.keys = {
-         LEFT: 37,
-         RIGHT: 39,
-         UP: 38,
-         DOWN: 40
-      }
-
-      // quando a tecla é pressionada
-      window.addEventListener("keydown", this.onKeydownPressed);
-
-      // quando a tecla é solta
-      window.addEventListener("keyup", this.onKeyupPressed);
+      this.keyboard = new Keyboard();
+      this.keyboard.addKeydown(this.onKeydownPressed);
+      this.keyboard.addKeyup(this.onKeyupPressed);
    }
 
    centerInScreen(mapWidth, mapHeight) {
@@ -33,38 +26,38 @@ class Player {
    }
 
    onKeydownPressed = (event) => {
-      const key = event.keyCode;
+      const keyPressed = event.keyCode;
 
-      switch (key) {
-         case this.keys.LEFT:
+      switch (keyPressed) {
+         case Keyboard.Keys.LEFT:
             this.moveLeft = true;
             break;
-         case this.keys.RIGHT:
+         case Keyboard.Keys.RIGHT:
             this.moveRight = true;
             break;
-         case this.keys.UP:
+         case Keyboard.Keys.UP:
             this.moveUp = true;
             break;
-         case this.keys.DOWN:
+         case Keyboard.Keys.DOWN:
             this.moveDown = true;
             break;
       }
    }
 
    onKeyupPressed = (event) => {
-      const key = event.keyCode;
+      const keyPressed = event.keyCode;
 
-      switch (key) {
-         case this.keys.LEFT:
+      switch (keyPressed) {
+         case Keyboard.Keys.LEFT:
             this.moveLeft = false;
             break;
-         case this.keys.RIGHT:
+         case Keyboard.Keys.RIGHT:
             this.moveRight = false;
             break;
-         case this.keys.UP:
+         case Keyboard.Keys.UP:
             this.moveUp = false;
             break;
-         case this.keys.DOWN:
+         case Keyboard.Keys.DOWN:
             this.moveDown = false;
             break;
       }
@@ -76,16 +69,16 @@ class Player {
 
    move() {
       if (this.moveLeft && !this.moveRight) {
-         this.x -= 2;
+         this.x -= this.speed;
       }
-      if (this.moveRight) {
-         this.x += 2;
+      if (this.moveRight && !this.moveLeft) {
+         this.x += this.speed;
       }
       if (this.moveUp && !this.moveDown) {
-         this.y -= 2;
+         this.y -= this.speed;
       }
       if (this.moveDown && !this.moveUp) {
-         this.y += 2;
+         this.y += this.speed;
       }
    }
 

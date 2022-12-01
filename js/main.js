@@ -39,5 +39,6 @@ const mapLevel1 = [
 ];
 
 const tileMapLevel1 = new TileMap(tileSize, mapLevel1);
+
 const game = new Game(canvas, context, tileMapLevel1);
 game.loop();
