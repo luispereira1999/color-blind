@@ -20,9 +20,9 @@ class Player {
       this.keyboard.addKeyup(this.onKeyupPressed);
    }
 
-   centerInScreen(mapWidth, mapHeight) {
-      this.x = (mapWidth - this.width) / 2;
-      this.y = (mapHeight - this.height) / 2;
+   centerInScreen(tileMapWidth, tileMapHeight) {
+      this.x = (tileMapWidth - this.width) / 2;
+      this.y = (tileMapHeight - this.height) / 2;
    }
 
    onKeydownPressed = (event) => {

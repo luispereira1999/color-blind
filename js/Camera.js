@@ -1,13 +1,13 @@
 "use strict";
 
 class Camera {
-   constructor(x, y, width, height, playerToFollow, map) {
+   constructor(x, y, width, height, player, tileMap) {
       this.x = x;
       this.y = y;
       this.width = width;
       this.height = height;
-      this.playerToFollow = playerToFollow;
-      this.map = map;
+      this.player = player;
+      this.tileMap = tileMap;
    }
 
    getLeftEdge() {
@@ -23,18 +23,24 @@ class Camera {
       return this.y + (this.height * 0.75);
    }
 
+   update() {
+      this.followPlayer();
+      this.setLimitsForCameraMovement();
+      this.setLimitsForPlayerMovement();
+   }
+
    followPlayer() {
-      if (this.playerToFollow.x < this.getLeftEdge()) {
-         this.x = this.playerToFollow.x - (this.width * 0.25);
+      if (this.player.x < this.getLeftEdge()) {
+         this.x = this.player.x - (this.width * 0.25);
       }
-      if (this.playerToFollow.x + this.playerToFollow.width > this.getRightEdge()) {
-         this.x = this.playerToFollow.x + this.playerToFollow.width - (this.width * 0.75);
+      if (this.player.x + this.player.width > this.getRightEdge()) {
+         this.x = this.player.x + this.player.width - (this.width * 0.75);
       }
-      if (this.playerToFollow.y < this.getTopEdge()) {
-         this.y = this.playerToFollow.y - (this.height * 0.25);
+      if (this.player.y < this.getTopEdge()) {
+         this.y = this.player.y - (this.height * 0.25);
       }
-      if (this.playerToFollow.y + this.playerToFollow.height > this.getBottomEdge()) {
-         this.y = this.playerToFollow.y + this.playerToFollow.height - (this.height * 0.75);
+      if (this.player.y + this.player.height > this.getBottomEdge()) {
+         this.y = this.player.y + this.player.height - (this.height * 0.75);
       }
    }
 
@@ -42,36 +48,30 @@ class Camera {
       if (this.x < 0) {
          this.x = 0;
       }
-      if (this.x + this.width > this.map.width) {
-         this.x = this.map.width - this.width;
+      if (this.x + this.width > this.tileMap.width) {
+         this.x = this.tileMap.width - this.width;
       }
       if (this.y < 0) {
          this.y = 0;
       }
-      if (this.y + this.height > this.map.height) {
-         this.y = this.map.height - this.height;
+      if (this.y + this.height > this.tileMap.height) {
+         this.y = this.tileMap.height - this.height;
       }
    }
 
    setLimitsForPlayerMovement() {
-      if (this.playerToFollow.x < 0) {
-         this.playerToFollow.x = 0;
+      if (this.player.x < 0) {
+         this.player.x = 0;
       }
-      if (this.playerToFollow.x + this.playerToFollow.width > this.map.width) {
-         this.playerToFollow.x = this.map.width - this.playerToFollow.width;
+      if (this.player.x + this.player.width > this.tileMap.width) {
+         this.player.x = this.tileMap.width - this.player.width;
       }
-      if (this.playerToFollow.y < 0) {
-         this.playerToFollow.y = 0;
+      if (this.player.y < 0) {
+         this.player.y = 0;
       }
-      if (this.playerToFollow.y + this.playerToFollow.height > this.map.height) {
-         this.playerToFollow.y = this.map.height - this.playerToFollow.height;
+      if (this.player.y + this.player.height > this.tileMap.height) {
+         this.player.y = this.tileMap.height - this.player.height;
       }
-   }
-
-   update() {
-      this.followPlayer();
-      this.setLimitsForCameraMovement();
-      this.setLimitsForPlayerMovement();
    }
 
    draw(context) {
