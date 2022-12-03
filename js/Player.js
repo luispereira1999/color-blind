@@ -25,6 +25,15 @@ class Player {
       this.y = (tileMapHeight - this.height) / 2;
    }
 
+   getBounds() {
+      return {
+         left: this.x,
+         right: this.height,
+         top: this.y,
+         bottom: this.width,
+      }
+   }
+
    onKeydownPressed = (event) => {
       const keyPressed = event.keyCode;
 
@@ -63,8 +72,25 @@ class Player {
       }
    }
 
-   update() {
+   update(tiles) {
+      // guardar valores do movimento anterior, para se houver colisão voltar ao valores do movimento anterior
+      const oldX = this.x;
+      const oldY = this.y;
       this.move();
+
+      // verificar colisões para cada camada do mapa
+      let colliding = false;
+      tiles.layers.forEach((currentMap, index) => {
+         // verificar apenas a camada de objetos/paredes colisiveis
+         if (index == 1) {
+            colliding = this.checkCollision(currentMap);
+         }
+      });
+
+      if (colliding) {
+         this.x = oldX;
+         this.y = oldY;
+      }
    }
 
    move() {
@@ -80,6 +106,39 @@ class Player {
       if (this.moveDown && !this.moveUp) {
          this.y += this.speed;
       }
+   }
+
+   checkCollision(currentMap) {
+      let colliding = false;
+
+      for (let row = 0; row < currentMap.length; row++) {
+         if (row != null) {
+            for (let column = 0; column < currentMap[row].length; column++) {
+               const tile = currentMap[row][column];
+
+               if (tile == null) {
+                  continue;
+               }
+
+               if (tile.type != TILE_TYPE.BLOCK) {
+                  continue;
+               }
+
+               const tileBounds = {
+                  left: column * tileSize,
+                  right: 32,
+                  top: row * tileSize,
+                  bottom: 32,
+               }
+
+               if (isCollide(this.getBounds(), tileBounds)) {
+                  colliding = true;
+               }
+            }
+         }
+      }
+
+      return colliding;
    }
 
    draw(context) {

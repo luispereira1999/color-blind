@@ -6,7 +6,7 @@ class Game {
       this.context = context;
       this.tileMap = tileMap;
 
-      this.player = new Player(this.tileMap.pacman, 0, 0, this.tileMap.tileSize, this.tileMap.tileSize);
+      this.player = new Player(this.tileMap.pacman, 1 * this.tileMap.tileSize, 1 * this.tileMap.tileSize, this.tileMap.tileSize, this.tileMap.tileSize);
       this.player.centerInScreen(this.tileMap.width, this.tileMap.height);
 
       this.camera = new Camera(0, 0, 608, 512, this.player, this.tileMap);
@@ -19,7 +19,7 @@ class Game {
    }
 
    update() {
-      this.player.update();
+      this.player.update(this.tileMap.tiles);
       this.camera.update();
    }
 
@@ -28,7 +28,7 @@ class Game {
 
       // fundo
       this.context.fillStyle = "black";
-      this.context.fillRect(0, 0, canvas.width, canvas.height);
+      this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
       this.camera.draw(this.context);
       this.tileMap.draw(this.context);

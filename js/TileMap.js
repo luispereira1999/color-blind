@@ -15,11 +15,11 @@ class TileMap {
          this.tiles.layers[index] = this.setTiles(currentMap);
       });
 
-      this.dot = this.createTile(0);
-      this.wall = this.createTile(1);
-      this.pacman = this.createImage(2);
-      this.ghost = this.createTile(3);
-      this.floor = this.createTile(4);
+      this.dot = this.setImage(0);
+      this.wall = this.setImage(1);
+      this.pacman = this.setImage(2);
+      this.ghost = this.setImage(3);
+      this.floor = this.setImage(4);
    }
 
    setTiles(currentMap) {
@@ -41,11 +41,11 @@ class TileMap {
                   tile = new Tile(tileNumber, TILE_TYPE.BLOCK);
                   break;
                case 2:  // personagem principal
-                  tile = new Tile(tileNumber, TILE_TYPE.BLOCK);
+                  this.pacman = this.setImage(2);
                   break;
-               case 3:  // inimigo
-                  tile = new Tile(tileNumber, TILE_TYPE.BLOCK);
-                  break;
+               // case 3:  // inimigo
+                  // tile = new Tile(tileNumber, TILE_TYPE.BLOCK);
+                  // break;
             }
 
             if (tile != null) {
@@ -57,7 +57,7 @@ class TileMap {
       return tiles;
    }
 
-   createImage(tileNumber) {
+   setImage(tileNumber) {
       const img = new Image();
       img.src = `./assets/${tileNumber}.png`;
       return img;
@@ -68,6 +68,9 @@ class TileMap {
       this.tiles.layers.forEach((currentMap) => {
          this.drawMap(context, currentMap);
       });
+
+      // context.fillStyle = "rgba(255, 255, 255, 0.5)";
+      // context.fillRect(32 * 0, 32 * 5, 32, 32);
    }
 
    drawMap(context, currentMap) {
