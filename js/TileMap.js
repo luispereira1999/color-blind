@@ -10,16 +10,12 @@ class TileMap {
       this.tiles = {};
       this.tiles.layers = [];
 
+      this.startLevelPosition = {};
+
       // definir os tiles de cada camada
       this.map.layers.forEach((currentMap, index) => {
          this.tiles.layers[index] = this.setTiles(currentMap);
       });
-
-      this.dot = this.setImage(0);
-      this.wall = this.setImage(1);
-      this.pacman = this.setImage(2);
-      this.ghost = this.setImage(3);
-      this.floor = this.setImage(4);
    }
 
    setTiles(currentMap) {
@@ -41,11 +37,14 @@ class TileMap {
                   tile = new Tile(tileNumber, TILE_TYPE.BLOCK);
                   break;
                case 2:  // personagem principal
-                  this.pacman = this.setImage(2);
+                  this.startLevelPosition = {
+                     x: row * this.tileSize,
+                     y: column * this.tileSize
+                  }
                   break;
-               // case 3:  // inimigo
+               case 3:  // inimigos
                   // tile = new Tile(tileNumber, TILE_TYPE.BLOCK);
-                  // break;
+                  break;
             }
 
             if (tile != null) {
@@ -55,12 +54,6 @@ class TileMap {
       }
 
       return tiles;
-   }
-
-   setImage(tileNumber) {
-      const img = new Image();
-      img.src = `./assets/${tileNumber}.png`;
-      return img;
    }
 
    draw(context) {

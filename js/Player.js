@@ -1,8 +1,8 @@
 "use strict";
 
 class Player {
-   constructor(image, x, y, width, height) {
-      this.image = image;
+   constructor(animation, x, y, width, height) {
+      this.animation = animation;
       this.x = x;
       this.y = y;
       this.width = width;
@@ -20,17 +20,12 @@ class Player {
       this.keyboard.addKeyup(this.onKeyupPressed);
    }
 
-   centerInScreen(tileMapWidth, tileMapHeight) {
-      this.x = (tileMapWidth - this.width) / 2;
-      this.y = (tileMapHeight - this.height) / 2;
-   }
-
    getBounds() {
       return {
          left: this.x,
-         right: this.height,
+         right: this.width * this.animation.scale,
          top: this.y,
-         bottom: this.width,
+         bottom: this.height * this.animation.scale,
       }
    }
 
@@ -142,6 +137,6 @@ class Player {
    }
 
    draw(context) {
-      context.drawImage(this.image, 0, 0, this.width, this.height, this.x, this.y, this.width, this.height);
+      this.animation.draw(context, this.x, this.y);
    }
 }
