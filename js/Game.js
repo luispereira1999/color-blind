@@ -6,18 +6,26 @@ class Game {
       this.context = context;
       this.tileMap = tileMap;
 
-      const animation = new Animation("./assets/player.png", 64, 100);
+      const animationPlayer = new Animation("./assets/player.png", 64, 100);
       this.player = new Player(
-         animation,
+         animationPlayer,
          this.tileMap.startPlayerPosition.x,
          this.tileMap.startPlayerPosition.y,
-         animation.frameWidth,
-         animation.frameHeight
+         animationPlayer.frameWidth,
+         animationPlayer.frameHeight
       );
 
       this.enemies = [];
       this.tileMap.startEnemiesPosition.forEach(position => {
-         const enemy = new Enemy("./assets/enemy.png", position.x, position.y, 32, 47);
+         const animationEnemy = new Animation("./assets/enemy.png", 67, 99);
+         const enemy = new Enemy(
+            animationEnemy,
+            position.x,
+            position.y,
+            animationEnemy.frameWidth,
+            animationEnemy.frameHeight
+         );
+
          this.enemies.push(enemy);
       });
 
@@ -74,6 +82,8 @@ class Game {
       this.drawBackground();
       this.camera.draw(this.context);
       this.tileMap.draw(this.context);
+
+      // lâmpada
       context.arc(7 * 32 + 15, 1 * 32 + 15, 12, 0, 2 * Math.PI, false);
       context.fillStyle = 'rgba(99, 255, 71, 0.75)';
       context.fill();
