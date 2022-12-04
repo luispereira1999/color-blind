@@ -9,11 +9,17 @@ class Game {
       const animation = new Animation("./assets/player.png", 64, 100);
       this.player = new Player(
          animation,
-         this.tileMap.startLevelPosition.x,
-         this.tileMap.startLevelPosition.y,
+         this.tileMap.startPlayerPosition.x,
+         this.tileMap.startPlayerPosition.y,
          animation.frameWidth,
          animation.frameHeight
       );
+
+      this.enemies = [];
+      this.tileMap.startEnemiesPosition.forEach(position => {
+         const enemy = new Enemy("./assets/enemy.png", position.x, position.y, 32, 47);
+         this.enemies.push(enemy);
+      });
 
       this.camera = new Camera(0, 0, 608, 512, this.player, this.tileMap);
 
@@ -51,6 +57,9 @@ class Game {
       this.drawBackground();
       this.camera.draw(this.context);
       this.tileMap.draw(this.context);
+      this.enemies.forEach(enemy => {
+         enemy.draw(this.context);
+      });
       this.player.draw(this.context);
 
       this.context.restore();

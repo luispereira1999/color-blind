@@ -13,8 +13,8 @@ class Tile {
    }
 
    setImage(tileNumber) {
-      const img = new Image();
-      img.src = `./assets/${tileNumber}.png`;
-      return img;
+      const image = new Image();
+      image.src = `./assets/${tileNumber}.png`;
+      return image;
    }
 }
