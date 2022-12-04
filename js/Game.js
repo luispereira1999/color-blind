@@ -6,7 +6,7 @@ class Game {
       this.context = context;
       this.tileMap = tileMap;
 
-      const animation = new Animation("./assets/2.png", 64, 100);
+      const animation = new Animation("./assets/player.png", 64, 100);
       this.player = new Player(
          animation,
          this.tileMap.startLevelPosition.x,

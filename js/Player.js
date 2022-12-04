@@ -91,15 +91,19 @@ class Player {
    move() {
       if (this.moveLeft && !this.moveRight) {
          this.x -= this.speed;
+         this.animation.angleInDegrees = 270;
       }
       if (this.moveRight && !this.moveLeft) {
          this.x += this.speed;
+         this.animation.angleInDegrees = 90;
       }
       if (this.moveUp && !this.moveDown) {
          this.y -= this.speed;
+         this.animation.angleInDegrees = 0;
       }
       if (this.moveDown && !this.moveUp) {
          this.y += this.speed;
+         this.animation.angleInDegrees = 180;
       }
    }
 
