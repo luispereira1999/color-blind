@@ -16,6 +16,22 @@ class Game {
       );
 
       this.camera = new Camera(0, 0, 608, 512, this.player, this.tileMap);
+
+      const numberOfColors = 3;
+      let colors = [];
+
+      const getColors = new Promise((resolve, reject) => {
+         fetch(`https://www.colr.org/json/colors/random/${numberOfColors}`, {
+            method: "GET"
+         }).then(data => resolve(data))
+            .catch(error => reject(error));
+      });
+
+      getColors.then(response => {
+         response.json().then(data => {
+            colors = data.colors;
+         })
+      });
    }
 
    loop = () => {
