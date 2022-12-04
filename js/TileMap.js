@@ -36,6 +36,7 @@ class TileMap {
                   break;
                case 1:  // paredes
                case 4:  // objeto
+               case 5:  // lâmpada
                   tile = new Tile(tileNumber, TILE_TYPE.BLOCK);
                   break;
                case 2:  // personagem principal

@@ -1,7 +1,7 @@
 "use strict";
 
 class Game {
-   constructor(canvas, context, tileMap) {
+   constructor(canvas, context, tileMap, levelTime) {
       this.canvas = canvas;
       this.context = context;
       this.tileMap = tileMap;
@@ -38,12 +38,29 @@ class Game {
             colors = data.colors;
          })
       });
+
+      this.timer = new Timer(levelTime, true);
    }
 
-   loop = () => {
-      window.requestAnimationFrame(this.loop, this.canvas);
-      this.update();
-      this.draw();
+   loop = (estimatedTime) => {
+      if (this.timer.started) {
+         this.timer.currentTime = estimatedTime + this.timer.fullTime;
+         this.timer.started = false;
+      }
+      else {
+         if (estimatedTime >= this.timer.currentTime) {
+            this.timer.finished = true;
+         }
+      }
+
+      this.timer.currentTimeInSeconds = this.timer.currentTime - estimatedTime;
+
+      // continuar ciclo do jogo até acabar o tempo
+      if (!this.timer.finished) {
+         this.update();
+         this.draw();
+         requestAnimationFrame(this.loop);
+      }
    }
 
    update() {
@@ -57,12 +74,21 @@ class Game {
       this.drawBackground();
       this.camera.draw(this.context);
       this.tileMap.draw(this.context);
+      context.arc(7 * 32 + 15, 1 * 32 + 15, 12, 0, 2 * Math.PI, false);
+      context.fillStyle = 'rgba(99, 255, 71, 0.75)';
+      context.fill();
+
       this.enemies.forEach(enemy => {
          enemy.draw(this.context);
       });
       this.player.draw(this.context);
 
       this.context.restore();
+
+      // desenhar elementos estáticos em relação ao movimento da câmara
+      this.context.font = "bold 20px Arial";
+      this.context.fillText(`Tempo: ${Math.floor(this.timer.currentTimeInSeconds / 1000)}`, 10, 30);
+      this.context.fillStyle = "white";
    }
 
    drawBackground() {
