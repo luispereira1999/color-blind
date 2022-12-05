@@ -20,20 +20,26 @@
    <script src="./js/Keyboard.js" defer></script>
    <script src="./js/Collision.js" defer></script>
    <script src="./js/Animation.js" defer></script>
-   <script src="./js/Game.js" defer></script>
-   <script src="./js/Tile.js" defer></script>
-   <script src="./js/TileMap.js" defer></script>
    <script src="./js/Camera.js" defer></script>
    <script src="./js/Player.js" defer></script>
    <script src="./js/Enemy.js" defer></script>
    <script src="./js/Timer.js" defer></script>
+   <script src="./js/Tile.js" defer></script>
+   <script src="./js/TileMap.js" defer></script>
+   <script src="./js/Level.js" defer></script>
+   <script src="./js/GameController.js" defer></script>
    <script src="./js/main.js" defer></script>
 </head>
 
 <body>
-   <div>
-      <canvas id="screenGame" width="608" height="512"></canvas>
+   <div id="menuScreen">
+      <img class="image-background" src="./assets/menu-background.jpg" alt="Imagem de fundo">
+      <button class="button-new-game" onclick="startGame()">Iniciar Jogo</button>
    </div>
+
+   <!-- <div> -->
+   <canvas id="gameScreen" width="608" height="512"></canvas>
+   <!-- </div> -->
 </body>
 
 </html>
