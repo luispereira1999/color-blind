@@ -1,12 +1,17 @@
 "use strict";
 
 class Level {
-   constructor(canvas, context, tileMap, tileSize, levelTime) {
+   constructor(canvas, context, tileMap, tileSize, levelTime, numberOfColors, lives) {
       this.canvas = canvas;
       this.context = context;
       this.tileMap = tileMap;
       this.tileSize = tileSize;
+      this.loadedLevel = false;
 
+      this.init(levelTime, numberOfColors);
+   }
+
+   async init(levelTime, numberOfColors) {
       const animationPlayer = new Animation("./assets/player.png", 64, 100);
       this.player = new Player(
          animationPlayer,
@@ -32,26 +37,37 @@ class Level {
 
       this.camera = new Camera(0, 0, 608, 512, this.player, this.tileMap);
 
-      const numberOfColors = 3;
-      let colors = [];
-
-      const getColors = new Promise((resolve, reject) => {
-         fetch(`https://www.colr.org/json/colors/random/${numberOfColors}`, {
-            method: "GET"
-         }).then(data => resolve(data))
-            .catch(error => reject(error));
-      });
-
-      getColors.then(response => {
-         response.json().then(data => {
-            colors = data.colors;
-         })
-      });
+      this.colors = [];
+      this.colors = await this.getColors(numberOfColors);
 
       this.timer = new Timer(levelTime, true);
+      this.loadedLevel = true;
+   }
+
+   getColors = async (numberOfColors) => {
+      const colorService = new ColorService();
+
+      const colorsResponse = colorService.getColors(numberOfColors)
+         .then(response => {
+            return response.json().then(data => {
+               return data.colors;
+            })
+         })
+         .catch(error => {
+            console.log(error)
+         });
+
+      return await colorsResponse;
    }
 
    loop = (estimatedTime) => {
+      // se ainda não carregou o mapa todo
+      if (!this.loadedLevel) {
+         requestAnimationFrame(this.loop);
+         return;
+      }
+
+      // código será executado após o mapa carregar todo
       if (this.timer.started) {
          this.timer.currentTime = estimatedTime + this.timer.fullTime;
          this.timer.started = false;
