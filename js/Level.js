@@ -1,10 +1,11 @@
 "use strict";
 
-class Game {
-   constructor(canvas, context, tileMap, levelTime) {
+class Level {
+   constructor(canvas, context, tileMap, tileSize, levelTime) {
       this.canvas = canvas;
       this.context = context;
       this.tileMap = tileMap;
+      this.tileSize = tileSize;
 
       const animationPlayer = new Animation("./assets/player.png", 64, 100);
       this.player = new Player(
@@ -72,7 +73,7 @@ class Game {
    }
 
    update() {
-      this.player.update(this.tileMap.tiles);
+      this.player.update(this.tileMap.tiles, this.tileSize);
       this.camera.update();
    }
 
@@ -84,9 +85,9 @@ class Game {
       this.tileMap.draw(this.context);
 
       // lâmpada
-      context.arc(7 * 32 + 15, 1 * 32 + 15, 12, 0, 2 * Math.PI, false);
-      context.fillStyle = 'rgba(99, 255, 71, 0.75)';
-      context.fill();
+      this.context.arc(7 * 32 + 15, 1 * 32 + 15, 12, 0, 2 * Math.PI, false);
+      this.context.fillStyle = 'rgba(99, 255, 71, 0.75)';
+      this.context.fill();
 
       this.enemies.forEach(enemy => {
          enemy.draw(this.context);

@@ -67,7 +67,7 @@ class Player {
       }
    }
 
-   update(tiles) {
+   update(tiles, tileSize) {
       // guardar valores do movimento anterior, para se houver colisão voltar ao valores do movimento anterior
       const oldX = this.x;
       const oldY = this.y;
@@ -78,7 +78,7 @@ class Player {
       tiles.layers.forEach((currentMap, index) => {
          // verificar apenas a camada de objetos/paredes colisiveis
          if (index == 1) {
-            colliding = this.checkCollision(currentMap);
+            colliding = this.checkCollision(currentMap, tileSize);
          }
       });
 
@@ -107,7 +107,7 @@ class Player {
       }
    }
 
-   checkCollision(currentMap) {
+   checkCollision(currentMap, tileSize) {
       let colliding = false;
 
       for (let row = 0; row < currentMap.length; row++) {
