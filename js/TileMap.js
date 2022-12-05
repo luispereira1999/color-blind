@@ -35,15 +35,31 @@ class TileMap {
                   tile = new Tile(tileNumber, TILE_TYPE.PASSABLE);
                   break;
                case 1:  // paredes
-               case 4:  // objeto
-               case 5:  // lâmpada
+               case 2:
+               case 3:
+               case 4:
+               case 5:
+               case 6:
+               case 7:
+               case 8:
+               case 9:
+               case 10:
+               case 11:
+               case 12:
+               case 13:
+               case 14:
+               case 15:
+               case 16:
+               case 17:
+               case 18:
+               case 19:
                   tile = new Tile(tileNumber, TILE_TYPE.BLOCK);
                   break;
-               case 2:  // personagem principal
+               case 99:  // personagem principal
                   position = this.getPosition(row * this.tileSize, column * this.tileSize);
                   this.startPlayerPosition = position;
                   break;
-               case 3:  // inimigos
+               case 98:  // inimigos
                   position = this.getPosition(row * this.tileSize, column * this.tileSize);
                   this.startEnemiesPosition.push(position);
                   break;

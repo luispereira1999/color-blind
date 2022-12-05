@@ -40,6 +40,30 @@ class Level {
       this.colors = [];
       this.colors = await this.getColors(numberOfColors);
 
+      // this.lamps = [];
+      // this.tileMap.startLampsPosition.forEach((position) => {
+      //    const lamp = new Lamp(
+      //       image,
+      //       position.x,
+      //       position.y,
+      //       width,
+      //       height,
+      //       color,
+      //       active = false
+      //    );
+
+      //    this.lamps.push(lamp);
+      // });
+
+      // this.lamps.forEach(lamp => {
+      //    const sequence = [
+      //       { lamp.color: "green", position: 3 },
+      //       { lamp.color: "red", position: 4 },
+      //       { lamp.color: "blue", position: 1 },
+      //       { lamp.color: "pink", position: 2 },
+      //    ] 
+      // });
+
       this.timer = new Timer(levelTime, true);
       this.loadedLevel = true;
    }
@@ -67,7 +91,7 @@ class Level {
          return;
       }
 
-      // código será executado após o mapa carregar todo
+      // código será executado após o mapa carregar
       if (this.timer.started) {
          this.timer.currentTime = estimatedTime + this.timer.fullTime;
          this.timer.started = false;
