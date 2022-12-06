@@ -67,20 +67,35 @@ class Player {
       }
    }
 
-   update(tiles, tileSize) {
+   update(tiles, tileSize, enemies, lamps) {
       // guardar valores do movimento anterior, para se houver colisão voltar ao valores do movimento anterior
       const oldX = this.x;
       const oldY = this.y;
       this.move();
 
-      // verificar colisões para cada camada do mapa
       let colliding = false;
       tiles.layers.forEach((currentMap, index) => {
-         // verificar apenas a camada de objetos/paredes colisiveis
+         // verificar apenas a camada das paredes
          if (index == 1) {
-            colliding = this.checkCollision(currentMap, tileSize);
+            colliding = this.checkCollisionsWithTileMap(currentMap, tileSize);
          }
       });
+
+      if (colliding) {
+         this.x = oldX;
+         this.y = oldY;
+      }
+
+      colliding = false;
+      colliding = this.checkCollisionsWithEnemies(enemies);
+
+      if (colliding) {
+         this.x = oldX;
+         this.y = oldY;
+      }
+
+      colliding = false;
+      colliding = this.checkCollisionsWithLamps(lamps);
 
       if (colliding) {
          this.x = oldX;
@@ -91,23 +106,19 @@ class Player {
    move() {
       if (this.moveLeft && !this.moveRight) {
          this.x -= this.speed;
-         this.animation.angleInDegrees = 0;  // 270;
       }
       if (this.moveRight && !this.moveLeft) {
          this.x += this.speed;
-         this.animation.angleInDegrees = 0;  // 90;
       }
       if (this.moveUp && !this.moveDown) {
          this.y -= this.speed;
-         this.animation.angleInDegrees = 0;  // 0;
       }
       if (this.moveDown && !this.moveUp) {
          this.y += this.speed;
-         this.animation.angleInDegrees = 0;  // 180;
       }
    }
 
-   checkCollision(currentMap, tileSize) {
+   checkCollisionsWithTileMap(currentMap, tileSize) {
       let colliding = false;
 
       for (let row = 0; row < currentMap.length; row++) {
@@ -136,6 +147,30 @@ class Player {
             }
          }
       }
+
+      return colliding;
+   }
+
+   checkCollisionsWithEnemies(enemies) {
+      let colliding = false;
+
+      enemies.forEach(enemy => {
+         if (isCollide(this.getBounds(), enemy.getBounds())) {
+            colliding = true;
+         }
+      });
+
+      return colliding;
+   }
+
+   checkCollisionsWithLamps(lamps) {
+      let colliding = false;
+
+      lamps.forEach(lamp => {
+         if (isCollide(this.getBounds(), lamp.getBounds())) {
+            colliding = true;
+         }
+      });
 
       return colliding;
    }
