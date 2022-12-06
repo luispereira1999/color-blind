@@ -15,7 +15,6 @@ class GameController {
          levelProperties.tileMap,
          levelProperties.tileSize,
          levelProperties.time,
-         levelProperties.numberOfColors,
          levelProperties.lives
       );
 

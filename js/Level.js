@@ -1,17 +1,17 @@
 "use strict";
 
 class Level {
-   constructor(canvas, context, tileMap, tileSize, levelTime, numberOfColors, lives) {
+   constructor(canvas, context, tileMap, tileSize, levelTime, lives) {
       this.canvas = canvas;
       this.context = context;
       this.tileMap = tileMap;
       this.tileSize = tileSize;
       this.loadedLevel = false;
 
-      this.init(levelTime, numberOfColors);
+      this.init(levelTime);
    }
 
-   async init(levelTime, numberOfColors) {
+   async init(levelTime) {
       const animationPlayer = new Animation("./assets/player.png", 64, 100);
       this.player = new Player(
          animationPlayer,
@@ -37,32 +37,25 @@ class Level {
 
       this.camera = new Camera(0, 0, 608, 512, this.player, this.tileMap);
 
-      this.colors = [];
+      this.lamps = [];
+
+      // o número de lâmpadas é igual ao número de cores, visto que cada lâmpada tem uma cor
+      const numberOfColors = this.tileMap.startLampsPosition.length;
       this.colors = await this.getColors(numberOfColors);
 
-      // this.lamps = [];
-      // this.tileMap.startLampsPosition.forEach((position) => {
-      //    const lamp = new Lamp(
-      //       image,
-      //       position.x,
-      //       position.y,
-      //       width,
-      //       height,
-      //       color,
-      //       active = false
-      //    );
+      this.tileMap.startLampsPosition.forEach((position, index) => {
+         const lamp = new Lamp(
+            "./assets/lamp.png",
+            position.x,
+            position.y,
+            34,
+            28,
+            this.colors[index].hex,
+            LAMP_STATE.DISABLE
+         );
 
-      //    this.lamps.push(lamp);
-      // });
-
-      // this.lamps.forEach(lamp => {
-      //    const sequence = [
-      //       { lamp.color: "green", position: 3 },
-      //       { lamp.color: "red", position: 4 },
-      //       { lamp.color: "blue", position: 1 },
-      //       { lamp.color: "pink", position: 2 },
-      //    ] 
-      // });
+         this.lamps.push(lamp);
+      });
 
       this.timer = new Timer(levelTime, true);
       this.loadedLevel = true;
@@ -113,7 +106,7 @@ class Level {
    }
 
    update() {
-      this.player.update(this.tileMap.tiles, this.tileSize);
+      this.player.update(this.tileMap.tiles, this.tileSize, this.enemies, this.lamps);
       this.camera.update();
    }
 
@@ -124,15 +117,13 @@ class Level {
       this.camera.draw(this.context);
       this.tileMap.draw(this.context);
 
-      // lâmpada
-      this.context.arc(7 * 32 + 15, 1 * 32 + 15, 12, 0, 2 * Math.PI, false);
-      this.context.fillStyle = 'rgba(99, 255, 71, 0.75)';
-      this.context.fill();
-
+      this.player.draw(this.context);
       this.enemies.forEach(enemy => {
          enemy.draw(this.context);
       });
-      this.player.draw(this.context);
+      this.lamps.forEach(lamp => {
+         lamp.draw(this.context);
+      });
 
       this.context.restore();
 

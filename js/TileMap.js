@@ -12,6 +12,7 @@ class TileMap {
 
       this.startPlayerPosition = {};
       this.startEnemiesPosition = [];
+      this.startLampsPosition = [];
 
       // definir os tiles de cada camada
       this.map.layers.forEach((currentMap, index) => {
@@ -21,7 +22,7 @@ class TileMap {
 
    setTiles(currentMap) {
       // declarar array vazio para armazenar os tiles do mapa, com o mesmo número de linhas e colunas
-      const tiles = [...Array(31)].map(e => Array(38));
+      const tiles = [...Array(this.width / 32)].map(e => Array(this.height / 32));
       let position = {};
 
       // atribuir cada tile com o respetivo número e adicioná-lo ao array de tiles
@@ -56,12 +57,16 @@ class TileMap {
                   tile = new Tile(tileNumber, TILE_TYPE.BLOCK);
                   break;
                case 99:  // personagem principal
-                  position = this.getPosition(row * this.tileSize, column * this.tileSize);
+                  position = this.getPosition(column * this.tileSize, row * this.tileSize);
                   this.startPlayerPosition = position;
                   break;
                case 98:  // inimigos
-                  position = this.getPosition(row * this.tileSize, column * this.tileSize);
+                  position = this.getPosition(column * this.tileSize, row * this.tileSize);
                   this.startEnemiesPosition.push(position);
+                  break;
+               case 97:  // lâmpada
+                  position = this.getPosition(column * this.tileSize, row * this.tileSize);
+                  this.startLampsPosition.push(position);
                   break;
             }
 
