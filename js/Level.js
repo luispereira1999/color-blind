@@ -37,12 +37,11 @@ class Level {
 
       this.camera = new Camera(0, 0, 608, 512, this.player, this.tileMap);
 
-      this.lamps = [];
-
       // o número de lâmpadas é igual ao número de cores, visto que cada lâmpada tem uma cor
       const numberOfColors = this.tileMap.startLampsPosition.length;
       this.colors = await this.getColors(numberOfColors);
 
+      this.lamps = [];
       this.tileMap.startLampsPosition.forEach((position, index) => {
          const lamp = new Lamp(
             "./assets/lamp.png",
@@ -55,6 +54,17 @@ class Level {
          );
 
          this.lamps.push(lamp);
+      });
+
+      const positions = [];
+      for (let i = 0; i < numberOfColors; i++) {
+         positions[i] = i + 1;
+      }
+
+      const randomPositions = this.shufflePositions(positions);
+      this.sequence = [];
+      this.lamps.forEach((lamp, index) => {
+         this.sequence.push({ color: lamp.color, position: randomPositions[index] });
       });
 
       this.timer = new Timer(levelTime, true);
@@ -75,6 +85,22 @@ class Level {
          });
 
       return await colorsResponse;
+   }
+
+   shufflePositions(positions) {
+      let numberOfPositions = positions.length;
+      let randomPosition = 0;
+      let randomPositions = [];
+
+      while (numberOfPositions--) {
+         randomPosition = Math.floor(Math.random() * (numberOfPositions + 1));
+         randomPositions.push(positions[randomPosition]);
+
+         // remover posição inserida, para não voltar a repeti-la
+         positions.splice(randomPosition, 1);
+      }
+
+      return randomPositions;
    }
 
    loop = (estimatedTime) => {

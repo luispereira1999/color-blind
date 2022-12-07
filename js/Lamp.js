@@ -30,7 +30,7 @@ class Lamp {
       if (this.state == LAMP_STATE.ENABLE) {
          opacity = 0.85;
       } else {
-         opacity = 0.35;
+         opacity = 0.45;
       }
 
       return opacity;
