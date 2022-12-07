@@ -14,10 +14,12 @@ class Player {
       this.moveRight = false;
       this.moveUp = false;
       this.moveDown = false;
+      this.lampClicked = false;
 
       this.keyboard = new Keyboard();
       this.keyboard.addKeydown(this.onKeydownPressed);
       this.keyboard.addKeyup(this.onKeyupPressed);
+      this.keyboard.addKeypress(this.onKeypressPressed);
    }
 
    getBounds() {
@@ -26,6 +28,16 @@ class Player {
          right: this.width * this.animation.scale,
          top: this.y,
          bottom: this.height * this.animation.scale,
+      }
+   }
+
+   onKeypressPressed = (event) => {
+      const keyPressed = event.keyCode;
+
+      switch (keyPressed) {
+         case Keyboard.Keys.SPACE:
+            this.lampClicked = true;
+            break;
       }
    }
 
@@ -44,6 +56,9 @@ class Player {
             break;
          case Keyboard.Keys.DOWN:
             this.moveDown = true;
+            break;
+         case Keyboard.Keys.SPACE:
+            this.lampClicked = true;
             break;
       }
    }
@@ -64,10 +79,13 @@ class Player {
          case Keyboard.Keys.DOWN:
             this.moveDown = false;
             break;
+         case Keyboard.Keys.SPACE:
+            this.lampClicked = false;
+            break;
       }
    }
 
-   update(tiles, tileSize, enemies, lamps) {
+   update(tiles, tileSize, enemies, lamps, sequence) {
       // guardar valores do movimento anterior, para se houver colisão voltar ao valores do movimento anterior
       const oldX = this.x;
       const oldY = this.y;
@@ -94,13 +112,44 @@ class Player {
          this.y = oldY;
       }
 
-      colliding = false;
-      colliding = this.checkCollisionsWithLamps(lamps);
+      let collider = {};
+      collider = this.checkCollisionsWithLamps(lamps);
 
-      if (colliding) {
+      if (collider.collidingStatus) {
+         if (this.checkLampClicked()) {
+            let elementStillNotRegistered = this.findNextElementStillNotRegistered(sequence);
+
+            if (elementStillNotRegistered != null) {
+               if (collider.collidingLamp.color == elementStillNotRegistered.color) {
+                  sequence[collider.collidingLampIndex].registered = true;
+                  lamps[collider.collidingLampIndex].state = LAMP_STATE.ENABLE;
+               }
+            }
+
+            this.lampClicked = false;
+         }
+
          this.x = oldX;
          this.y = oldY;
       }
+   }
+
+   findNextElementStillNotRegistered(sequence) {
+      let elementStillNotRegistered = null;
+      let lowest = 99;
+      let currentLowest;
+
+      // encontrar o próximo elemento da sequência AINDA não registado
+      for (var i = sequence.length - 1; i >= 0; i--) {
+         currentLowest = sequence[i].position;
+
+         if (currentLowest < lowest && !sequence[i].registered) {
+            elementStillNotRegistered = sequence[i];
+            lowest = currentLowest;
+         }
+      }
+
+      return elementStillNotRegistered;
    }
 
    move() {
@@ -164,15 +213,31 @@ class Player {
    }
 
    checkCollisionsWithLamps(lamps) {
-      let colliding = false;
+      let collidingStatus = false;
+      let collidingLamp = null;
+      let collidingLampIndex = -1;
 
-      lamps.forEach(lamp => {
+      lamps.forEach((lamp, index) => {
          if (isCollide(this.getBounds(), lamp.getBounds())) {
-            colliding = true;
+            collidingStatus = true;
+            collidingLamp = lamp;
+            collidingLampIndex = index;
          }
       });
 
-      return colliding;
+      return {
+         collidingStatus: collidingStatus,
+         collidingLamp: collidingLamp,
+         collidingLampIndex: collidingLampIndex
+      };
+   }
+
+   checkLampClicked() {
+      if (this.lampClicked) {
+         return true;
+      } else {
+         return false;
+      }
    }
 
    draw(context) {

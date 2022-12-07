@@ -64,7 +64,11 @@ class Level {
       const randomPositions = this.shufflePositions(positions);
       this.sequence = [];
       this.lamps.forEach((lamp, index) => {
-         this.sequence.push({ color: lamp.color, position: randomPositions[index] });
+         this.sequence.push({
+            color: lamp.color,
+            position: randomPositions[index],
+            registered: false
+         });
       });
 
       this.timer = new Timer(levelTime, true);
@@ -132,7 +136,7 @@ class Level {
    }
 
    update() {
-      this.player.update(this.tileMap.tiles, this.tileSize, this.enemies, this.lamps);
+      this.player.update(this.tileMap.tiles, this.tileSize, this.enemies, this.lamps, this.sequence);
       this.camera.update();
    }
 

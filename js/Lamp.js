@@ -36,7 +36,7 @@ class Lamp {
       return opacity;
    }
 
-   convertHexToRGBA = (hexCode, opacity = 1) => {
+   convertHexToRGBA(hexCode, opacity = 1) {
       let hex = hexCode.replace('#', '');
 
       if (hex.length === 3) {
@@ -52,6 +52,11 @@ class Lamp {
       }
 
       return `rgba(${r},${g},${b},${opacity})`;
+   };
+
+   changeOpacityFromRGBA(rgbaCode, opacity = 1) {
+      rgbaCode = rgbaCode.replace(/[^,]+(?=\))/, opacity);
+      return rgbaCode;
    };
 
    getBounds() {
@@ -78,6 +83,9 @@ class Lamp {
          2 * Math.PI,
          false
       );
+
+      this.opacity = this.getOpacity();
+      this.color = this.changeOpacityFromRGBA(this.color, this.opacity);
 
       context.fillStyle = this.color;
       context.fill();
