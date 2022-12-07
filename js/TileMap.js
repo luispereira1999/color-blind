@@ -33,6 +33,7 @@ class TileMap {
 
             switch (tileNumber) {
                case 0:  // chão
+               case 20:
                   tile = new Tile(tileNumber, TILE_TYPE.PASSABLE);
                   break;
                case 1:  // paredes
