@@ -15,7 +15,7 @@ class Lamp {
       this.state = state;
 
       this.opacity = this.getOpacity();
-      this.color = this.convertHexToRGBA(color, 0.85)
+      this.color = this.convertHexToRGBA(color, this.opacity)
    }
 
    setImage(path) {
@@ -28,7 +28,7 @@ class Lamp {
       let opacity = 0;
 
       if (this.state == LAMP_STATE.ENABLE) {
-         opacity = 0.75;
+         opacity = 0.85;
       } else {
          opacity = 0.35;
       }
