@@ -6,6 +6,7 @@ class Level {
       this.context = context;
       this.tileMap = tileMap;
       this.tileSize = tileSize;
+      this.lives = lives;
       this.loadedLevel = false;
 
       this.init(levelTime);
@@ -172,7 +173,7 @@ class Level {
       const timeFormatted = this.formatTimeToDisplay();
       const minutesAndSeconds = timeFormatted.split(":");
       this.drawTime(minutesAndSeconds[0], minutesAndSeconds[1]);
-
+      this.drawLives();
       // this.context.font = "bold 20px Arial";
       // this.context.fillText(`Tempo: ${Math.floor(this.timer.currentTimeInSeconds / 1000)}`, 10, 30);
       // this.context.fillStyle = "white";
@@ -190,5 +191,9 @@ class Level {
    drawTime(minutes, seconds) {
       document.documentElement.style.setProperty('--timer-minutes', "'" + minutes + "'");
       document.documentElement.style.setProperty('--timer-seconds', "'" + seconds + "'");
+   }
+
+   drawLives() {
+      document.documentElement.style.setProperty('--lives', "'" + this.lives + "'");
    }
 }
