@@ -13,7 +13,7 @@ class LevelManager {
    }
 
    async init(levelTime) {
-      const animationPlayer = new AnimationManager("./assets/sprites/player-sprite.png", 64, 100);
+      const animationPlayer = new AnimationManager("./assets/sprites/player-walk-sprite.png", 64, 100, 4, 18, 0.5);
       this.player = new PlayerSprite(
          animationPlayer,
          this.tileMap.startPlayerPosition.x,
@@ -24,7 +24,7 @@ class LevelManager {
 
       this.enemies = [];
       this.tileMap.startEnemiesPosition.forEach(position => {
-         const animationEnemy = new AnimationManager("./assets/sprites/enemy-sprite.png", 67, 99);
+         const animationEnemy = new AnimationManager("./assets/sprites/enemy-sprite.png", 67, 99, 11, 18, 0.5);
          const enemy = new EnemySprite(
             animationEnemy,
             position.x,
@@ -126,7 +126,7 @@ class LevelManager {
          return;
       }
 
-      // código será executado após o mapa carregar
+      // código será executado após o mapa ser carregado
       if (this.timer.started) {
          this.timer.currentTime = estimatedTime + this.timer.fullTime;
          this.timer.started = false;
@@ -174,7 +174,7 @@ class LevelManager {
       const minutesAndSeconds = timeFormatted.split(":");
       this.drawTime(minutesAndSeconds[0], minutesAndSeconds[1]);
       this.drawLives();
-      
+
       // this.context.font = "bold 20px Arial";
       // this.context.fillText(`Tempo: ${Math.floor(this.timer.currentTimeInSeconds / 1000)}`, 10, 30);
       // this.context.fillStyle = "white";

@@ -1,15 +1,16 @@
 "use strict";
 
 class AnimationManager {
-   constructor(spriteSheet, frameWidth, frameHeight) {
+   constructor(spriteSheet, frameWidth, frameHeight, numberOfFrames, frameRate, scale = 1) {
       this.spriteSheet = this.setSpriteSheet(spriteSheet);
       this.frameWidth = frameWidth;
       this.frameHeight = frameHeight;
+      this.numberOfFrames = numberOfFrames;
+      this.frameRate = frameRate;
+      this.scale = scale;
 
-      this.scale = 0.5;
       this.frameIndex = 0;
       this.count = 0;
-
       this.angleInDegrees = 0;
    }
 
@@ -31,12 +32,12 @@ class AnimationManager {
       );
 
       this.count++;
-      if (this.count > 18) {
+      if (this.count > this.frameRate) {
          this.frameIndex++;
          this.count = 0;
       }
 
-      if (this.frameIndex > 3) {
+      if (this.frameIndex > this.numberOfFrames - 1) {
          this.frameIndex = 0;
       }
    }
