@@ -5,7 +5,7 @@ const TILE_TYPE = {
    BLOCK: 1
 }
 
-class Tile {
+class TileSprite {
    constructor(tileNumber, type) {
       this.tileNumber = tileNumber;
       this.image = this.setImage(tileNumber);
@@ -14,7 +14,7 @@ class Tile {
 
    setImage(tileNumber) {
       const image = new Image();
-      image.src = `./assets/${tileNumber}.png`;
+      image.src = `./assets/tiles/${tileNumber}.png`;
       return image;
    }
 }

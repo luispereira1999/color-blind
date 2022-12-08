@@ -1,6 +1,6 @@
 "use strict";
 
-class Keyboard {
+class KeyboardManager {
    static Keys = {
       LEFT: 37,
       RIGHT: 39,

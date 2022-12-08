@@ -5,7 +5,7 @@ const LAMP_STATE = {
    ENABLE: 1
 }
 
-class Lamp {
+class LampSprite {
    constructor(imagePath, x, y, width, height, color, state) {
       this.image = this.setImage(imagePath);
       this.x = x;

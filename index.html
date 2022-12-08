@@ -22,19 +22,23 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
    <!-- JAVASCRIPT -->
-   <script src="./js/Keyboard.js" defer></script>
-   <script src="./js/Collision.js" defer></script>
-   <script src="./js/Animation.js" defer></script>
-   <script src="./js/Camera.js" defer></script>
-   <script src="./js/Player.js" defer></script>
-   <script src="./js/Lamp.js" defer></script>
-   <script src="./js/Enemy.js" defer></script>
-   <script src="./js/ColorService.js" defer></script>
-   <script src="./js/Timer.js" defer></script>
-   <script src="./js/Tile.js" defer></script>
-   <script src="./js/TileMap.js" defer></script>
-   <script src="./js/Level.js" defer></script>
-   <script src="./js/GameController.js" defer></script>
+   <script src="./js/Utils/CollisionUtil.js" defer></script>
+
+   <script src="./js/Services/ColorService.js" defer></script>
+
+   <script src="./js/Sprites/EnemySprite.js" defer></script>
+   <script src="./js/Sprites/LampSprite.js" defer></script>
+   <script src="./js/Sprites/PlayerSprite.js" defer></script>
+   <script src="./js/Sprites/TileSprite.js" defer></script>
+
+   <script src="./js/Managers/AnimationManager.js" defer></script>
+   <script src="./js/Managers/KeyboardManager.js" defer></script>
+   <script src="./js/Managers/TimerManager.js" defer></script>
+   <script src="./js/Managers/CameraManager.js" defer></script>
+   <script src="./js/Managers/TileMapManager.js" defer></script>
+   <script src="./js/Managers/LevelManager.js" defer></script>
+   <script src="./js/Managers/GameManager.js" defer></script>
+
    <script src="./js/main.js" defer></script>
 
    <!-- FONTE -->
@@ -43,7 +47,7 @@
 
 <body>
    <div id="menuScreen">
-      <img class="image-background" src="./assets/menu-background.jpg" alt="Imagem de fundo">
+      <img class="image-background" src="./assets/backgrounds/menu-background.jpg" alt="Imagem de fundo">
       <button class="button-new-game" onclick="startGame()">THE BOMB SOUND</button>
    </div>
 

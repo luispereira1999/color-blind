@@ -1,6 +1,6 @@
 "use strict";
 
-class Animation {
+class AnimationManager {
    constructor(spriteSheet, frameWidth, frameHeight) {
       this.spriteSheet = this.setSpriteSheet(spriteSheet);
       this.frameWidth = frameWidth;

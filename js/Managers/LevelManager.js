@@ -1,6 +1,6 @@
 "use strict";
 
-class Level {
+class LevelManager {
    constructor(canvas, context, tileMap, tileSize, levelTime, lives) {
       this.canvas = canvas;
       this.context = context;
@@ -13,8 +13,8 @@ class Level {
    }
 
    async init(levelTime) {
-      const animationPlayer = new Animation("./assets/player.png", 64, 100);
-      this.player = new Player(
+      const animationPlayer = new AnimationManager("./assets/sprites/player-sprite.png", 64, 100);
+      this.player = new PlayerSprite(
          animationPlayer,
          this.tileMap.startPlayerPosition.x,
          this.tileMap.startPlayerPosition.y,
@@ -24,8 +24,8 @@ class Level {
 
       this.enemies = [];
       this.tileMap.startEnemiesPosition.forEach(position => {
-         const animationEnemy = new Animation("./assets/enemy.png", 67, 99);
-         const enemy = new Enemy(
+         const animationEnemy = new AnimationManager("./assets/sprites/enemy-sprite.png", 67, 99);
+         const enemy = new EnemySprite(
             animationEnemy,
             position.x,
             position.y,
@@ -36,7 +36,7 @@ class Level {
          this.enemies.push(enemy);
       });
 
-      this.camera = new Camera(0, 0, 608, 512, this.player, this.tileMap);
+      this.camera = new CameraManager(0, 0, 608, 512, this.player, this.tileMap);
 
       // o número de lâmpadas é igual ao número de cores, visto que cada lâmpada tem uma cor
       const numberOfColors = this.tileMap.startLampsPosition.length;
@@ -44,8 +44,8 @@ class Level {
 
       this.lamps = [];
       this.tileMap.startLampsPosition.forEach((position, index) => {
-         const lamp = new Lamp(
-            "./assets/lamp.png",
+         const lamp = new LampSprite(
+            "./assets/sprites/lamp-sprite.png",
             position.x,
             position.y,
             34,
@@ -72,7 +72,7 @@ class Level {
          });
       });
 
-      this.timer = new Timer(levelTime, true);
+      this.timer = new TimerManager(levelTime, true);
 
       this.toggleScreen('menuScreen', false);
       this.toggleScreen('gameScreen', true);
@@ -174,6 +174,7 @@ class Level {
       const minutesAndSeconds = timeFormatted.split(":");
       this.drawTime(minutesAndSeconds[0], minutesAndSeconds[1]);
       this.drawLives();
+      
       // this.context.font = "bold 20px Arial";
       // this.context.fillText(`Tempo: ${Math.floor(this.timer.currentTimeInSeconds / 1000)}`, 10, 30);
       // this.context.fillStyle = "white";

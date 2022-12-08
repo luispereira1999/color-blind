@@ -1,6 +1,6 @@
 "use strict";
 
-class TileMap {
+class TileMapManager {
    constructor(tileSize, map, width, height) {
       this.tileSize = tileSize;
       this.map = map;
@@ -34,7 +34,7 @@ class TileMap {
             switch (tileNumber) {
                case 0:  // chão
                case 20:
-                  tile = new Tile(tileNumber, TILE_TYPE.PASSABLE);
+                  tile = new TileSprite(tileNumber, TILE_TYPE.PASSABLE);
                   break;
                case 1:  // paredes
                case 2:
@@ -55,7 +55,7 @@ class TileMap {
                case 17:
                case 18:
                case 19:
-                  tile = new Tile(tileNumber, TILE_TYPE.BLOCK);
+                  tile = new TileSprite(tileNumber, TILE_TYPE.BLOCK);
                   break;
                case 99:  // personagem principal
                   position = this.getPosition(column * this.tileSize, row * this.tileSize);

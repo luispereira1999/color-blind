@@ -1,6 +1,6 @@
 "use strict";
 
-class Enemy {
+class EnemySprite {
    constructor(animation, x, y, width, height) {
       this.animation = animation;
       this.x = x;

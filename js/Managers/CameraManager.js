@@ -1,6 +1,6 @@
 "use strict";
 
-class Camera {
+class CameraManager {
    constructor(x, y, width, height, player, tileMap) {
       this.x = x;
       this.y = y;

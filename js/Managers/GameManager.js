@@ -1,6 +1,6 @@
 "use strict";
 
-class GameController {
+class GameManager {
    constructor(canvas, context) {
       this.canvas = canvas;
       this.context = context;
@@ -9,7 +9,7 @@ class GameController {
 
    startLevel = () => {
       const levelProperties = this.getLevelProperties(this.currentLevelIndex);
-      const level = new Level(
+      const level = new LevelManager(
          this.canvas,
          this.context,
          levelProperties.tileMap,
@@ -100,7 +100,7 @@ class GameController {
             tileSize = 32;
             width = map.layers[0][0].length * 32;
             height = map.layers[0].length * 32;
-            tileMap = new TileMap(tileSize, map, width, height);
+            tileMap = new TileMapManager(tileSize, map, width, height);
 
             time = 120000;  // milissegundos
             lives = 3;
@@ -166,7 +166,7 @@ class GameController {
             tileSize = 32;
             width = map.layers[0][0].length * 32;
             height = map.layers[0].length * 32;
-            tileMap = new TileMap(tileSize, map, width, height);
+            tileMap = new TileMapManager(tileSize, map, width, height);
 
             time = 60000;  // milissegundos
             lives = 3;

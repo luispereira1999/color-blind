@@ -1,6 +1,6 @@
 "use strict";
 
-class Timer {
+class TimerManager {
    constructor(timeInMilliseconds, started) {
       this.started = started;
       this.finished = false;

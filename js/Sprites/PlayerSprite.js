@@ -1,6 +1,6 @@
 "use strict";
 
-class Player {
+class PlayerSprite {
    constructor(animation, x, y, width, height) {
       this.animation = animation;
       this.x = x;
@@ -16,7 +16,7 @@ class Player {
       this.moveDown = false;
       this.lampClicked = false;
 
-      this.keyboard = new Keyboard();
+      this.keyboard = new KeyboardManager();
       this.keyboard.addKeydown(this.onKeydownPressed);
       this.keyboard.addKeyup(this.onKeyupPressed);
       this.keyboard.addKeypress(this.onKeypressPressed);
@@ -35,7 +35,7 @@ class Player {
       const keyPressed = event.keyCode;
 
       switch (keyPressed) {
-         case Keyboard.Keys.SPACE:
+         case KeyboardManager.Keys.SPACE:
             this.lampClicked = true;
             break;
       }
@@ -45,19 +45,19 @@ class Player {
       const keyPressed = event.keyCode;
 
       switch (keyPressed) {
-         case Keyboard.Keys.LEFT:
+         case KeyboardManager.Keys.LEFT:
             this.moveLeft = true;
             break;
-         case Keyboard.Keys.RIGHT:
+         case KeyboardManager.Keys.RIGHT:
             this.moveRight = true;
             break;
-         case Keyboard.Keys.UP:
+         case KeyboardManager.Keys.UP:
             this.moveUp = true;
             break;
-         case Keyboard.Keys.DOWN:
+         case KeyboardManager.Keys.DOWN:
             this.moveDown = true;
             break;
-         case Keyboard.Keys.SPACE:
+         case KeyboardManager.Keys.SPACE:
             this.lampClicked = true;
             break;
       }
@@ -67,19 +67,19 @@ class Player {
       const keyPressed = event.keyCode;
 
       switch (keyPressed) {
-         case Keyboard.Keys.LEFT:
+         case KeyboardManager.Keys.LEFT:
             this.moveLeft = false;
             break;
-         case Keyboard.Keys.RIGHT:
+         case KeyboardManager.Keys.RIGHT:
             this.moveRight = false;
             break;
-         case Keyboard.Keys.UP:
+         case KeyboardManager.Keys.UP:
             this.moveUp = false;
             break;
-         case Keyboard.Keys.DOWN:
+         case KeyboardManager.Keys.DOWN:
             this.moveDown = false;
             break;
-         case Keyboard.Keys.SPACE:
+         case KeyboardManager.Keys.SPACE:
             this.lampClicked = false;
             break;
       }
