@@ -16,6 +16,11 @@
    <!-- CSS -->
    <link rel="stylesheet" href="./css/main.css">
 
+   <!-- PARTICLE.JS -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"
+      integrity="sha512-jq8sZI0I9Og0nnZ+CfJRnUzNSDKxr/5Bvha5bn7AHzTnRyxUfpUArMzfH++mwE/hb2efOo1gCAgI+1RMzf8F7g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
    <!-- JAVASCRIPT -->
    <script src="./js/Keyboard.js" defer></script>
    <script src="./js/Collision.js" defer></script>
@@ -31,17 +36,33 @@
    <script src="./js/Level.js" defer></script>
    <script src="./js/GameController.js" defer></script>
    <script src="./js/main.js" defer></script>
+
+   <!-- FONTE -->
+   <link href="https://fonts.cdnfonts.com/css/blomberg" rel="stylesheet">
 </head>
 
 <body>
    <div id="menuScreen">
       <img class="image-background" src="./assets/menu-background.jpg" alt="Imagem de fundo">
-      <button class="button-new-game" onclick="startGame()">Iniciar Jogo</button>
+      <button class="button-new-game" onclick="startGame()">THE BOMB SOUND</button>
    </div>
 
    <!-- <div> -->
-      <canvas id="gameScreen" width="608" height="512"></canvas>
+   <canvas id="gameScreen" width="608" height="512"></canvas>
    <!-- </div> -->
+
+   <div id="gameScreenUI">
+      <div class="clock-container">
+         <div class="clock-col">
+            <p class="clock-minutes clock-timer"></p>
+            <p class="clock-label">Minutes</p>
+         </div>
+         <div class="clock-col">
+            <p class="clock-seconds clock-timer"></p>
+            <p class="clock-label">Seconds</p>
+         </div>
+      </div>
+   </div>
 </body>
 
 </html>

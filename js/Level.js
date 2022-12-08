@@ -72,6 +72,11 @@ class Level {
       });
 
       this.timer = new Timer(levelTime, true);
+
+      this.toggleScreen('menuScreen', false);
+      this.toggleScreen('gameScreen', true);
+      this.toggleScreen('gameScreenUI', true);
+
       this.loadedLevel = true;
    }
 
@@ -105,6 +110,12 @@ class Level {
       }
 
       return randomPositions;
+   }
+
+   toggleScreen(elementID, toggle) {
+      let element = document.getElementById(elementID);
+      let display = (toggle) ? 'block' : 'none';
+      element.style.display = display;
    }
 
    loop = (estimatedTime) => {
@@ -157,14 +168,27 @@ class Level {
 
       this.context.restore();
 
-      // desenhar elementos estáticos em relação ao movimento da câmara
-      this.context.font = "bold 20px Arial";
-      this.context.fillText(`Tempo: ${Math.floor(this.timer.currentTimeInSeconds / 1000)}`, 10, 30);
-      this.context.fillStyle = "white";
+      // desenhar elementos estáticos em relação ao movimento da câmara (UI)
+      const timeFormatted = this.formatTimeToDisplay();
+      const minutesAndSeconds = timeFormatted.split(":");
+      this.drawTime(minutesAndSeconds[0], minutesAndSeconds[1]);
+
+      // this.context.font = "bold 20px Arial";
+      // this.context.fillText(`Tempo: ${Math.floor(this.timer.currentTimeInSeconds / 1000)}`, 10, 30);
+      // this.context.fillStyle = "white";
    }
 
    drawBackground() {
       this.context.fillStyle = "black";
       this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+   }
+
+   formatTimeToDisplay() {
+      return new Date(Math.floor(this.timer.currentTimeInSeconds / 1000) * 1000).toISOString().substring(14, 19);
+   }
+
+   drawTime(minutes, seconds) {
+      document.documentElement.style.setProperty('--timer-minutes', "'" + minutes + "'");
+      document.documentElement.style.setProperty('--timer-seconds', "'" + seconds + "'");
    }
 }

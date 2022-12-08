@@ -2,6 +2,7 @@
    box-sizing: border-box;
    margin: 0;
    padding: 0;
+   font-family: blomberg;
 }
 
 html,
@@ -46,4 +47,78 @@ body {
 #gameScreen {
    display: none;
    overflow: hidden;
+   z-index: 1;
+}
+
+#gameScreenUI {
+   background-color: rgba(0, 0, 0, 0);
+   display: none;
+   /* top: 38px;
+   left: 338px; */
+   position: absolute;
+   width: 608px;
+   height: 50px;
+   z-index: 2;
+}
+
+/* RELÓGIO */
+
+.clock-minutes:before {
+   content: var(--timer-minutes);
+}
+
+.clock-seconds:before {
+   content: var(--timer-seconds);
+}
+
+.clock-container {
+   /* margin-top: 10px; */
+   /* margin-bottom: 10px; */
+   /* background-color: #080808; */
+   /* box-shadow: 1px 1px 5px rgba(255, 255, 255, .15), 0 15px 90px 30px rgba(0, 0, 0, .25); */
+   padding: 30px 15px;
+   display: flex;
+}
+
+.clock-col {
+   text-align: center;
+   margin-right: 10px;
+   margin-left: 10px;
+   min-width: 60px;
+   position: relative;
+   font-family: 'Montserrat', 'sans-serif' !important;
+}
+
+.clock-col:not(:last-child):before,
+.clock-col:not(:last-child):after {
+   content: "";
+   background-color: rgba(255, 255, 255, .3);
+   height: 5px;
+   width: 5px;
+   border-radius: 50%;
+   display: block;
+   position: absolute;
+   right: -12px;
+}
+
+.clock-col:not(:last-child):before {
+   top: 25%;
+}
+
+.clock-col:not(:last-child):after {
+   top: 40%;
+}
+
+.clock-timer:before {
+   color: white;
+   font-size: 32px;
+   text-transform: uppercase;
+}
+
+.clock-label {
+   color: rgba(255, 255, 255, .35);
+   font-family: 'Montserrat', 'sans-serif' !important;
+   font-size: 10px;
+   margin-top: 5px;
+   text-transform: uppercase;
 }
