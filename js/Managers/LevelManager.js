@@ -1,11 +1,10 @@
 "use strict";
 
 class LevelManager {
-   constructor(canvas, context, tileMap, tileSize, levelTime, lives) {
+   constructor(canvas, context, tileMap, levelTime, lives) {
       this.canvas = canvas;
       this.context = context;
       this.tileMap = tileMap;
-      this.tileSize = tileSize;
       this.lives = lives;
       this.loadedLevel = false;
 
@@ -36,7 +35,7 @@ class LevelManager {
          this.enemies.push(enemy);
       });
 
-      this.camera = new CameraManager(0, 0, 608, 512, this.player, this.tileMap);
+      this.camera = new CameraManager(0, 0, this.canvas.width, this.canvas.height, this.player, this.tileMap);
 
       // o número de lâmpadas é igual ao número de cores, visto que cada lâmpada tem uma cor
       const numberOfColors = this.tileMap.startLampsPosition.length;
@@ -148,7 +147,7 @@ class LevelManager {
    }
 
    update() {
-      this.player.update(this.tileMap.tiles, this.tileSize, this.enemies, this.lamps, this.sequence);
+      this.player.update(this.tileMap.tiles, this.tileMap.tileSize, this.tileMap.scale, this.enemies, this.lamps, this.sequence);
       this.camera.update();
    }
 
@@ -156,9 +155,10 @@ class LevelManager {
       this.context.save();
 
       this.drawBackground();
-      this.camera.draw(this.context);
-      this.tileMap.draw(this.context);
 
+      this.camera.draw(this.context);
+
+      this.tileMap.draw(this.context);
       this.player.draw(this.context);
       this.enemies.forEach(enemy => {
          enemy.draw(this.context);
@@ -174,10 +174,6 @@ class LevelManager {
       const minutesAndSeconds = timeFormatted.split(":");
       this.drawTime(minutesAndSeconds[0], minutesAndSeconds[1]);
       this.drawLives();
-
-      // this.context.font = "bold 20px Arial";
-      // this.context.fillText(`Tempo: ${Math.floor(this.timer.currentTimeInSeconds / 1000)}`, 10, 30);
-      // this.context.fillStyle = "white";
    }
 
    drawBackground() {

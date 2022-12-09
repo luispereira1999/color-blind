@@ -8,7 +8,7 @@ class PlayerSprite {
       this.width = width;
       this.height = height;
 
-      this.speed = 1;
+      this.speed = 3;
 
       this.moveLeft = false;
       this.moveRight = false;
@@ -85,17 +85,17 @@ class PlayerSprite {
       }
    }
 
-   update(tiles, tileSize, enemies, lamps, sequence) {
+   update(tiles, tileSize, tileMapScale, enemies, lamps, sequence) {
       // guardar valores do movimento anterior, para se houver colisão voltar ao valores do movimento anterior
       const oldX = this.x;
       const oldY = this.y;
       this.move();
-
+      console.log("scale", tileMapScale)
       let colliding = false;
       tiles.layers.forEach((currentMap, index) => {
          // verificar apenas a camada das paredes
          if (index == 1) {
-            colliding = this.checkCollisionsWithTileMap(currentMap, tileSize);
+            colliding = this.checkCollisionsWithTileMap(currentMap, tileSize, tileMapScale);
          }
       });
 
@@ -167,7 +167,7 @@ class PlayerSprite {
       }
    }
 
-   checkCollisionsWithTileMap(currentMap, tileSize) {
+   checkCollisionsWithTileMap(currentMap, tileSize, tileMapScale) {
       let colliding = false;
 
       for (let row = 0; row < currentMap.length; row++) {
@@ -184,10 +184,10 @@ class PlayerSprite {
                }
 
                const tileBounds = {
-                  left: column * tileSize,
-                  right: 32,
-                  top: row * tileSize,
-                  bottom: 32,
+                  left: column * tileSize * tileMapScale,
+                  right: tileSize * tileMapScale,
+                  top: row * tileSize * tileMapScale,
+                  bottom: tileSize * tileMapScale,
                }
 
                if (isCollide(this.getBounds(), tileBounds)) {

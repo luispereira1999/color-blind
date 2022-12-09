@@ -10,17 +10,13 @@ class CameraManager {
       this.tileMap = tileMap;
    }
 
-   getLeftEdge() {
-      return this.x + (this.width * 0.25);
-   }
-   getRightEdge() {
-      return this.x + (this.width * 0.75);
-   }
-   getTopEdge() {
-      return this.y + (this.height * 0.25);
-   }
-   getBottomEdge() {
-      return this.y + (this.height * 0.75);
+   getBounds() {
+      return {
+         left: this.x + (this.width * 0.25),
+         right: this.x + (this.width * 0.75),
+         top: this.y + (this.height * 0.25),
+         bottom: this.y + (this.height * 0.75)
+      };
    }
 
    update() {
@@ -30,16 +26,16 @@ class CameraManager {
    }
 
    followPlayer() {
-      if (this.player.x < this.getLeftEdge()) {
+      if (this.player.x < this.getBounds().left) {
          this.x = this.player.x - (this.width * 0.25);
       }
-      if (this.player.x + this.player.width > this.getRightEdge()) {
+      if (this.player.x + this.player.width > this.getBounds().right) {
          this.x = this.player.x + this.player.width - (this.width * 0.75);
       }
-      if (this.player.y < this.getTopEdge()) {
+      if (this.player.y < this.getBounds().top) {
          this.y = this.player.y - (this.height * 0.25);
       }
-      if (this.player.y + this.player.height > this.getBottomEdge()) {
+      if (this.player.y + this.player.height > this.getBounds().bottom) {
          this.y = this.player.y + this.player.height - (this.height * 0.75);
       }
    }
@@ -48,14 +44,14 @@ class CameraManager {
       if (this.x < 0) {
          this.x = 0;
       }
-      if (this.x + this.width > this.tileMap.width) {
-         this.x = this.tileMap.width - this.width;
+      if (this.x + this.width > this.tileMap.width * this.tileMap.scale) {
+         this.x = this.tileMap.width * this.tileMap.scale - this.width;
       }
       if (this.y < 0) {
          this.y = 0;
       }
-      if (this.y + this.height > this.tileMap.height) {
-         this.y = this.tileMap.height - this.height;
+      if (this.y + this.height > this.tileMap.height * this.tileMap.scale) {
+         this.y = this.tileMap.height * this.tileMap.scale - this.height;
       }
    }
 
@@ -63,18 +59,19 @@ class CameraManager {
       if (this.player.x < 0) {
          this.player.x = 0;
       }
-      if (this.player.x + this.player.width > this.tileMap.width) {
-         this.player.x = this.tileMap.width - this.player.width;
+      if (this.player.x + this.player.width > this.tileMap.width * this.tileMap.scale) {
+         this.player.x = (this.tileMap.width - this.player.width) * this.tileMap.scale;
       }
       if (this.player.y < 0) {
          this.player.y = 0;
       }
-      if (this.player.y + this.player.height > this.tileMap.height) {
-         this.player.y = this.tileMap.height - this.player.height;
+      if (this.player.y + this.player.height > this.tileMap.height * this.tileMap.scale) {
+         this.player.y = (this.tileMap.height - this.player.height) * this.tileMap.scale;
       }
    }
 
    draw(context) {
+      // desenhar o mapa em função das posições x e y da câmara
       context.translate(-this.x, -this.y);
    }
 }

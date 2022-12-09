@@ -1,11 +1,12 @@
 "use strict";
 
 class TileMapManager {
-   constructor(tileSize, map, width, height) {
+   constructor(tileSize, map, width, height, scale = 1) {
       this.tileSize = tileSize;
       this.map = map;
       this.width = width;
       this.height = height;
+      this.scale = scale;
 
       this.tiles = {};
       this.tiles.layers = [];
@@ -58,15 +59,15 @@ class TileMapManager {
                   tile = new TileSprite(tileNumber, TILE_TYPE.BLOCK);
                   break;
                case 99:  // personagem principal
-                  position = this.getPosition(column * this.tileSize, row * this.tileSize);
+                  position = this.getPosition(column * this.tileSize * this.scale, row * this.tileSize * this.scale);
                   this.startPlayerPosition = position;
                   break;
                case 98:  // inimigos
-                  position = this.getPosition(column * this.tileSize, row * this.tileSize);
+                  position = this.getPosition(column * this.tileSize * this.scale, row * this.tileSize * this.scale);
                   this.startEnemiesPosition.push(position);
                   break;
                case 97:  // lâmpada
-                  position = this.getPosition(column * this.tileSize, row * this.tileSize);
+                  position = this.getPosition(column * this.tileSize * this.scale, row * this.tileSize * this.scale);
                   this.startLampsPosition.push(position);
                   break;
             }
@@ -92,9 +93,6 @@ class TileMapManager {
       this.tiles.layers.forEach((currentMap) => {
          this.drawMap(context, currentMap);
       });
-
-      // context.fillStyle = "rgba(255, 255, 255, 0.5)";
-      // context.fillRect(32 * 0, 32 * 5, 32, 32);
    }
 
    drawMap(context, currentMap) {
@@ -103,7 +101,7 @@ class TileMapManager {
             let tile = currentMap[row][column];
 
             if (tile != null) {
-               context.drawImage(tile.image, column * this.tileSize, row * this.tileSize, this.tileSize, this.tileSize);
+               context.drawImage(tile.image, column * this.tileSize * this.scale, row * this.tileSize * this.scale, this.tileSize * this.scale, this.tileSize * this.scale);
             }
          }
       }
