@@ -35,6 +35,7 @@ class TileMapManager {
             switch (tileNumber) {
                case 0:  // chão
                case 20:
+               case 21:
                   tile = new TileSprite(tileNumber, TILE_TYPE.PASSABLE);
                   break;
                case 1:  // paredes
@@ -56,6 +57,15 @@ class TileMapManager {
                case 17:
                case 18:
                case 19:
+               case 22:
+               case 23:
+               case 24:
+               case 25:
+               case 26:
+               case 27:
+               case 28:
+               case 29:
+               case 30:
                   tile = new TileSprite(tileNumber, TILE_TYPE.BLOCK);
                   break;
                case 99:  // personagem principal

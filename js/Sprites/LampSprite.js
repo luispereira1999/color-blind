@@ -6,14 +6,15 @@ const LAMP_STATE = {
 }
 
 class LampSprite {
-   constructor(imagePath, x, y, width, height, color, state) {
+   constructor(imagePath, x, y, width, height, scale = 1, color, state) {
       this.image = this.setImage(imagePath);
       this.x = x;
       this.y = y;
       this.width = width;
       this.height = height;
-      this.state = state;
+      this.scale = scale
 
+      this.state = state;
       this.opacity = this.getOpacity();
       this.color = this.convertHexToRGBA(color, this.opacity)
    }
@@ -62,23 +63,23 @@ class LampSprite {
    getBounds() {
       return {
          left: this.x,
-         right: this.width,
+         right: this.width * this.scale,
          top: this.y,
-         bottom: this.height,
+         bottom: this.height * this.scale,
       }
    }
 
    draw(context) {
-      context.drawImage(this.image, this.x, this.y, this.width, this.height);
+      context.drawImage(this.image, this.x, this.y, this.width * this.scale, this.height * this.scale);
       this.drawColor(context);
    }
 
    drawColor(context) {
       context.beginPath();
       context.arc(
-         this.x + 16,
-         this.y + 13,
-         10,
+         (this.x) + 16 * this.scale,
+         (this.y) + 13 * this.scale,
+         10 * this.scale,
          0,
          2 * Math.PI,
          false

@@ -12,18 +12,19 @@ class LevelManager {
    }
 
    async init(levelTime) {
-      const animationPlayer = new AnimationManager("./assets/sprites/player-walk-sprite.png", 64, 100, 4, 18, 0.5);
+      const animationPlayer = new AnimationManager("./assets/sprites/player-walk-sprite.png", 64, 100, 4, 18, 0.75);
       this.player = new PlayerSprite(
          animationPlayer,
          this.tileMap.startPlayerPosition.x,
          this.tileMap.startPlayerPosition.y,
          animationPlayer.frameWidth,
-         animationPlayer.frameHeight
+         animationPlayer.frameHeight,
+         3.0
       );
 
       this.enemies = [];
       this.tileMap.startEnemiesPosition.forEach(position => {
-         const animationEnemy = new AnimationManager("./assets/sprites/enemy-sprite.png", 67, 99, 11, 18, 0.5);
+         const animationEnemy = new AnimationManager("./assets/sprites/enemy-sprite.png", 67, 99, 11, 18, 0.75);
          const enemy = new EnemySprite(
             animationEnemy,
             position.x,
@@ -49,6 +50,7 @@ class LevelManager {
             position.y,
             34,
             28,
+            2.0,
             this.colors[index].hex,
             LAMP_STATE.DISABLE
          );

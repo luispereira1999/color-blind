@@ -1,14 +1,14 @@
 "use strict";
 
 class PlayerSprite {
-   constructor(animation, x, y, width, height) {
+   constructor(animation, x, y, width, height, speed = 1.0) {
       this.animation = animation;
       this.x = x;
       this.y = y;
       this.width = width;
       this.height = height;
 
-      this.speed = 3;
+      this.speed = speed;
 
       this.moveLeft = false;
       this.moveRight = false;
