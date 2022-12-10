@@ -40,8 +40,8 @@ function onStartGame() {
    const gameCanvas = document.getElementById("gameScreen");
    const gameContext = gameCanvas.getContext("2d");
 
-   const gameManager = new GameManager(gameCanvas, gameContext);
-   gameManager.startLevel();
+   const gameManager = new GameManager(gameCanvas, gameContext, 5);
+   gameManager.startLevel(1);
 }
 
 function onDisplayCredits() {

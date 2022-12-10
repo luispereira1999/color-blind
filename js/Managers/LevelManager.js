@@ -114,34 +114,6 @@ class LevelManager {
       return randomPositions;
    }
 
-   loop = (estimatedTime) => {
-      // se ainda não carregou o mapa todo
-      if (!this.loadedLevel) {
-         requestAnimationFrame(this.loop);
-         return;
-      }
-
-      // código será executado após o mapa ser carregado
-      if (this.timer.started) {
-         this.timer.currentTime = estimatedTime + this.timer.fullTime;
-         this.timer.started = false;
-      }
-      else {
-         if (estimatedTime >= this.timer.currentTime) {
-            this.timer.finished = true;
-         }
-      }
-
-      this.timer.currentTimeInSeconds = this.timer.currentTime - estimatedTime;
-
-      // continuar ciclo do jogo até acabar o tempo
-      if (!this.timer.finished) {
-         this.update();
-         this.draw();
-         requestAnimationFrame(this.loop);
-      }
-   }
-
    update() {
       this.player.update(this.tileMap.tiles, this.tileMap.tileSize, this.tileMap.scale, this.enemies, this.lamps, this.sequence);
       this.camera.update();

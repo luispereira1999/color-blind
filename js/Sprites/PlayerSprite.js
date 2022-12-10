@@ -193,7 +193,7 @@ class PlayerSprite {
                   bottom: tileSize * tileMapScale,
                }
 
-               if (isCollide(this.getBounds(), tileBounds)) {
+               if (CollisionUtil.isCollide(this.getBounds(), tileBounds)) {
                   colliding = true;
                }
             }
@@ -207,7 +207,7 @@ class PlayerSprite {
       let colliding = false;
 
       enemies.forEach(enemy => {
-         if (isCollide(this.getBounds(), enemy.getBounds())) {
+         if (CollisionUtil.isCollide(this.getBounds(), enemy.getBounds())) {
             colliding = true;
          }
       });
@@ -221,7 +221,7 @@ class PlayerSprite {
       let collidingLampIndex = -1;
 
       lamps.forEach((lamp, index) => {
-         if (isCollide(this.getBounds(), lamp.getBounds())) {
+         if (CollisionUtil.isCollide(this.getBounds(), lamp.getBounds())) {
             collidingStatus = true;
             collidingLamp = lamp;
             collidingLampIndex = index;

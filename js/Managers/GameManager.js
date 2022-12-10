@@ -1,23 +1,59 @@
 "use strict";
 
 class GameManager {
-   constructor(canvas, context) {
+   constructor(canvas, context, numberOfLevels) {
       this.canvas = canvas;
       this.context = context;
-      this.currentLevelIndex = 1;
+      this.numberOfLevels = numberOfLevels;
+
+      this.currentLevelIndex = -1;
+      this.currentLevel = null;
    }
 
-   startLevel = () => {
+   startLevel(levelIndex) {
+      this.currentLevelIndex = levelIndex;
       const levelProperties = this.getLevelProperties(this.currentLevelIndex);
-      const level = new LevelManager(
+
+      this.currentLevel = new LevelManager(
          this.canvas,
          this.context,
          levelProperties.tileMap,
          levelProperties.time,
          levelProperties.lives
       );
+      this.runLevel(0);  // o parâmetro é necessário para iniciar o relógio de jogo
+   }
 
-      level.loop(0);  // o parâmetro é necessário para iniciar o relógio de jogo
+   runLevel = (estimatedTime) => {
+      // se ainda não carregou o mapa todo
+      if (!this.currentLevel.loadedLevel) {
+         requestAnimationFrame(this.runLevel);
+         return;
+      }
+
+      // após o mapa ser carregado
+      if (this.currentLevel.timer.started) {
+         this.currentLevel.timer.currentTime = estimatedTime + this.currentLevel.timer.fullTime;
+         this.currentLevel.timer.started = false;
+      }
+      else {
+         if (estimatedTime >= this.currentLevel.timer.currentTime) {
+            this.currentLevel.timer.finished = true;
+
+            this.currentLevelIndex = this.getNextLevelIndex();
+            this.startLevel(this.currentLevelIndex);
+            return;
+         }
+      }
+
+      this.currentLevel.timer.currentTimeInSeconds = this.currentLevel.timer.currentTime - estimatedTime;
+
+      // continuar ciclo do jogo até acabar o nível ou ser interrompido
+      if (!this.currentLevel.timer.finished) {
+         this.currentLevel.update();
+         this.currentLevel.draw();
+         requestAnimationFrame(this.runLevel);
+      }
    }
 
    restartLevel() {
@@ -26,6 +62,16 @@ class GameManager {
 
    nextLevel() {
 
+   }
+
+   getNextLevelIndex() {
+      let index = -1;
+
+      if (this.currentLevelIndex < this.numberOfLevels) {
+         index = this.currentLevelIndex + 1;
+      }
+
+      return index;
    }
 
    getLevelProperties(levelIndex) {
@@ -103,7 +149,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 140000;  // milissegundos
+            time = 15000;  // milissegundos
             lives = 3;
             break;
          case 2:
@@ -170,7 +216,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 120000;  // milissegundos
+            time = 5000;  // milissegundos
             lives = 3;
             break;
          case 3:
@@ -237,7 +283,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 90000;  // milissegundos
+            time = 5000;  // milissegundos
             lives = 3;
             break;
          case 4:
@@ -304,7 +350,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 80000;  // milissegundos
+            time = 5000;  // milissegundos
             lives = 3;
             break;
          case 5:
@@ -370,7 +416,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 60000;  // milissegundos
+            time = 5000;  // milissegundos
             lives = 3;
             break;
       }
