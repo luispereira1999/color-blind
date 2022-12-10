@@ -9,8 +9,8 @@ let player = null;
 animationPlayer = new AnimationManager("./assets/sprites/player-sprite.png", 64, 100, 14, 18, 1.35);
 player = new PlayerSprite(
    animationPlayer,
-   700,
-   290,
+   685,
+   295,
    animationPlayer.frameWidth,
    animationPlayer.frameHeight
 );

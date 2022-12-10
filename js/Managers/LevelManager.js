@@ -19,7 +19,7 @@ class LevelManager {
          this.tileMap.startPlayerPosition.y,
          animationPlayer.frameWidth,
          animationPlayer.frameHeight,
-         3.0
+         1.0
       );
 
       this.enemies = [];

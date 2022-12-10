@@ -14,7 +14,7 @@ class PlayerSprite {
       this.moveRight = false;
       this.moveUp = false;
       this.moveDown = false;
-      this.lampClicked = false;
+      this.lampPressed = false;
 
       this.keyboard = new KeyboardManager();
       this.keyboard.addKeydown(this.onKeydownPressed);
@@ -36,7 +36,7 @@ class PlayerSprite {
 
       switch (keyPressed) {
          case KeyboardManager.Keys.SPACE:
-            this.lampClicked = true;
+            this.lampPressed = true;
             break;
       }
    }
@@ -58,7 +58,7 @@ class PlayerSprite {
             this.moveDown = true;
             break;
          case KeyboardManager.Keys.SPACE:
-            this.lampClicked = true;
+            this.lampPressed = true;
             break;
       }
    }
@@ -80,7 +80,7 @@ class PlayerSprite {
             this.moveDown = false;
             break;
          case KeyboardManager.Keys.SPACE:
-            this.lampClicked = false;
+            this.lampPressed = false;
             break;
       }
    }
@@ -90,10 +90,10 @@ class PlayerSprite {
       const oldX = this.x;
       const oldY = this.y;
       this.move();
-      console.log("scale", tileMapScale)
+
       let colliding = false;
       tiles.layers.forEach((currentMap, index) => {
-         // verificar apenas a camada das paredes
+         // verificar apenas colisões na camada 2 do mapa, pois definiu-se que as paredes/objetos ficam todos nessa camada 
          if (index == 1) {
             colliding = this.checkCollisionsWithTileMap(currentMap, tileSize, tileMapScale);
          }
@@ -116,17 +116,20 @@ class PlayerSprite {
       collider = this.checkCollisionsWithLamps(lamps);
 
       if (collider.collidingStatus) {
-         if (this.checkLampClicked()) {
+         // se colidir com alguma lâmpada e se a tecla de ligar a lâmpada for pressionada
+         if (this.checkLampPressed()) {
             let elementStillNotRegistered = this.findNextElementStillNotRegistered(sequence);
 
             if (elementStillNotRegistered != null) {
+               // se a lâmpada ligada for a próxima da sequência ainda não registada
                if (collider.collidingLamp.color == elementStillNotRegistered.color) {
+                  // registar na sequência e ligar lâmpada 
                   sequence[collider.collidingLampIndex].registered = true;
                   lamps[collider.collidingLampIndex].state = LAMP_STATE.ENABLE;
                }
             }
 
-            this.lampClicked = false;
+            this.lampPressed = false;
          }
 
          this.x = oldX;
@@ -232,8 +235,8 @@ class PlayerSprite {
       };
    }
 
-   checkLampClicked() {
-      if (this.lampClicked) {
+   checkLampPressed() {
+      if (this.lampPressed) {
          return true;
       } else {
          return false;

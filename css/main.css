@@ -13,7 +13,6 @@ html,
 body {
    background-color: black;
    display: flex;
-   /* height: 100vh; */
    justify-content: center;
    overflow: hidden;
 }

@@ -4,7 +4,7 @@ class GameManager {
    constructor(canvas, context) {
       this.canvas = canvas;
       this.context = context;
-      this.currentLevelIndex = 5;
+      this.currentLevelIndex = 1;
    }
 
    startLevel = () => {
