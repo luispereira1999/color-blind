@@ -126,6 +126,12 @@ class PlayerSprite {
                   // registar na sequência e ligar lâmpada 
                   sequence[collider.collidingLampIndex].registered = true;
                   lamps[collider.collidingLampIndex].state = LAMP_STATE.ENABLE;
+
+                  const audio = new Audio('./assets/sounds/lamp-enable-sound.wav');
+                  audio.play();
+               } else {
+                  const audio = new Audio('./assets/sounds/lamp-error-sound.mp3');
+                  audio.play();
                }
             }
 
