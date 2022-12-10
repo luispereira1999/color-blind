@@ -75,9 +75,9 @@ class LevelManager {
 
       this.timer = new TimerManager(levelTime, true);
 
-      this.toggleScreen('menuScreen', false);
-      this.toggleScreen('gameScreen', true);
-      this.toggleScreen('gameScreenUI', true);
+      UIUtil.toggleScreen('menuScreen', false);
+      UIUtil.toggleScreen('gameScreen', true);
+      UIUtil.toggleScreen('gameScreenUI', true);
 
       this.loadedLevel = true;
    }
@@ -112,12 +112,6 @@ class LevelManager {
       }
 
       return randomPositions;
-   }
-
-   toggleScreen(elementID, toggle) {
-      let element = document.getElementById(elementID);
-      let display = (toggle) ? 'block' : 'none';
-      element.style.display = display;
    }
 
    loop = (estimatedTime) => {

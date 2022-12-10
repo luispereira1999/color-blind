@@ -24,6 +24,7 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
    <!-- JAVASCRIPT -->
+   <script src="./js/Utils/UIUtil.js" defer></script>
    <script src="./js/Utils/CollisionUtil.js" defer></script>
 
    <script src="./js/Services/ColorService.js" defer></script>
@@ -52,10 +53,11 @@
       <canvas id="menuAnimation" width="896" height="576"></canvas>
 
       <img class="image-background" src="./assets/backgrounds/menu-background.jpg" alt="Imagem de fundo">
-      <img class="logo" src="./assets/logo.png" alt="Color Blind">
+      <img class="logo" id="logo" src="./assets/logo.png" alt="Color Blind">
+      <h1 class="credits-text" id="credits-text"></h1>
 
-      <div class="buttons">
-         <button class="blob-btn" onclick="startGame()">
+      <div class="buttons" id="buttons">
+         <button class="blob-btn" id="button-start-game" onclick="onStartGame()">
             Novo Jogo
             <span class="blob-btn__inner">
                <span class="blob-btn__blobs">
@@ -67,7 +69,7 @@
             </span>
          </button>
 
-         <button class="blob-btn">
+         <button class="blob-btn" id="button-display-credits" onclick="onDisplayCredits()">
             Creditos
             <span class="blob-btn__inner">
                <span class="blob-btn__blobs">

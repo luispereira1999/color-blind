@@ -23,6 +23,17 @@
    left: 35%;
 }
 
+.credits-text {
+   color: white;
+   position: absolute;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   font-size: 18px;
+   text-align: center;
+   top: 6%;
+   left: 32%;
+   width: 575px;
+}
+
 .copyright-text {
    color: white;
    position: absolute;
@@ -48,7 +59,7 @@
    display: block;
    z-index: 2;
    position: relative;
-   padding: 17px 30px 14px 30px;
+   padding: 17px 30px 15px 30px;
    margin-bottom: 35px;
    text-align: center;
    text-transform: uppercase;
