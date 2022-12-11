@@ -12,7 +12,7 @@ class LevelManager {
    }
 
    async init(levelTime) {
-      const animationPlayer = new AnimationManager("./assets/sprites/player-walk-sprite.png", 64, 100, 4, 18, 0.75);
+      const animationPlayer = new AnimationManager("./assets/sprites/player-walk-sprite.png", 64, 100, 4, 21, 0.75);
       this.player = new PlayerSprite(
          animationPlayer,
          this.tileMap.startPlayerPosition.x,
@@ -75,6 +75,7 @@ class LevelManager {
 
       this.timer = new TimerManager(levelTime, true);
 
+      // mostrar/esconder elementos HTML
       UIUtil.toggleScreen('menuScreen', false);
       UIUtil.toggleScreen('gameScreen', true);
       UIUtil.toggleScreen('gameScreenUI', true);

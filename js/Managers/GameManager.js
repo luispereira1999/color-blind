@@ -8,6 +8,7 @@ class GameManager {
 
       this.currentLevelIndex = -1;
       this.currentLevel = null;
+      this.pausedLevel = false;
    }
 
    startLevel(levelIndex) {
@@ -31,17 +32,21 @@ class GameManager {
          return;
       }
 
-      // após o mapa ser carregado
+      // após o relógio iniciar (quando o mapa é carregado)
       if (this.currentLevel.timer.started) {
          this.currentLevel.timer.currentTime = estimatedTime + this.currentLevel.timer.fullTime;
          this.currentLevel.timer.started = false;
       }
+      // quando o tempo do relógio acabar
       else {
          if (estimatedTime >= this.currentLevel.timer.currentTime) {
             this.currentLevel.timer.finished = true;
+            this.pausedLevel = true;
 
-            this.currentLevelIndex = this.getNextLevelIndex();
-            this.startLevel(this.currentLevelIndex);
+            UIUtil.toggleScreen('losePopup', true);
+          
+            const losePopup = new PopupManager("losePopup"); 
+            losePopup.onBackToMenu();
             return;
          }
       }
@@ -149,7 +154,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 15000;  // milissegundos
+            time = 5000;  // milissegundos
             lives = 3;
             break;
          case 2:

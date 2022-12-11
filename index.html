@@ -34,6 +34,7 @@
    <script src="./js/Sprites/PlayerSprite.js" defer></script>
    <script src="./js/Sprites/TileSprite.js" defer></script>
 
+   <script src="./js/Managers/PopupManager.js" defer></script>
    <script src="./js/Managers/AnimationManager.js" defer></script>
    <script src="./js/Managers/KeyboardManager.js" defer></script>
    <script src="./js/Managers/TimerManager.js" defer></script>
@@ -97,6 +98,23 @@
    </div>
 
    <canvas id="gameScreen" width="896" height="576"></canvas>
+
+   <div id="winPopup">
+      <img class="popup-background-image" src="./assets/ui/win-popup.png" alt="Popup de ganhar">
+      <h2 class="popup-time-label">Tempo: <span id="popupTime">1:30</span></h2>
+      <h2 class="popup-description-label"><span id="popupDescription">Muito bem!! Sera que es capaz de fazes isto
+            novamente?</span></h2>
+      <button class="popup-back-to-menu-button" type="button" alt="Voltar ao menu"></button>
+      <button class="popup-go-to-next-level-button" type="button" alt="Próximo nível"></button>
+   </div>
+
+   <div id="losePopup">
+      <img class="popup-background-image" src="./assets/ui/lose-popup.png" alt="Popup de perder">
+      <h2 class="popup-lamps-label">Lampadas ligadas: <span id="popupLamps">2</span></h2>
+      <h2 class="popup-description-label"><span id="popupDescription">Ups! Bora tentar de novo?</span></h2>
+      <button class="popup-back-to-menu-button" type="button" alt="Voltar ao menu"></button>
+      <button class="popup-restart-level-button" type="button" alt="Reiniciar nível"></button>
+   </div>
 
    <div id="gameScreenUI">
       <div class="clock-container">
