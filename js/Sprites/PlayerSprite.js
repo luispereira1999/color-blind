@@ -1,5 +1,10 @@
 "use strict";
 
+const PLAYER_STATE = {
+   ALIVE: 0,
+   DEAD: 1
+}
+
 class PlayerSprite {
    constructor(animation, x, y, width, height, speed = 1.0) {
       this.animation = animation;
@@ -7,7 +12,6 @@ class PlayerSprite {
       this.y = y;
       this.width = width;
       this.height = height;
-
       this.speed = speed;
 
       this.moveLeft = false;
@@ -15,6 +19,7 @@ class PlayerSprite {
       this.moveUp = false;
       this.moveDown = false;
       this.lampPressed = false;
+      this.state = PLAYER_STATE.ALIVE;
 
       this.keyboard = new KeyboardManager();
       this.keyboard.addKeydown(this.onKeydownPressed);
@@ -91,6 +96,7 @@ class PlayerSprite {
       const oldY = this.y;
       this.move();
 
+      // colisões com tilemap
       let colliding = false;
       tiles.layers.forEach((currentMap, index) => {
          // verificar apenas colisões na camada 2 do mapa, pois definiu-se que as paredes/objetos ficam todos nessa camada 
@@ -104,14 +110,15 @@ class PlayerSprite {
          this.y = oldY;
       }
 
+      // colisões com inimigos
       colliding = false;
       colliding = this.checkCollisionsWithEnemies(enemies);
 
       if (colliding) {
-         this.x = oldX;
-         this.y = oldY;
+         this.state = PLAYER_STATE.DEAD;
       }
 
+      // colisões com lâmpadas
       let collider = {};
       collider = this.checkCollisionsWithLamps(lamps);
 
