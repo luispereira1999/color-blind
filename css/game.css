@@ -225,7 +225,7 @@
 }
 
 #losePopup .popup-restart-level-button {
-   background-image: url("../assets/ui/next-level-button.png");
+   background-image: url("../assets/ui/restart-level-button.png");
    background-size: cover;
    background-color: Transparent;
    width: 56px;

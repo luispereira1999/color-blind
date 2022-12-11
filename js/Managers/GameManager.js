@@ -44,9 +44,9 @@ class GameManager {
             this.pausedLevel = true;
 
             UIUtil.toggleScreen('losePopup', true);
-          
-            const losePopup = new PopupManager("losePopup"); 
-            losePopup.onBackToMenu();
+
+            this.backToMenu("losePopup");
+            this.restartLevel("losePopup");
             return;
          }
       }
@@ -61,12 +61,20 @@ class GameManager {
       }
    }
 
-   restartLevel() {
-
+   backToMenu(popupID) {
+      document.querySelector(`#${popupID} .popup-back-to-menu-button`).onclick = () => {
+         UIUtil.toggleScreen('menuScreen', true);
+         UIUtil.toggleScreen('gameScreen', false);
+         UIUtil.toggleScreen('gameScreenUI', false);
+         UIUtil.toggleScreen(popupID, false);
+      };
    }
 
-   nextLevel() {
-
+   restartLevel(popupID) {
+      document.querySelector(`#${popupID} .popup-restart-level-button`).onclick = () => {
+         UIUtil.toggleScreen(popupID, false);
+         this.startLevel(this.currentLevelIndex);
+      };
    }
 
    getNextLevelIndex() {
