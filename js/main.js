@@ -45,13 +45,32 @@ function onStartGame() {
 }
 
 function onDisplayCredits() {
-   const displayState = UIUtil.getDisplayState("logo");
-   if (displayState == "none") {
+   const displayStateLogo = UIUtil.getDisplayState("logo");
+   const displayStateControls = UIUtil.getDisplayState("controlsImage");
+
+   if (displayStateControls != "none") {
+      UIUtil.toggleScreen("creditsText", true);
+      const creditsText = "Jogo desenvolvido no âmbito da unidade curricular de\n" +
+         "Programação e Desenvolvimento Web,\n" +
+         "realizado no Instituto Politécnico do Cávado e do Ave.\n\n" +
+         "Equipa:\n" +
+         "- Luís Pereira\n" +
+         "- Vânia Pereira\n\n" +
+         "Barcelos, Dezembro 2022\n" +
+         "© Direitos reservados.";
+      UIUtil.changeText("creditsText", creditsText);
+
+      UIUtil.toggleScreen("controlsImage", false);
+      UIUtil.toggleScreen("logo", false);
+      return;
+   }
+
+   if (displayStateLogo == "none") {
       UIUtil.toggleScreen("logo", true);
-      UIUtil.toggleScreen("credits-text", false);
+      UIUtil.toggleScreen("creditsText", false);
    } else {
       UIUtil.toggleScreen("logo", false);
-      UIUtil.toggleScreen("credits-text", true);
+      UIUtil.toggleScreen("creditsText", true);
 
       const creditsText = "Jogo desenvolvido no âmbito da unidade curricular de\n" +
          "Programação e Desenvolvimento Web,\n" +
@@ -61,6 +80,26 @@ function onDisplayCredits() {
          "- Vânia Pereira\n\n" +
          "Barcelos, Dezembro 2022\n" +
          "© Direitos reservados.";
-      UIUtil.changeText("credits-text", creditsText);
+      UIUtil.changeText("creditsText", creditsText);
+   }
+}
+
+function onDisplayControls() {
+   const displayStateLogo = UIUtil.getDisplayState("logo");
+   const displayStateCredits = UIUtil.getDisplayState("creditsText");
+
+   if (displayStateCredits != "none") {
+      UIUtil.toggleScreen("creditsText", false);
+      UIUtil.toggleScreen("controlsImage", true);
+      UIUtil.toggleScreen("logo", false);
+      return;
+   }
+
+   if (displayStateLogo == "none") {
+      UIUtil.toggleScreen("logo", true);
+      UIUtil.toggleScreen("controlsImage", false);
+   } else {
+      UIUtil.toggleScreen("controlsImage", true);
+      UIUtil.toggleScreen("logo", false);
    }
 }

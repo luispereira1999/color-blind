@@ -23,6 +23,13 @@
    left: 35%;
 }
 
+.controls-image {
+   display: none;
+   position: absolute;
+   top: 10%;
+   left: 43%;
+}
+
 .credits-text {
    color: white;
    position: absolute;

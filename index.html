@@ -55,7 +55,8 @@
 
       <img class="image-background" src="./assets/backgrounds/menu-background.jpg" alt="Imagem de fundo">
       <img class="logo" id="logo" src="./assets/logo.png" alt="Color Blind">
-      <h1 class="credits-text" id="credits-text"></h1>
+      <img class="controls-image" id="controlsImage" src="./assets/ui/controls-image.png" alt="Controlos">
+      <h1 class="credits-text" id="creditsText"></h1>
 
       <div class="buttons" id="buttons">
          <button class="blob-btn" id="button-start-game" onclick="onStartGame()">
@@ -72,6 +73,18 @@
 
          <button class="blob-btn" id="button-display-credits" onclick="onDisplayCredits()">
             Creditos
+            <span class="blob-btn__inner">
+               <span class="blob-btn__blobs">
+                  <span class="blob-btn__blob"></span>
+                  <span class="blob-btn__blob"></span>
+                  <span class="blob-btn__blob"></span>
+                  <span class="blob-btn__blob"></span>
+               </span>
+            </span>
+         </button>
+
+         <button class="blob-btn" id="button-display-controls" onclick="onDisplayControls()">
+            Controlos
             <span class="blob-btn__inner">
                <span class="blob-btn__blobs">
                   <span class="blob-btn__blob"></span>
