@@ -48,11 +48,19 @@ class GameManager {
          }
       }
 
+      // quando o jogado morre pelo inimigo
       if (this.currentLevel.player.state == PLAYER_STATE.DEAD) {
          UIUtil.toggleScreen('losePopup', true);
          this.backToMenu("losePopup");
          this.restartLevel("losePopup");
+         return;
+      }
 
+      // quando o jogador completa a sequência
+      if (this.currentLevel.checkCompletedSequence()) {
+         UIUtil.toggleScreen('winPopup', true);
+         this.backToMenu("winPopup");
+         this.goToNextLevel("winPopup");
          return;
       }
 
@@ -68,16 +76,24 @@ class GameManager {
 
    backToMenu(popupID) {
       document.querySelector(`#${popupID} .popup-back-to-menu-button`).onclick = () => {
+         UIUtil.toggleScreen(popupID, false);
          UIUtil.toggleScreen('menuScreen', true);
          UIUtil.toggleScreen('gameScreen', false);
          UIUtil.toggleScreen('gameScreenUI', false);
-         UIUtil.toggleScreen(popupID, false);
       };
    }
 
    restartLevel(popupID) {
       document.querySelector(`#${popupID} .popup-restart-level-button`).onclick = () => {
          UIUtil.toggleScreen(popupID, false);
+         this.startLevel(this.currentLevelIndex);
+      };
+   }
+
+   goToNextLevel(popupID) {
+      document.querySelector(`#${popupID} .popup-go-to-next-level-button`).onclick = () => {
+         UIUtil.toggleScreen(popupID, false);
+         this.currentLevelIndex = this.getNextLevelIndex();
          this.startLevel(this.currentLevelIndex);
       };
    }
@@ -134,7 +150,7 @@ class GameManager {
                ],
                [
                   [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6],
-                  [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,-1, -1, -1, -1, -1, -1, -1, -1, 5, 10, 10, 3, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, 5],
+                  [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, 10, 10, 3, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, 5],
                   [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 97, -1, -1, -1, -1, -1, -1, 5, 10, 10, 3, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, 5],
                   [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, 10, 10, 3, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, 4, 4, 4, 5],
                   [3, -1, -1, -1, 11, 15, 15, 15, 15, 12, -1, -1, -1, 3, -1, -1, -1, -1, -1, 5, 10, 10, 3, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, 5],
