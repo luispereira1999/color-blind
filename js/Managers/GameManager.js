@@ -239,7 +239,7 @@ class GameManager {
 
       // continuar ciclo do jogo até acabar o nível ou ser interrompido
       if (!this.currentLevel.timer.finished) {
-         this.currentLevel.update();
+         this.currentLevel.update(estimatedTime);
          this.currentLevel.draw();
          requestAnimationFrame(this.runLevel);
       }
@@ -345,7 +345,7 @@ class GameManager {
                   [3, -1, -1, -1, -1, 4, 4, 4, 4, 4, 7, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, 13, 2, 2, 2, 14, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, 5],
                   [3, -1, -1, -1, 98, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, 9, 9, 9, 9, 9, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, 5],
                   [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, 5],
-                  [3, -1, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 96, -1, 5],
+                  [3, -1, 99, -1, -1, -1, 96, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, 5],
                   [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, 5],
                   [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7]
                ]]
@@ -424,7 +424,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;  // milissegundos
+            time = 5000;
             musicPath = "./assets/musics/background-2-music.mp3";
             break;
          case 3:
@@ -491,7 +491,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;  // milissegundos
+            time = 5000;
             musicPath = "./assets/musics/background-3-music.mp3";
             break;
          case 4:
@@ -558,7 +558,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;  // milissegundos
+            time = 5000;
             musicPath = "./assets/musics/background-4-music.mp3";
             break;
          case 5:
@@ -624,7 +624,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;  // milissegundos
+            time = 5000;
             musicPath = "./assets/musics/background-5-music.mp3";
             break;
       }

@@ -18,8 +18,9 @@ class PlayerSprite {
       this.moveRight = false;
       this.moveUp = false;
       this.moveDown = false;
-      this.lampPressed = false;
+      this.actionPressed = false;
       this.state = PLAYER_STATE.ALIVE;
+      this.moveBlocked = false;
 
       this.keyboard = new KeyboardManager();
       this.keyboard.addKeydown(this.onKeydownPressed);
@@ -41,7 +42,7 @@ class PlayerSprite {
 
       switch (keyPressed) {
          case KeyboardManager.Keys.SPACE:
-            this.lampPressed = true;
+            this.actionPressed = true;
             break;
       }
    }
@@ -62,9 +63,6 @@ class PlayerSprite {
          case KeyboardManager.Keys.DOWN:
             this.moveDown = true;
             break;
-         case KeyboardManager.Keys.SPACE:
-            this.lampPressed = true;
-            break;
       }
    }
 
@@ -84,17 +82,16 @@ class PlayerSprite {
          case KeyboardManager.Keys.DOWN:
             this.moveDown = false;
             break;
-         case KeyboardManager.Keys.SPACE:
-            this.lampPressed = false;
-            break;
       }
    }
 
-   update(tiles, tileSize, tileMapScale, door, enemies, lamps, sequence) {
+   update(tiles, tileSize, tileMapScale, door, enemies, lamps, sequence, estimatedTime) {
       // guardar valores do movimento anterior, para se houver colisão voltar ao valores do movimento anterior
       const oldX = this.x;
       const oldY = this.y;
-      this.move();
+      if (!this.moveBlocked) {
+         this.move();
+      }
 
       // colisões com tilemap
       let colliding = false;
@@ -115,8 +112,32 @@ class PlayerSprite {
       colliding = this.checkCollisionsWithDoor(door);
 
       if (colliding) {
-         this.x = oldX;
-         this.y = oldY;
+         // só quando o jogador tiver ao nível do chão, é que pode entrar na porta
+         if (Math.abs((this.getBounds().top + this.getBounds().bottom) - (door.getBounds().top + door.getBounds().bottom)) < 5) {
+            // andar automaticamente até ao centro da porta
+            for (let i = 0; i < 5; i++) {
+               // se o jogador atingir o centro da porta, parar de andar
+               if (this.x > 419) {
+                  this.x = 419;
+                  break;
+               }
+               this.x += i * estimatedTime / 100000;
+            }
+
+            // se o jogador atingir o centro da porta, iniciar animação de abrir porta
+            if (this.x > 340) {
+               door.animation.stop = false;
+               // se atingir a última animação da porta, parar animação da porta
+               if (door.animation.frameIndex + 1 == door.animation.numberOfFrames) {
+                  door.animation.stop = true;
+               }
+            }
+
+            this.moveBlocked = true;
+         } else {
+            this.x = oldX;
+            this.y = oldY;
+         }
       }
 
       // colisões com inimigos
@@ -133,7 +154,7 @@ class PlayerSprite {
 
       if (collider.collidingStatus) {
          // se colidir com alguma lâmpada e se a tecla de ligar a lâmpada for pressionada
-         if (this.checkLampPressed()) {
+         if (this.checkActionPressed()) {
             let elementStillNotRegistered = this.findNextElementStillNotRegistered(sequence);
 
             if (elementStillNotRegistered != null) {
@@ -161,7 +182,7 @@ class PlayerSprite {
                }
             }
 
-            this.lampPressed = false;
+            this.actionPressed = false;
          }
 
          this.x = oldX;
@@ -277,8 +298,8 @@ class PlayerSprite {
       };
    }
 
-   checkLampPressed() {
-      if (this.lampPressed) {
+   checkActionPressed() {
+      if (this.actionPressed) {
          return true;
       } else {
          return false;

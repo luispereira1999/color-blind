@@ -18,14 +18,14 @@ class LevelManager {
          this.tileMap.startPlayerPosition.y,
          animationPlayer.frameWidth,
          animationPlayer.frameHeight,
-         3.0
+         1.0
       );
 
-      const animationDoor = new AnimationManager("./assets/sprites/door-sprite.png", 141.25, 128, 4, 36, 1, true);
+      const animationDoor = new AnimationManager("./assets/sprites/door-sprite.png", 141.25, 128, 4, 50, 1, true);
       this.door = new DoorSprite(
          animationDoor,
          this.tileMap.startDoorPosition.x - 14,
-         this.tileMap.startDoorPosition.y + 4,
+         this.tileMap.startDoorPosition.y,
          animationDoor.frameWidth,
          animationDoor.frameHeight
       );
@@ -141,8 +141,8 @@ class LevelManager {
       return randomPositions;
    }
 
-   update() {
-      this.player.update(this.tileMap.tiles, this.tileMap.tileSize, this.tileMap.scale, this.door, this.enemies, this.lamps, this.sequence);
+   update(estimatedTime) {
+      this.player.update(this.tileMap.tiles, this.tileMap.tileSize, this.tileMap.scale, this.door, this.enemies, this.lamps, this.sequence, estimatedTime);
       this.camera.update();
    }
 
@@ -171,8 +171,8 @@ class LevelManager {
       this.camera.draw(this.context);
 
       this.tileMap.draw(this.context);
-      this.player.draw(this.context);
       this.door.draw(this.context);
+      this.player.draw(this.context);
       this.enemies.forEach(enemy => {
          enemy.draw(this.context);
       });
