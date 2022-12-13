@@ -18,10 +18,8 @@
    <link rel="stylesheet" href="./css/menu.css">
    <link rel="stylesheet" href="./css/game.css">
 
-   <!-- PARTICLE.JS -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"
-      integrity="sha512-jq8sZI0I9Og0nnZ+CfJRnUzNSDKxr/5Bvha5bn7AHzTnRyxUfpUArMzfH++mwE/hb2efOo1gCAgI+1RMzf8F7g=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <!-- TSPARTICLES -->
+   <script src='https://cdn.jsdelivr.net/npm/tsparticles@1.33.1/tsparticles.min.js'></script>
 
    <!-- JAVASCRIPT -->
    <script src="./js/Utils/UIUtil.js" defer></script>
@@ -109,7 +107,13 @@
       <h3 class="copyright-text">2022 &#169; Color Blind</h3>
    </div>
 
-   <canvas id="gameScreen" width="896" height="576"></canvas>
+   <video id="background-music" title="Advertisement" webkit-playsinline="true" playsinline="true"
+      style="display: none;" src="./assets/musics/background-2-music.mp3" muted="muted" autoplay="true"></video>
+
+   <div class="gameScreen-container">
+      <canvas id="gameScreen" width="896" height="576"></canvas>
+      <div id="tsparticles"></div>
+   </div>
 
    <div id="winPopup">
       <img class="popup-background-image" src="./assets/ui/win-popup.png" alt="Popup de ganhar">
@@ -129,22 +133,19 @@
    </div>
 
    <div id="gameScreenUI">
-      <div class="clock-container">
-         <div class="clock-col">
-            <p class="clock-minutes clock-timer"></p>
-            <p class="clock-label">Minutes</p>
+      <div class="gameScreenUI-container">
+         <div class="clock-container">
+            <div class="clock-col">
+               <p class="clock-minutes clock-timer"></p>
+               <p class="clock-label">Minutes</p>
+            </div>
+            <div class="clock-col">
+               <p class="clock-seconds clock-timer"></p>
+               <p class="clock-label">Seconds</p>
+            </div>
          </div>
-         <div class="clock-col">
-            <p class="clock-seconds clock-timer"></p>
-            <p class="clock-label">Seconds</p>
-         </div>
-      </div>
 
-      <div class="lives-container">
-         <div class="lives-col">
-            <p class="lives-value"></p>
-            <p class="clock-label">Vidas</p>
-         </div>
+         <div id="sequence"></div>
       </div>
    </div>
 </body>
