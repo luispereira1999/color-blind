@@ -90,7 +90,7 @@ class PlayerSprite {
       }
    }
 
-   update(tiles, tileSize, tileMapScale, enemies, lamps, sequence) {
+   update(tiles, tileSize, tileMapScale, door, enemies, lamps, sequence) {
       // guardar valores do movimento anterior, para se houver colisão voltar ao valores do movimento anterior
       const oldX = this.x;
       const oldY = this.y;
@@ -104,6 +104,15 @@ class PlayerSprite {
             colliding = this.checkCollisionsWithTileMap(currentMap, tileSize, tileMapScale);
          }
       });
+
+      if (colliding) {
+         this.x = oldX;
+         this.y = oldY;
+      }
+
+      // colisões com porta
+      colliding = false;
+      colliding = this.checkCollisionsWithDoor(door);
 
       if (colliding) {
          this.x = oldX;
@@ -221,6 +230,16 @@ class PlayerSprite {
                }
             }
          }
+      }
+
+      return colliding;
+   }
+
+   checkCollisionsWithDoor(door) {
+      let colliding = false;
+
+      if (CollisionUtil.isCollide(this.getBounds(), door.getBounds())) {
+         colliding = true;
       }
 
       return colliding;

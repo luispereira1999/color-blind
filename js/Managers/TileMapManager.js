@@ -12,6 +12,7 @@ class TileMapManager {
       this.tiles.layers = [];
 
       this.startPlayerPosition = {};
+      this.startDoorPosition = {};
       this.startEnemiesPosition = [];
       this.startLampsPosition = [];
 
@@ -79,6 +80,10 @@ class TileMapManager {
                case 97:  // lâmpada
                   position = this.getPosition(column * this.tileSize * this.scale, row * this.tileSize * this.scale);
                   this.startLampsPosition.push(position);
+                  break;
+               case 96:  // porta (fim do nível)
+                  position = this.getPosition(column * this.tileSize * this.scale, row * this.tileSize * this.scale);
+                  this.startDoorPosition = position;
                   break;
             }
 

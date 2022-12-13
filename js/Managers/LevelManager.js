@@ -18,7 +18,16 @@ class LevelManager {
          this.tileMap.startPlayerPosition.y,
          animationPlayer.frameWidth,
          animationPlayer.frameHeight,
-         1.0
+         3.0
+      );
+
+      const animationDoor = new AnimationManager("./assets/sprites/door-sprite.png", 141.25, 128, 4, 36, 1, true);
+      this.door = new DoorSprite(
+         animationDoor,
+         this.tileMap.startDoorPosition.x - 14,
+         this.tileMap.startDoorPosition.y + 4,
+         animationDoor.frameWidth,
+         animationDoor.frameHeight
       );
 
       this.enemies = [];
@@ -133,7 +142,7 @@ class LevelManager {
    }
 
    update() {
-      this.player.update(this.tileMap.tiles, this.tileMap.tileSize, this.tileMap.scale, this.enemies, this.lamps, this.sequence);
+      this.player.update(this.tileMap.tiles, this.tileMap.tileSize, this.tileMap.scale, this.door, this.enemies, this.lamps, this.sequence);
       this.camera.update();
    }
 
@@ -163,6 +172,7 @@ class LevelManager {
 
       this.tileMap.draw(this.context);
       this.player.draw(this.context);
+      this.door.draw(this.context);
       this.enemies.forEach(enemy => {
          enemy.draw(this.context);
       });
