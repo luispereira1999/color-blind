@@ -134,6 +134,16 @@ class PlayerSprite {
                   sequence[collider.collidingLampIndex].registered = true;
                   lamps[collider.collidingLampIndex].state = LAMP_STATE.ENABLE;
 
+                  const opacity = lamps[collider.collidingLampIndex].getOpacity();
+                  const color = lamps[collider.collidingLampIndex].changeOpacityFromRGBA(lamps[collider.collidingLampIndex].color, opacity);
+
+                  const numberOfElementsRegistered = UIUtil.countSequenceElementsRegistered("sequence", "sequence-circle", "sequence-registered");
+
+                  const currentDiv = document.getElementById(`sequence-element-${numberOfElementsRegistered + 1}`);
+                  currentDiv.style.backgroundColor = color;
+                  currentDiv.style.borderColor = "white";
+                  currentDiv.classList.add("sequence-registered");
+
                   const audio = new Audio('./assets/sounds/lamp-enable-sound.wav');
                   audio.play();
                } else {

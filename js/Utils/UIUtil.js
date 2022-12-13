@@ -1,9 +1,9 @@
 "use strict";
 
 class UIUtil {
-   static toggleScreen(elementID, toggle) {
+   static toggleScreen(elementID, toggle, style = "block") {
       let element = document.getElementById(elementID);
-      let display = (toggle) ? 'block' : 'none';
+      let display = (toggle) ? style : "none";
       element.style.display = display;
    }
 
@@ -15,5 +15,28 @@ class UIUtil {
    static changeText(elementID, text) {
       let element = document.getElementById(elementID);
       element.innerText = text;
+   }
+
+   static createCircleElement(parentID, idName, className) {
+      const newElement = document.createElement("div");
+
+      newElement.setAttribute("id", idName);
+      newElement.classList.add(className);
+
+      const parentElement = document.getElementById(parentID);
+      parentElement.appendChild(newElement);
+   }
+
+   static countSequenceElementsRegistered(parentID, elementClass, classToSearch) {
+      const childrens = document.getElementById(parentID).getElementsByClassName(elementClass);
+      let counter = 0;
+
+      for (let i = 0; i < childrens.length; i++) {
+         if (childrens[i].classList.contains(classToSearch)) {
+            counter++;
+         }
+      }
+
+      return counter;
    }
 }

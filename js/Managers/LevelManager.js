@@ -1,11 +1,11 @@
 "use strict";
 
 class LevelManager {
-   constructor(canvas, context, tileMap, levelTime, lives) {
+   constructor(canvas, context, tileMap, levelTime, music) {
       this.canvas = canvas;
       this.context = context;
       this.tileMap = tileMap;
-      this.lives = lives;
+      this.music = music;
       this.loadedLevel = false;
 
       this.init(levelTime);
@@ -76,9 +76,15 @@ class LevelManager {
       this.timer = new TimerManager(levelTime, true);
 
       // mostrar/esconder elementos HTML
-      UIUtil.toggleScreen('menuScreen', false);
-      UIUtil.toggleScreen('gameScreen', true);
-      UIUtil.toggleScreen('gameScreenUI', true);
+      UIUtil.toggleScreen("menuScreen", false);
+      UIUtil.toggleScreen("gameScreen", true);
+      UIUtil.toggleScreen("gameScreenUI", true, "flex");
+
+      document.getElementById("sequence").textContent = '';
+
+      this.sequence.forEach((element, index) => {
+         UIUtil.createCircleElement("sequence", `sequence-element-${index + 1}`, "sequence-circle");
+      });
 
       this.loadedLevel = true;
    }
@@ -159,7 +165,6 @@ class LevelManager {
       const timeFormatted = this.formatTimeToDisplay();
       const minutesAndSeconds = timeFormatted.split(":");
       this.drawTime(minutesAndSeconds[0], minutesAndSeconds[1]);
-      this.drawLives();
    }
 
    drawBackground() {
@@ -172,11 +177,7 @@ class LevelManager {
    }
 
    drawTime(minutes, seconds) {
-      document.documentElement.style.setProperty('--timer-minutes', "'" + minutes + "'");
-      document.documentElement.style.setProperty('--timer-seconds', "'" + seconds + "'");
-   }
-
-   drawLives() {
-      document.documentElement.style.setProperty('--lives', "'" + this.lives + "'");
+      document.documentElement.style.setProperty("--timer-minutes", "'" + minutes + "'");
+      document.documentElement.style.setProperty("--timer-seconds", "'" + seconds + "'");
    }
 }
