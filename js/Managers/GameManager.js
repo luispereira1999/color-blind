@@ -162,11 +162,6 @@ class GameManager {
          }
       });
 
-      let particlesCanvas = document.querySelector(".tsparticles-canvas-el");
-      particlesCanvas.setAttribute("width", "896");
-      particlesCanvas.setAttribute("height", "576");
-      particlesCanvas.style.position = "absolute";
-
       this.tsparticlesContainer = tsParticles.domItem(0);
    }
 
@@ -179,7 +174,7 @@ class GameManager {
          this.context,
          levelProperties.tileMap,
          levelProperties.time,
-         levelProperties.lives
+         levelProperties.musicPath
       );
       this.runLevel(0);  // o parâmetro é necessário para iniciar o relógio de jogo
    }
@@ -200,6 +195,7 @@ class GameManager {
       else {
          if (estimatedTime >= this.currentLevel.timer.currentTime) {
             this.currentLevel.timer.finished = true;
+            this.currentLevel.stopMusic();
 
             UIUtil.toggleScreen('losePopup', true);
             this.backToMenu("losePopup");
@@ -211,6 +207,8 @@ class GameManager {
 
       // quando o jogado morre pelo inimigo
       if (this.currentLevel.player.state == PLAYER_STATE.DEAD) {
+         this.currentLevel.stopMusic();
+
          UIUtil.toggleScreen('losePopup', true);
          this.backToMenu("losePopup");
          this.restartLevel("losePopup");
@@ -219,6 +217,8 @@ class GameManager {
 
       // quando o jogador completa a sequência
       if (this.currentLevel.checkCompletedSequence()) {
+         this.currentLevel.stopMusic();
+
          UIUtil.toggleScreen('winPopup', true);
          this.backToMenu("winPopup");
          this.goToNextLevel("winPopup");
@@ -282,7 +282,7 @@ class GameManager {
       let scale;
       let tileMap;
       let time;
-      let music;
+      let musicPath;
 
       switch (levelIndex) {
          case 1:
@@ -350,7 +350,7 @@ class GameManager {
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
             time = 35000;  // milissegundos
-            music = 3;
+            musicPath = "./assets/musics/background-1-music.mp3";
             break;
          case 2:
             map = {
@@ -416,8 +416,8 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;  // milissegundos
-            music = 3;
+            time = 20000;  // milissegundos
+            musicPath = "./assets/musics/background-2-music.mp3";
             break;
          case 3:
             map = {
@@ -483,8 +483,8 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;  // milissegundos
-            music = 3;
+            time = 10000;  // milissegundos
+            musicPath = "./assets/musics/background-3-music.mp3";
             break;
          case 4:
             map = {
@@ -550,8 +550,8 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;  // milissegundos
-            music = 3;
+            time = 10000;  // milissegundos
+            music = "./assets/musics/background-4-music.mp3";
             break;
          case 5:
             map = {
@@ -616,8 +616,8 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;  // milissegundos
-            music = 3;
+            time = 10000;  // milissegundos
+            musicPath = "./assets/musics/background-5-music.mp3";
             break;
       }
 
@@ -627,7 +627,7 @@ class GameManager {
          height: height,
          tileMap: tileMap,
          time: time,
-         music: music
+         musicPath: musicPath
       }
    }
 }

@@ -1,6 +1,6 @@
 "use strict";
 
-onLoadMenu();
+window.onload = onLoadMenu;
 
 function onLoadMenu() {
    const menuCanvas = document.getElementById("menuAnimation");
@@ -9,7 +9,7 @@ function onLoadMenu() {
    let animationPlayer = null;
    let player = null;
 
-   animationPlayer = new AnimationManager("./assets/sprites/player-sprite.png", 64, 100, 14, 18, 1.35);
+   animationPlayer = new AnimationManager("./assets/sprites/player-menu-sprite.png", 64, 100, 14, 18, 1.35);
    player = new PlayerSprite(
       animationPlayer,
       685,

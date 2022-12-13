@@ -1,17 +1,16 @@
 "use strict";
 
 class LevelManager {
-   constructor(canvas, context, tileMap, levelTime, music) {
+   constructor(canvas, context, tileMap, levelTime, musicPath) {
       this.canvas = canvas;
       this.context = context;
       this.tileMap = tileMap;
-      this.music = music;
       this.loadedLevel = false;
 
-      this.init(levelTime);
+      this.init(levelTime, musicPath);
    }
 
-   async init(levelTime) {
+   async init(levelTime, musicPath) {
       const animationPlayer = new AnimationManager("./assets/sprites/player-walk-sprite.png", 64, 100, 4, 21, 0.75);
       this.player = new PlayerSprite(
          animationPlayer,
@@ -86,7 +85,19 @@ class LevelManager {
          UIUtil.createCircleElement("sequence", `sequence-element-${index + 1}`, "sequence-circle");
       });
 
+      this.music = this.startMusic(musicPath);
+
       this.loadedLevel = true;
+   }
+
+   startMusic(musicPath) {
+      const audio = new Audio(musicPath);
+      audio.play();
+      return audio;
+   }
+
+   stopMusic() {
+      this.music.pause();
    }
 
    getColors = async (numberOfColors) => {
