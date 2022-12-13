@@ -185,6 +185,52 @@
    position: absolute;
 }
 
+#winLastLevelPopup {
+   display: none;
+   position: absolute;
+   z-index: 3;
+   text-align: center;
+   top: 6%;
+}
+
+#winLastLevelPopup .popup-background-image {
+   width: 75%;
+}
+
+#winLastLevelPopup .popup-time-label {
+   color: white;
+   top: 36%;
+   left: 40%;
+   position: absolute;
+   font-size: 20px;
+   font-weight: 100;
+   display: block;
+}
+
+#winLastLevelPopup .popup-description-label {
+   color: white;
+   top: 45%;
+   left: 27%;
+   position: absolute;
+   font-size: 16px;
+   font-weight: 100;
+   display: block;
+   width: 200px;
+}
+
+#winLastLevelPopup .popup-back-to-menu-button {
+   background-image: url("../assets/ui/back-to-menu-button.png");
+   background-size: cover;
+   background-color: Transparent;
+   width: 56px;
+   height: 56px;
+   cursor: pointer;
+   border: 0;
+   top: 65%;
+   left: 43.5%;
+   position: absolute;
+}
+
 #losePopup {
    display: none;
    position: absolute;
