@@ -113,6 +113,7 @@ class LevelManager {
       });
 
       this.music = this.startMusic(musicPath);
+      this.music.volume = 0.75;
 
       this.loadedLevel = true;
    }

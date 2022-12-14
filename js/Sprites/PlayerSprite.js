@@ -31,6 +31,8 @@ class PlayerSprite {
 
       this.lampEnableAudio = new Audio('./assets/sounds/lamp-enable-sound.wav');
       this.lampErrorAudio = new Audio('./assets/sounds/lamp-error-sound.mp3');
+      this.wallAudio = new Audio('./assets/sounds/wall-sound.mp3');
+      this.walkAudio = new Audio('./assets/sounds/walk-sound.mp3')
    }
 
    getBounds() {
@@ -48,15 +50,19 @@ class PlayerSprite {
       switch (keyPressed) {
          case KeyboardManager.Keys.LEFT:
             this.moveLeft = true;
+            this.walkAudio.play();
             break;
          case KeyboardManager.Keys.RIGHT:
             this.moveRight = true;
+            this.walkAudio.play();
             break;
          case KeyboardManager.Keys.UP:
             this.moveUp = true;
+            this.walkAudio.play();
             break;
          case KeyboardManager.Keys.DOWN:
             this.moveDown = true;
+            this.walkAudio.play();
             break;
       }
    }
@@ -108,6 +114,7 @@ class PlayerSprite {
       });
 
       if (colliding) {
+         this.wallAudio.play();
          this.x = oldX;
          this.y = oldY;
       }
