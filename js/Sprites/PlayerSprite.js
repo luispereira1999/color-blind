@@ -90,7 +90,7 @@ class PlayerSprite {
       }
    }
 
-   update(tiles, tileSize, tileMapScale, door, enemies, lamps, sequence, estimatedTime) {
+   update(tiles, tileSize, tileMapScale, door, enemies, lamps, sequence) {
       // guardar valores do movimento anterior, para se houver colisão voltar ao valores do movimento anterior
       const oldX = this.x;
       const oldY = this.y;
@@ -122,15 +122,14 @@ class PlayerSprite {
             if (this.checkCompletedSequence(sequence)) {
                // só quando o jogador tiver ao nível do chão, é que pode entrar na porta
                if (Math.abs((this.getBounds().top + this.getBounds().bottom) - (door.getBounds().top + door.getBounds().bottom)) < 5) {
-                  // andar automaticamente até ao centro da porta
-                  for (let i = 0; i < 5; i++) {
-                     // se o jogador atingir o centro da porta, parar de andar
-                     if (this.x > 419) {
-                        this.x = 419;
-                        break;
-                     }
-                     this.x += i * estimatedTime / 100000;
+                  // se o jogador atingir o centro da porta, parar de andar
+                  if (this.x > 419) {
+                     this.x = 419;
+                     this.state = PLAYER_STATE.ALIVE_AND_FREE;
                   }
+
+                  // andar automaticamente até ao centro da porta
+                  this.x += 0.25;
 
                   // se o jogador atingir o centro da porta, iniciar animação de abrir porta
                   if (this.x > 340) {
@@ -138,7 +137,6 @@ class PlayerSprite {
                      // se atingir a última animação da porta, parar animação da porta
                      if (door.animation.frameIndex + 1 == door.animation.numberOfFrames) {
                         door.animation.stop = true;
-                        this.state = PLAYER_STATE.ALIVE_AND_FREE;
                      }
                   }
 

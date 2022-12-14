@@ -32,14 +32,32 @@ class LevelManager {
 
       this.enemies = [];
       this.tileMap.startEnemiesPosition.forEach(position => {
-         const animationEnemy = new AnimationManager("./assets/sprites/enemy-sprite.png", 67, 99, 11, 18, 0.75);
-         const enemy = new EnemySprite(
-            animationEnemy,
-            position.x,
-            position.y,
-            animationEnemy.frameWidth,
-            animationEnemy.frameHeight
-         );
+         const animationEnemy = new AnimationManager("./assets/sprites/enemy-sprite.png", 67, 99, 11, 18, 0.75, true);
+         let enemy = null;
+
+         if (position.tileNumber == 98) {
+            enemy = new EnemySprite(
+               animationEnemy,
+               position.x,
+               position.y,
+               animationEnemy.frameWidth,
+               animationEnemy.frameHeight,
+               ENEMY_TYPE.HORIZONTAL,
+               0.25,
+               4
+            );
+         } else {
+            enemy = new EnemySprite(
+               animationEnemy,
+               position.x,
+               position.y,
+               animationEnemy.frameWidth,
+               animationEnemy.frameHeight,
+               ENEMY_TYPE.VERTICAL,
+               0.25,
+               4
+            );
+         }
 
          this.enemies.push(enemy);
       });
@@ -141,8 +159,11 @@ class LevelManager {
       return randomPositions;
    }
 
-   update(estimatedTime) {
-      this.player.update(this.tileMap.tiles, this.tileMap.tileSize, this.tileMap.scale, this.door, this.enemies, this.lamps, this.sequence, estimatedTime);
+   update() {
+      this.player.update(this.tileMap.tiles, this.tileMap.tileSize, this.tileMap.scale, this.door, this.enemies, this.lamps, this.sequence);
+      this.enemies.forEach(enemy => {
+         enemy.update(this.tileMap.tileSize, this.tileMap.scale);
+      })
       this.camera.update();
    }
 

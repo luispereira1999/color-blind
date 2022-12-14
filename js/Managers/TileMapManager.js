@@ -73,8 +73,9 @@ class TileMapManager {
                   position = this.getPosition(column * this.tileSize * this.scale, row * this.tileSize * this.scale);
                   this.startPlayerPosition = position;
                   break;
-               case 98:  // inimigos
+               case 98:  // inimigos na horizontal
                   position = this.getPosition(column * this.tileSize * this.scale, row * this.tileSize * this.scale);
+                  position.tileNumber = 98
                   this.startEnemiesPosition.push(position);
                   break;
                case 97:  // lâmpada
@@ -84,6 +85,11 @@ class TileMapManager {
                case 96:  // porta (fim do nível)
                   position = this.getPosition(column * this.tileSize * this.scale, row * this.tileSize * this.scale);
                   this.startDoorPosition = position;
+                  break;
+               case 95:  // inimigos na vertical
+                  position = this.getPosition(column * this.tileSize * this.scale, row * this.tileSize * this.scale);
+                  position.tileNumber = 95
+                  this.startEnemiesPosition.push(position);
                   break;
             }
 
