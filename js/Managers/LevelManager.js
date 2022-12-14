@@ -146,23 +146,6 @@ class LevelManager {
       this.camera.update();
    }
 
-   checkCompletedSequence() {
-      let isCompleted = true;
-
-      if (this.sequence.length === 0) {
-         isCompleted = false;
-      }
-
-      for (let i = 0; i < this.sequence.length; i++) {
-         if (!this.sequence[i].registered) {
-            isCompleted = false;
-            break;
-         }
-      }
-
-      return isCompleted;
-   }
-
    draw() {
       this.context.save();
 

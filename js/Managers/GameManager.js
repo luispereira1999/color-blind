@@ -215,7 +215,7 @@ class GameManager {
       }
 
       // quando o jogador completa a sequência
-      if (this.currentLevel.checkCompletedSequence()) {
+      if (this.currentLevel.player.state == PLAYER_STATE.ALIVE_AND_FREE) {
          this.currentLevel.stopMusic();
 
          // mostrar a popup de ganhar do último nível

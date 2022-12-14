@@ -2,7 +2,8 @@
 
 const PLAYER_STATE = {
    ALIVE: 0,
-   DEAD: 1
+   DEAD: 1,
+   ALIVE_AND_FREE: 2
 }
 
 class PlayerSprite {
@@ -21,11 +22,15 @@ class PlayerSprite {
       this.actionPressed = false;
       this.state = PLAYER_STATE.ALIVE;
       this.moveBlocked = false;
+      this.doorOpened = false;
 
       this.keyboard = new KeyboardManager();
+      this.keyboard.addKeypress(this.onKeypressPressed);
       this.keyboard.addKeydown(this.onKeydownPressed);
       this.keyboard.addKeyup(this.onKeyupPressed);
-      this.keyboard.addKeypress(this.onKeypressPressed);
+
+      this.lampEnableAudio = new Audio('./assets/sounds/lamp-enable-sound.wav');
+      this.lampErrorAudio = new Audio('./assets/sounds/lamp-error-sound.mp3');
    }
 
    getBounds() {
@@ -34,16 +39,6 @@ class PlayerSprite {
          right: this.width * this.animation.scale,
          top: this.y,
          bottom: this.height * this.animation.scale,
-      }
-   }
-
-   onKeypressPressed = (event) => {
-      const keyPressed = event.keyCode;
-
-      switch (keyPressed) {
-         case KeyboardManager.Keys.SPACE:
-            this.actionPressed = true;
-            break;
       }
    }
 
@@ -85,6 +80,16 @@ class PlayerSprite {
       }
    }
 
+   onKeypressPressed = (event) => {
+      const keyPressed = event.keyCode;
+
+      switch (keyPressed) {
+         case KeyboardManager.Keys.SPACE:
+            this.actionPressed = true;
+            break;
+      }
+   }
+
    update(tiles, tileSize, tileMapScale, door, enemies, lamps, sequence, estimatedTime) {
       // guardar valores do movimento anterior, para se houver colisão voltar ao valores do movimento anterior
       const oldX = this.x;
@@ -112,28 +117,50 @@ class PlayerSprite {
       colliding = this.checkCollisionsWithDoor(door);
 
       if (colliding) {
-         // só quando o jogador tiver ao nível do chão, é que pode entrar na porta
-         if (Math.abs((this.getBounds().top + this.getBounds().bottom) - (door.getBounds().top + door.getBounds().bottom)) < 5) {
-            // andar automaticamente até ao centro da porta
-            for (let i = 0; i < 5; i++) {
-               // se o jogador atingir o centro da porta, parar de andar
-               if (this.x > 419) {
-                  this.x = 419;
-                  break;
-               }
-               this.x += i * estimatedTime / 100000;
-            }
+         // se a tecla de ação for pressionada
+         if (this.checkActionPressed()) {
+            if (this.checkCompletedSequence(sequence)) {
+               // só quando o jogador tiver ao nível do chão, é que pode entrar na porta
+               if (Math.abs((this.getBounds().top + this.getBounds().bottom) - (door.getBounds().top + door.getBounds().bottom)) < 5) {
+                  // andar automaticamente até ao centro da porta
+                  for (let i = 0; i < 5; i++) {
+                     // se o jogador atingir o centro da porta, parar de andar
+                     if (this.x > 419) {
+                        this.x = 419;
+                        break;
+                     }
+                     this.x += i * estimatedTime / 100000;
+                  }
 
-            // se o jogador atingir o centro da porta, iniciar animação de abrir porta
-            if (this.x > 340) {
-               door.animation.stop = false;
-               // se atingir a última animação da porta, parar animação da porta
-               if (door.animation.frameIndex + 1 == door.animation.numberOfFrames) {
-                  door.animation.stop = true;
-               }
-            }
+                  // se o jogador atingir o centro da porta, iniciar animação de abrir porta
+                  if (this.x > 340) {
+                     door.animation.stop = false;
+                     // se atingir a última animação da porta, parar animação da porta
+                     if (door.animation.frameIndex + 1 == door.animation.numberOfFrames) {
+                        door.animation.stop = true;
+                        this.state = PLAYER_STATE.ALIVE_AND_FREE;
+                     }
+                  }
 
-            this.moveBlocked = true;
+                  this.moveBlocked = true;
+               } else {
+                  if (!this.audioIsPlaying(this.lampErrorAudio)) {
+                     this.lampErrorAudio.play();
+                  }
+
+                  this.x = oldX;
+                  this.y = oldY;
+                  this.actionPressed = false;
+               }
+            } else {
+               if (!this.audioIsPlaying(this.lampErrorAudio)) {
+                  this.lampErrorAudio.play();
+               }
+
+               this.x = oldX;
+               this.y = oldY;
+               this.actionPressed = false;
+            }
          } else {
             this.x = oldX;
             this.y = oldY;
@@ -153,7 +180,7 @@ class PlayerSprite {
       collider = this.checkCollisionsWithLamps(lamps);
 
       if (collider.collidingStatus) {
-         // se colidir com alguma lâmpada e se a tecla de ligar a lâmpada for pressionada
+         // se colidir com alguma lâmpada e se a tecla de ação for pressionada
          if (this.checkActionPressed()) {
             let elementStillNotRegistered = this.findNextElementStillNotRegistered(sequence);
 
@@ -174,11 +201,13 @@ class PlayerSprite {
                   currentDiv.style.borderColor = "white";
                   currentDiv.classList.add("sequence-registered");
 
-                  const audio = new Audio('./assets/sounds/lamp-enable-sound.wav');
-                  audio.play();
+                  if (!this.audioIsPlaying(this.lampEnableAudio)) {
+                     this.lampEnableAudio.play();
+                  }
                } else {
-                  const audio = new Audio('./assets/sounds/lamp-error-sound.mp3');
-                  audio.play();
+                  if (!this.audioIsPlaying(this.lampErrorAudio)) {
+                     this.lampErrorAudio.play();
+                  }
                }
             }
 
@@ -188,6 +217,10 @@ class PlayerSprite {
          this.x = oldX;
          this.y = oldY;
       }
+   }
+
+   audioIsPlaying(audio) {
+      return !audio.paused;
    }
 
    findNextElementStillNotRegistered(sequence) {
@@ -304,6 +337,23 @@ class PlayerSprite {
       } else {
          return false;
       }
+   }
+
+   checkCompletedSequence(sequence) {
+      let isCompleted = true;
+
+      if (sequence.length === 0) {
+         isCompleted = false;
+      }
+
+      for (let i = 0; i < sequence.length; i++) {
+         if (!sequence[i].registered) {
+            isCompleted = false;
+            break;
+         }
+      }
+
+      return isCompleted;
    }
 
    draw(context) {
