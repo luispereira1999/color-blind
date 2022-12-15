@@ -18,7 +18,7 @@ class LevelManager {
          this.tileMap.startPlayerPosition.y,
          animationPlayer.frameWidth,
          animationPlayer.frameHeight,
-         1.0
+         3.0
       );
 
       const animationDoor = new AnimationManager("./assets/sprites/door-sprite.png", 141.25, 128, 4, 50, 1, true);

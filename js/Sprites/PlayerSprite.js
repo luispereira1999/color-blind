@@ -32,7 +32,8 @@ class PlayerSprite {
       this.lampEnableAudio = new Audio('./assets/sounds/lamp-enable-sound.wav');
       this.lampErrorAudio = new Audio('./assets/sounds/lamp-error-sound.mp3');
       this.wallAudio = new Audio('./assets/sounds/wall-sound.mp3');
-      this.walkAudio = new Audio('./assets/sounds/walk-sound.mp3')
+      this.walkAudio = new Audio('./assets/sounds/walk-sound.mp3');
+      this.doorAudio = new Audio('./assets/sounds/door-sound.mp3');
    }
 
    getBounds() {
@@ -126,37 +127,32 @@ class PlayerSprite {
       if (colliding) {
          // se a tecla de ação for pressionada
          if (this.checkActionPressed()) {
-            if (this.checkCompletedSequence(sequence)) {
-               // só quando o jogador tiver ao nível do chão, é que pode entrar na porta
-               if (Math.abs((this.getBounds().top + this.getBounds().bottom) - (door.getBounds().top + door.getBounds().bottom)) < 5) {
-                  // se o jogador atingir o centro da porta, parar de andar
-                  if (this.x > 419) {
-                     this.x = 419;
-                     this.state = PLAYER_STATE.ALIVE_AND_FREE;
-                  }
-
-                  // andar automaticamente até ao centro da porta
-                  this.x += 0.25;
-
-                  // se o jogador atingir o centro da porta, iniciar animação de abrir porta
-                  if (this.x > 340) {
-                     door.animation.stop = false;
-                     // se atingir a última animação da porta, parar animação da porta
-                     if (door.animation.frameIndex + 1 == door.animation.numberOfFrames) {
-                        door.animation.stop = true;
-                     }
-                  }
-
-                  this.moveBlocked = true;
-               } else {
-                  if (!this.audioIsPlaying(this.lampErrorAudio)) {
-                     this.lampErrorAudio.play();
-                  }
-
-                  this.x = oldX;
-                  this.y = oldY;
-                  this.actionPressed = false;
+            // if (this.checkCompletedSequence(sequence)) {
+            // só quando o jogador tiver ao nível do chão, é que pode entrar na porta
+            if (Math.abs((this.getBounds().top + this.getBounds().bottom) - (door.getBounds().top + door.getBounds().bottom)) < 5) {
+               // se o jogador atingir o centro da porta, parar de andar
+               if (this.x > door.x + 48) {
+                  this.x = door.x + 48;
+                  this.state = PLAYER_STATE.ALIVE_AND_FREE;
                }
+
+               // andar automaticamente até ao centro da porta
+               this.x += 0.5;
+
+               // se o jogador atingir o centro da porta, iniciar animação de abrir porta
+               if (this.x > door.x - 32) {
+                  door.animation.stop = false;
+                  if (!this.audioIsPlaying(this.lampErrorAudio)) {
+                     this.doorAudio.play();
+                  }
+
+                  // se atingir a última animação da porta, parar animação da porta
+                  if (door.animation.frameIndex + 1 == door.animation.numberOfFrames) {
+                     door.animation.stop = true;
+                  }
+               }
+
+               this.moveBlocked = true;
             } else {
                if (!this.audioIsPlaying(this.lampErrorAudio)) {
                   this.lampErrorAudio.play();
@@ -167,9 +163,18 @@ class PlayerSprite {
                this.actionPressed = false;
             }
          } else {
+            if (!this.audioIsPlaying(this.lampErrorAudio)) {
+               this.lampErrorAudio.play();
+            }
+
             this.x = oldX;
             this.y = oldY;
+            this.actionPressed = false;
          }
+         // } else {
+         //    this.x = oldX;
+         //    this.y = oldY;
+         // }
       }
 
       // colisões com inimigos
