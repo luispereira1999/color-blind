@@ -13,7 +13,6 @@ class PlayerSprite {
       this.y = y;
       this.width = width;
       this.height = height;
-      this.acceleration = 1;
       this.speed = speed;
 
       this.moveLeft = false;
@@ -53,18 +52,22 @@ class PlayerSprite {
          case KeyboardManager.Keys.LEFT:
             this.moveLeft = true;
             this.walkAudio.play();
+            this.walkAudio.volume = 0.75;
             break;
          case KeyboardManager.Keys.RIGHT:
             this.moveRight = true;
             this.walkAudio.play();
+            this.walkAudio.volume = 0.75;
             break;
          case KeyboardManager.Keys.UP:
             this.moveUp = true;
             this.walkAudio.play();
+            this.walkAudio.volume = 0.75;
             break;
          case KeyboardManager.Keys.DOWN:
             this.moveDown = true;
             this.walkAudio.play();
+            this.walkAudio.volume = 0.75;
             break;
       }
    }
@@ -128,32 +131,41 @@ class PlayerSprite {
       if (colliding) {
          // se a tecla de ação for pressionada
          if (this.checkActionPressed()) {
-            // if (this.checkCompletedSequence(sequence)) {
-            // só quando o jogador tiver ao nível do chão, é que pode entrar na porta
-            if (Math.abs((this.getBounds().top + this.getBounds().bottom) - (door.getBounds().top + door.getBounds().bottom)) < 5) {
-               // se o jogador atingir o centro da porta, parar de andar
-               if (this.x > door.x + 48) {
-                  this.x = door.x + 48;
-                  this.state = PLAYER_STATE.ALIVE_AND_FREE;
-               }
+            if (this.checkCompletedSequence(sequence)) {
+               // só quando o jogador tiver ao nível do chão, é que pode entrar na porta
+               if (Math.abs((this.getBounds().top + this.getBounds().bottom) - (door.getBounds().top + door.getBounds().bottom)) < 5) {
+                  // quando o jogador atingir o centro da porta, parar de andar
+                  if (this.x > door.x + 48) {
+                     this.x = door.x + 48;
+                     this.state = PLAYER_STATE.ALIVE_AND_FREE;
+                  }
 
-               // andar automaticamente até ao centro da porta
-               this.x += 0.5;
+                  // andar automaticamente até ao centro da porta
+                  this.x += 0.5;
 
-               // se o jogador atingir o centro da porta, iniciar animação de abrir porta
-               if (this.x > door.x - 32) {
-                  door.animation.stop = false;
+                  // iniciar animação de abrir a porta
+                  if (this.x > door.x - 32) {
+                     door.animation.stop = false;
+                     if (!this.audioIsPlaying(this.doorAudio)) {
+                        this.doorAudio.play();
+                     }
+
+                     // se atingir a última animação da porta, parar animação da porta
+                     if (door.animation.frameIndex + 1 == door.animation.numberOfFrames) {
+                        door.animation.stop = true;
+                     }
+                  }
+
+                  this.moveBlocked = true;
+               } else {
                   if (!this.audioIsPlaying(this.lampErrorAudio)) {
-                     this.doorAudio.play();
+                     this.lampErrorAudio.play();
                   }
 
-                  // se atingir a última animação da porta, parar animação da porta
-                  if (door.animation.frameIndex + 1 == door.animation.numberOfFrames) {
-                     door.animation.stop = true;
-                  }
+                  this.x = oldX;
+                  this.y = oldY;
+                  this.actionPressed = false;
                }
-
-               this.moveBlocked = true;
             } else {
                if (!this.audioIsPlaying(this.lampErrorAudio)) {
                   this.lampErrorAudio.play();
@@ -164,18 +176,9 @@ class PlayerSprite {
                this.actionPressed = false;
             }
          } else {
-            if (!this.audioIsPlaying(this.lampErrorAudio)) {
-               this.lampErrorAudio.play();
-            }
-
             this.x = oldX;
             this.y = oldY;
-            this.actionPressed = false;
          }
-         // } else {
-         //    this.x = oldX;
-         //    this.y = oldY;
-         // }
       }
 
       // colisões com inimigos
@@ -253,18 +256,17 @@ class PlayerSprite {
    }
 
    move() {
-      console.log(this.speed * Math.sin(this.acceleration))
       if (this.moveLeft && !this.moveRight) {
-         this.x -= this.speed * Math.sin(this.acceleration);
+         this.x -= this.speed;
       }
       if (this.moveRight && !this.moveLeft) {
-         this.x += this.speed * Math.sin(this.acceleration);
+         this.x += this.speed;
       }
       if (this.moveUp && !this.moveDown) {
-         this.y -= this.speed * Math.sin(this.acceleration);
+         this.y -= this.speed;
       }
       if (this.moveDown && !this.moveUp) {
-         this.y += this.speed * Math.sin(this.acceleration);
+         this.y += this.speed;
       }
    }
 
