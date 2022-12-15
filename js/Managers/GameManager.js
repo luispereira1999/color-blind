@@ -384,7 +384,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 35000;  // milissegundos
+            time = 120000;  // milissegundos
             musicPath = "./assets/musics/background-1-music.mp3";
             break;
          case 2:
@@ -451,7 +451,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;
+            time = 120000;
             musicPath = "./assets/musics/background-2-music.mp3";
             break;
          case 3:
@@ -518,7 +518,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;
+            time = 120000;
             musicPath = "./assets/musics/background-3-music.mp3";
             break;
          case 4:
@@ -585,7 +585,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;
+            time = 120000;
             musicPath = "./assets/musics/background-4-music.mp3";
             break;
          case 5:
@@ -651,7 +651,7 @@ class GameManager {
             scale = 2.0;
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 5000;
+            time = 120000;
             musicPath = "./assets/musics/background-5-music.mp3";
             break;
       }

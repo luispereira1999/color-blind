@@ -13,6 +13,7 @@ class PlayerSprite {
       this.y = y;
       this.width = width;
       this.height = height;
+      this.acceleration = 1;
       this.speed = speed;
 
       this.moveLeft = false;
@@ -252,17 +253,18 @@ class PlayerSprite {
    }
 
    move() {
+      console.log(this.speed * Math.sin(this.acceleration))
       if (this.moveLeft && !this.moveRight) {
-         this.x -= this.speed;
+         this.x -= this.speed * Math.sin(this.acceleration);
       }
       if (this.moveRight && !this.moveLeft) {
-         this.x += this.speed;
+         this.x += this.speed * Math.sin(this.acceleration);
       }
       if (this.moveUp && !this.moveDown) {
-         this.y -= this.speed;
+         this.y -= this.speed * Math.sin(this.acceleration);
       }
       if (this.moveDown && !this.moveUp) {
-         this.y += this.speed;
+         this.y += this.speed * Math.sin(this.acceleration);
       }
    }
 
