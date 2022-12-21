@@ -1,13 +1,24 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/*** GLOBAL ***/
+@font-face {
+  font-family: blomberg;
+  font-style: normal;
+  font-weight: 400;
+  src: local('BLOMBERG'), url(./fonts/blomberg.woff) format('woff');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: blomberg;
+}
+
+html,
+body {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
 }
