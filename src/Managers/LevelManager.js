@@ -1,5 +1,3 @@
-"use strict";
-
 class LevelManager {
    constructor(canvas, context, tileMap, levelTime, musicPath) {
       this.canvas = canvas;
@@ -207,3 +205,5 @@ class LevelManager {
       document.documentElement.style.setProperty("--timer-seconds", "'" + seconds + "'");
    }
 }
+
+export default LevelManager

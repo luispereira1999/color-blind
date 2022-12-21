@@ -1,5 +1,3 @@
-"use strict";
-
 class DoorSprite {
    constructor(animation, x, y, width, height) {
       this.animation = animation;
@@ -22,3 +20,5 @@ class DoorSprite {
       this.animation.draw(context, this.x, this.y);
    }
 }
+
+export default DoorSprite

@@ -1,5 +1,3 @@
-"use strict";
-
 class UIUtil {
    static toggleScreen(elementID, toggle, style = "block") {
       let element = document.getElementById(elementID);
@@ -40,3 +38,5 @@ class UIUtil {
       return counter;
    }
 }
+
+export default UIUtil

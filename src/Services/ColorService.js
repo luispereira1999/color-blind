@@ -1,5 +1,3 @@
-"use strict";
-
 class ColorService {
    getColors(numberOfColors) {
       return new Promise((resolve, reject) => {
@@ -11,3 +9,5 @@ class ColorService {
       });
    }
 }
+
+export default ColorService

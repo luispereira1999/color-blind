@@ -1,5 +1,3 @@
-"use strict";
-
 class TileMapManager {
    constructor(tileSize, map, width, height, scale = 1) {
       this.tileSize = tileSize;
@@ -128,3 +126,5 @@ class TileMapManager {
       }
    }
 }
+
+export default TileMapManager

@@ -1,5 +1,3 @@
-"use strict";
-
 const TILE_TYPE = {
    PASSABLE: 0,
    BLOCK: 1
@@ -18,3 +16,5 @@ class TileSprite {
       return image;
    }
 }
+
+export default TileSprite

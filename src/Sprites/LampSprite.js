@@ -1,5 +1,3 @@
-"use strict";
-
 const LAMP_STATE = {
    DISABLE: 0,
    ENABLE: 1
@@ -92,3 +90,5 @@ class LampSprite {
       context.fill();
    }
 }
+
+export default LampSprite

@@ -1,5 +1,3 @@
-"use strict";
-
 class CameraManager {
    constructor(x, y, width, height, player, tileMap) {
       this.x = x;
@@ -75,3 +73,5 @@ class CameraManager {
       context.translate(-this.x, -this.y);
    }
 }
+
+export default CameraManager

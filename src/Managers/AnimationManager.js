@@ -1,5 +1,3 @@
-// "use strict";
-
 class AnimationManager {
    constructor(spriteSheet, frameWidth, frameHeight, numberOfFrames, frameRate, scale = 1, stop = false) {
       this.spriteSheet = this.setSpriteSheet(spriteSheet);

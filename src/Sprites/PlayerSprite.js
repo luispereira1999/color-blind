@@ -1,5 +1,3 @@
-// "use strict";
-
 import KeyboardManager from '../Managers/KeyboardManager'
 
 const PLAYER_STATE = {

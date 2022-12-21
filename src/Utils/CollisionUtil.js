@@ -1,5 +1,3 @@
-"use strict";
-
 class CollisionUtil {
    static isCollide(rect1, rect2) {
       return (
@@ -10,3 +8,5 @@ class CollisionUtil {
       );
    }
 }
+
+export default CollisionUtil

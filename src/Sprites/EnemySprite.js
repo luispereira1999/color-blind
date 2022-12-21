@@ -1,5 +1,3 @@
-"use strict";
-
 const ENEMY_TYPE = {
    HORIZONTAL: 0,
    VERTICAL: 1
@@ -86,3 +84,5 @@ class EnemySprite {
       this.animation.draw(context, this.x, this.y);
    }
 }
+
+export default EnemySprite

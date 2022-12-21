@@ -1,17 +1,54 @@
 import React from 'react'
 import '../css/Menu.css';
-import useCanvas from '../hooks/useCanvas'
+import useMenuAnimation from '../hooks/useMenuAnimation'
+import UIUtil from '../Utils/UIUtil'
 
 const Menu = (props) => {
-   const loadMenu = props.loadMenu;
-   const canvasRef = useCanvas(loadMenu);
+   const drawMenuAnimation = props.drawMenuAnimation;
+   const canvasRef = useMenuAnimation(drawMenuAnimation);
 
    const onStartGame = () => {
       console.log("onStartGame");
    }
 
    const onDisplayCredits = () => {
-      console.log("onDisplayCredits");
+      const displayStateLogo = UIUtil.getDisplayState("logo");
+      const displayStateControls = UIUtil.getDisplayState("controlsImage");
+   
+      if (displayStateControls != "none") {
+         UIUtil.toggleScreen("creditsText", true);
+         const creditsText = "Jogo desenvolvido no âmbito da unidade curricular de\n" +
+            "Programação e Desenvolvimento Web,\n" +
+            "realizado no Instituto Politécnico do Cávado e do Ave.\n\n" +
+            "Equipa:\n" +
+            "- Luís Pereira\n" +
+            "- Vânia Pereira\n\n" +
+            "Barcelos, Dezembro 2022\n" +
+            "© Direitos reservados.";
+         UIUtil.changeText("creditsText", creditsText);
+   
+         UIUtil.toggleScreen("controlsImage", false);
+         UIUtil.toggleScreen("logo", false);
+         return;
+      }
+   
+      if (displayStateLogo == "none") {
+         UIUtil.toggleScreen("logo", true);
+         UIUtil.toggleScreen("creditsText", false);
+      } else {
+         UIUtil.toggleScreen("logo", false);
+         UIUtil.toggleScreen("creditsText", true);
+   
+         const creditsText = "Jogo desenvolvido no âmbito da unidade curricular de\n" +
+            "Programação e Desenvolvimento Web,\n" +
+            "realizado no Instituto Politécnico do Cávado e do Ave.\n\n" +
+            "Equipa:\n" +
+            "- Luís Pereira\n" +
+            "- Vânia Pereira\n\n" +
+            "Barcelos, Dezembro 2022\n" +
+            "© Direitos reservados.";
+         UIUtil.changeText("creditsText", creditsText);
+      }
    }
 
    const onDisplayControls = () => {

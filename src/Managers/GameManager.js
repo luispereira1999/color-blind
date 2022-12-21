@@ -1,5 +1,3 @@
-"use strict";
-
 class GameManager {
    constructor(canvas, context, numberOfLevels) {
       this.canvas = canvas;
@@ -666,3 +664,5 @@ class GameManager {
       }
    }
 }
+
+export default GameManager

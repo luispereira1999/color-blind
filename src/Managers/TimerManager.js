@@ -1,5 +1,3 @@
-"use strict";
-
 class TimerManager {
    constructor(timeInMilliseconds, started) {
       this.started = started;
@@ -9,3 +7,5 @@ class TimerManager {
       this.currentTimeInSeconds = null;
    }
 }
+
+export default TimerManager
