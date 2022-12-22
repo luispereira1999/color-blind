@@ -1,21 +1,27 @@
-import React from 'react'
+import React from 'react';
 import '../css/Menu.css';
-import useMenuAnimation from '../hooks/useMenuAnimation'
-import UIUtil from '../Utils/UIUtil'
+import useMenuAnimation from '../hooks/useMenuAnimation';
+import GameManager from '../Managers/GameManager';
+import UIUtil from '../Utils/UIUtil';
+
 
 const Menu = (props) => {
    const drawMenuAnimation = props.drawMenuAnimation;
    const canvasRef = useMenuAnimation(drawMenuAnimation);
 
    const onStartGame = () => {
-      console.log("onStartGame");
+      const gameCanvas = document.getElementById("gameScreen");
+      const gameContext = gameCanvas.getContext("2d");
+
+      const gameManager = new GameManager(gameCanvas, gameContext, 5);
+      gameManager.startLevel(1);
    }
 
    const onDisplayCredits = () => {
       const displayStateLogo = UIUtil.getDisplayState("logo");
       const displayStateControls = UIUtil.getDisplayState("controlsImage");
 
-      if (displayStateControls != "none") {
+      if (displayStateControls !== "none") {
          UIUtil.toggleScreen("creditsText", true);
          const creditsText = "Jogo desenvolvido no âmbito da unidade curricular de\n" +
             "Programação e Desenvolvimento Web,\n" +
@@ -32,7 +38,7 @@ const Menu = (props) => {
          return;
       }
 
-      if (displayStateLogo == "none") {
+      if (displayStateLogo === "none") {
          UIUtil.toggleScreen("logo", true);
          UIUtil.toggleScreen("creditsText", false);
       } else {
@@ -55,14 +61,14 @@ const Menu = (props) => {
       const displayStateLogo = UIUtil.getDisplayState("logo");
       const displayStateCredits = UIUtil.getDisplayState("creditsText");
 
-      if (displayStateCredits != "none") {
+      if (displayStateCredits !== "none") {
          UIUtil.toggleScreen("creditsText", false);
          UIUtil.toggleScreen("controlsImage", true);
          UIUtil.toggleScreen("logo", false);
          return;
       }
 
-      if (displayStateLogo == "none") {
+      if (displayStateLogo === "none") {
          UIUtil.toggleScreen("logo", true);
          UIUtil.toggleScreen("controlsImage", false);
       } else {

@@ -1,3 +1,5 @@
+import { TILE_TYPE, TileSprite } from '../Sprites/TileSprite';
+
 class TileMapManager {
    constructor(tileSize, map, width, height, scale = 1) {
       this.tileSize = tileSize;
@@ -88,6 +90,8 @@ class TileMapManager {
                   position = this.getPosition(column * this.tileSize * this.scale, row * this.tileSize * this.scale);
                   position.tileNumber = 95
                   this.startEnemiesPosition.push(position);
+                  break;
+               default:
                   break;
             }
 

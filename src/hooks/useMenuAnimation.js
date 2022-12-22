@@ -1,6 +1,6 @@
-import { useRef, useEffect } from 'react'
-import AnimationManager from '../Managers/AnimationManager'
-import PlayerSprite from '../Sprites/PlayerSprite'
+import { useRef, useEffect } from 'react';
+import AnimationManager from '../Managers/AnimationManager';
+import { PlayerSprite } from '../Sprites/PlayerSprite';
 
 const useMenuAnimation = (drawMenuAnimation) => {
    const canvasRef = useRef(null);

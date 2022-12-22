@@ -22,3 +22,10 @@ body {
   justify-content: center;
   overflow: hidden;
 }
+
+#root {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}

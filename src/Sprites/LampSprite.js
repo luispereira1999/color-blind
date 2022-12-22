@@ -26,7 +26,7 @@ class LampSprite {
    getOpacity() {
       let opacity = 0;
 
-      if (this.state == LAMP_STATE.ENABLE) {
+      if (this.state === LAMP_STATE.ENABLE) {
          opacity = 0.85;
       } else {
          opacity = 0.45;
@@ -91,4 +91,7 @@ class LampSprite {
    }
 }
 
-export default LampSprite
+export {
+   LAMP_STATE,
+   LampSprite
+} 

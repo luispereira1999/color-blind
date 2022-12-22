@@ -1,3 +1,9 @@
+import LevelManager from '../Managers/LevelManager';
+import TileMapManager from '../Managers/TileMapManager';
+import { PLAYER_STATE } from '../Sprites/PlayerSprite';
+import UIUtil from '../Utils/UIUtil';
+import { tsParticles } from "tsparticles-engine";
+
 class GameManager {
    constructor(canvas, context, numberOfLevels) {
       this.canvas = canvas;
@@ -14,7 +20,7 @@ class GameManager {
 
       tsParticles.load("tsparticles", {
          fullScreen: {
-            enable: true
+            enable: false
          },
          detectRetina: true,
          background: {
@@ -39,7 +45,7 @@ class GameManager {
                height: 0
             },
             position: {
-               y: 75,
+               y: 50,
                x: 50
             }
          },
@@ -210,7 +216,7 @@ class GameManager {
       }
 
       // quando o jogado morre pelo inimigo
-      if (this.currentLevel.player.state == PLAYER_STATE.DEAD) {
+      if (this.currentLevel.player.state === PLAYER_STATE.DEAD) {
          this.currentLevel.stopMusic();
          this.clockAudio.pause();
 
@@ -222,11 +228,11 @@ class GameManager {
       }
 
       // quando o jogador completa a sequência
-      if (this.currentLevel.player.state == PLAYER_STATE.ALIVE_AND_FREE) {
+      if (this.currentLevel.player.state === PLAYER_STATE.ALIVE_AND_FREE) {
          this.currentLevel.stopMusic();
 
          // mostrar a popup de ganhar do último nível
-         if (this.numberOfLevels == this.currentLevelIndex) {
+         if (this.numberOfLevels === this.currentLevelIndex) {
             this.clockAudio.pause();
 
             UIUtil.toggleScreen('winLastLevelPopup', true);
@@ -651,6 +657,8 @@ class GameManager {
 
             time = 420000;
             musicPath = "./assets/musics/background-5-music.mp3";
+            break;
+         default:
             break;
       }
 

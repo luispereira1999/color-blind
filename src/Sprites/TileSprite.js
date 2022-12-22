@@ -17,4 +17,7 @@ class TileSprite {
    }
 }
 
-export default TileSprite
+export {
+   TILE_TYPE,
+   TileSprite
+}  

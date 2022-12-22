@@ -24,7 +24,7 @@ class GameManager {
          },
          fpsLimit: 60,
          emitters: {
-            autoPlay: false,
+            autoPlay: true,
             name: "win",
             direction: "top",
             life: {

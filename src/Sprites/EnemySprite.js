@@ -41,8 +41,8 @@ class EnemySprite {
    }
 
    move(tileSize, tileMapScale) {
-      if (this.type == ENEMY_TYPE.HORIZONTAL) {
-         if (this.movementSense == MOVEMENT_SENSE.LEFT) {
+      if (this.type === ENEMY_TYPE.HORIZONTAL) {
+         if (this.movementSense === MOVEMENT_SENSE.LEFT) {
             this.x -= this.speed;
             if (this.x < this.startX) {
                this.movementSense = MOVEMENT_SENSE.RIGHT;
@@ -60,7 +60,7 @@ class EnemySprite {
          // andar automaticamente até ao limite
          this.x += this.speed;
       } else {
-         if (this.movementSense == MOVEMENT_SENSE.TOP) {
+         if (this.movementSense === MOVEMENT_SENSE.TOP) {
             this.y -= this.speed;
             if (this.y < this.startY) {
                this.movementSense = MOVEMENT_SENSE.BOTTOM;
@@ -85,4 +85,8 @@ class EnemySprite {
    }
 }
 
-export default EnemySprite
+export {
+   ENEMY_TYPE,
+   MOVEMENT_SENSE,
+   EnemySprite
+} 

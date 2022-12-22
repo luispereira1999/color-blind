@@ -1,3 +1,13 @@
+import AnimationManager from '../Managers/AnimationManager';
+import CameraManager from '../Managers/CameraManager';
+import TimerManager from '../Managers/TimerManager';
+import { PlayerSprite } from '../Sprites/PlayerSprite';
+import { ENEMY_TYPE, EnemySprite } from '../Sprites/EnemySprite';
+import DoorSprite from '../Sprites/DoorSprite';
+import { LAMP_STATE, LampSprite } from '../Sprites/LampSprite';
+import ColorService from '../Services/ColorService';
+import UIUtil from '../Utils/UIUtil';
+
 class LevelManager {
    constructor(canvas, context, tileMap, levelTime, musicPath) {
       this.canvas = canvas;
@@ -33,7 +43,7 @@ class LevelManager {
          const animationEnemy = new AnimationManager("./assets/sprites/enemy-sprite.png", 67, 99, 11, 18, 0.75, true);
          let enemy = null;
 
-         if (position.tileNumber == 98) {
+         if (position.tileNumber === 98) {
             enemy = new EnemySprite(
                animationEnemy,
                position.x,
