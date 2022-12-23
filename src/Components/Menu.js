@@ -4,8 +4,11 @@ import useMenuAnimation from '../hooks/useMenuAnimation';
 import GameManager from '../Managers/GameManager';
 import UIUtil from '../Utils/UIUtil';
 
+import backgroundImage from '../assets/backgrounds/menu-background.jpg';
+import logoImage from '../assets/logo.png';
+import controlsImage from '../assets/ui/controls-image.png';
 
-const Menu = (props) => {
+function Menu(props) {
    const drawMenuAnimation = props.drawMenuAnimation;
    const canvasRef = useMenuAnimation(drawMenuAnimation);
 
@@ -81,11 +84,11 @@ const Menu = (props) => {
       <React.Fragment>
          <canvas id="menuAnimation" width="896" height="576" ref={canvasRef} />
 
-         <img className="image-background" src="./assets/backgrounds/menu-background.jpg" alt="Imagem de fundo" />
-         <img className="logo" id="logo" src="./assets/logo.png" alt="Color Blind" />
-         <img className="controls-image" id="controlsImage" src="./assets/ui/controls-image.png" alt="Controlos" />
+         <img className="image-background" src={backgroundImage} alt="Imagem de fundo" />
+         <img className="logo" id="logo" src={logoImage} alt="Logótipo" />
+         <img className="controls-image" id="controlsImage" src={controlsImage} alt="Controlos" />
 
-         <h1 className="credits-text" id="creditsText"></h1>
+         <p className="credits-text" id="creditsText"></p>
 
          <div className="buttons" id="buttons">
             <button className="blob-btn" id="button-start-game" onClick={onStartGame}>

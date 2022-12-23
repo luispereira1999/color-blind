@@ -4,6 +4,12 @@ import { TILE_TYPE } from '../Sprites/TileSprite';
 import CollisionUtil from '../Utils/CollisionUtil';
 import UIUtil from '../Utils/UIUtil';
 
+import lampEnableSound from '../assets/sounds/lamp-enable-sound.wav';
+import lampErrorSound from '../assets/sounds/lamp-error-sound.mp3';
+import wallSound from '../assets/sounds/wall-sound.mp3';
+import walkSound from '../assets/sounds/walk-sound.mp3';
+import doorSound from '../assets/sounds/door-sound.mp3';
+
 const PLAYER_STATE = {
    ALIVE: 0,
    DEAD: 1,
@@ -33,11 +39,11 @@ class PlayerSprite {
       this.keyboard.addKeydown(this.onKeydownPressed);
       this.keyboard.addKeyup(this.onKeyupPressed);
 
-      this.lampEnableAudio = new Audio('./assets/sounds/lamp-enable-sound.wav');
-      this.lampErrorAudio = new Audio('./assets/sounds/lamp-error-sound.mp3');
-      this.wallAudio = new Audio('./assets/sounds/wall-sound.mp3');
-      this.walkAudio = new Audio('./assets/sounds/walk-sound.mp3');
-      this.doorAudio = new Audio('./assets/sounds/door-sound.mp3');
+      this.lampEnableAudio = new Audio(lampEnableSound);
+      this.lampErrorAudio = new Audio(lampErrorSound);
+      this.wallAudio = new Audio(wallSound);
+      this.walkAudio = new Audio(walkSound);
+      this.doorAudio = new Audio(doorSound);
    }
 
    getBounds() {

@@ -1,5 +1,10 @@
+/*** GLOBAL DO JOGO ***/
+
 .gameScreen-container {
    position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 #gameScreen {
@@ -7,6 +12,9 @@
    overflow: hidden;
    z-index: 1;
 }
+
+
+/*** PARTÍCULAS ***/
 
 #tsparticles {
    position: absolute;
@@ -20,21 +28,22 @@
    pointer-events: none;
 }
 
-/* canvas pertencente às partículas */
+/* canvas das partículas */
 .tsparticles-canvas-el {
    position: absolute !important;
    pointer-events: none !important;
-   /* width: 896 !important;
-   height: 576 !important; */
    z-index: 9 !important;
 }
 
+
+/*** UI ***/
+
 #gameScreenUI {
-   /* background-color: rgba(0, 0, 0, 0); */
    display: none;
    position: absolute;
    width: 608px;
    height: 50px;
+   top: 0%;
    z-index: 2;
 }
 
@@ -45,7 +54,7 @@
 }
 
 
-/*** RELÓGIO ***/
+/*** UI - RELÓGIO ***/
 
 .clock-container {
    padding-top: 20px;
@@ -106,7 +115,7 @@
 }
 
 
-/*** SEQUÊNCIA DE CORES ***/
+/*** UI - SEQUÊNCIA DE CORES ***/
 
 #sequence {
    padding-left: 30px;
@@ -151,7 +160,7 @@
 }
 
 #winPopup .popup-back-to-menu-button {
-   background-image: url("../../assets/ui/back-to-menu-button.png");
+   background-image: url("../assets/ui/back-to-menu-button.png");
    background-size: cover;
    background-color: Transparent;
    width: 56px;
@@ -164,7 +173,7 @@
 }
 
 #winPopup .popup-go-to-next-level-button {
-   background-image: url("../../assets/ui/next-level-button.png");
+   background-image: url("../assets/ui/next-level-button.png");
    background-size: cover;
    background-color: Transparent;
    width: 56px;
@@ -190,7 +199,7 @@
 
 #winLastLevelPopup .popup-description-label {
    color: white;
-   top: 36%;
+   top: 38%;
    left: 27%;
    position: absolute;
    font-size: 19px;
@@ -200,7 +209,7 @@
 }
 
 #winLastLevelPopup .popup-back-to-menu-button {
-   background-image: url("../../assets/ui/back-to-menu-button.png");
+   background-image: url("../assets/ui/back-to-menu-button.png");
    background-size: cover;
    background-color: Transparent;
    width: 56px;
@@ -208,7 +217,7 @@
    cursor: pointer;
    border: 0;
    top: 65%;
-   left: 43.5%;
+   left: 44%;
    position: absolute;
 }
 
@@ -227,7 +236,7 @@
 
 #losePopup .popup-description-label {
    color: white;
-   top: 45%;
+   top: 43%;
    left: 24%;
    left: 24%;
    position: absolute;
@@ -238,7 +247,7 @@
 }
 
 #losePopup .popup-back-to-menu-button {
-   background-image: url("../../assets/ui/back-to-menu-button.png");
+   background-image: url("../assets/ui/back-to-menu-button.png");
    background-size: cover;
    background-color: Transparent;
    width: 56px;
@@ -251,7 +260,7 @@
 }
 
 #losePopup .popup-restart-level-button {
-   background-image: url("../../assets/ui/restart-level-button.png");
+   background-image: url("../assets/ui/restart-level-button.png");
    background-size: cover;
    background-color: Transparent;
    width: 56px;

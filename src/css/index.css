@@ -1,0 +1,32 @@
+/*** GLOBAL ***/
+
+@font-face {
+  font-family: blomberg;
+  font-style: normal;
+  font-weight: 400;
+  src: local('BLOMBERG'), url(../fonts/blomberg.woff) format('woff');
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: blomberg;
+}
+
+html,
+body {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#root {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}

@@ -12,7 +12,7 @@ class TileSprite {
 
    setImage(tileNumber) {
       const image = new Image();
-      image.src = `./assets/tiles/${tileNumber}.png`;
+      image.src = require(`../assets/tiles/${tileNumber}.png`);
       return image;
    }
 }

@@ -8,6 +8,11 @@ import { LAMP_STATE, LampSprite } from '../Sprites/LampSprite';
 import ColorService from '../Services/ColorService';
 import UIUtil from '../Utils/UIUtil';
 
+import playerWalkImage from '../assets/sprites/player-walk-sprite.png';
+import doorImage from '../assets/sprites/door-sprite.png';
+import enemyImage from '../assets/sprites/enemy-sprite.png';
+import lampImage from '../assets/sprites/lamp-sprite.png';
+
 class LevelManager {
    constructor(canvas, context, tileMap, levelTime, musicPath) {
       this.canvas = canvas;
@@ -19,7 +24,7 @@ class LevelManager {
    }
 
    async init(levelTime, musicPath) {
-      const animationPlayer = new AnimationManager("./assets/sprites/player-walk-sprite.png", 64, 100, 4, 21, 0.75);
+      const animationPlayer = new AnimationManager(playerWalkImage, 64, 100, 4, 21, 0.75);
       this.player = new PlayerSprite(
          animationPlayer,
          this.tileMap.startPlayerPosition.x,
@@ -29,7 +34,7 @@ class LevelManager {
          4.0
       );
 
-      const animationDoor = new AnimationManager("./assets/sprites/door-sprite.png", 141.25, 128, 4, 50, 1, true);
+      const animationDoor = new AnimationManager(doorImage, 141.25, 128, 4, 50, 1, true);
       this.door = new DoorSprite(
          animationDoor,
          this.tileMap.startDoorPosition.x - 14,
@@ -40,7 +45,7 @@ class LevelManager {
 
       this.enemies = [];
       this.tileMap.startEnemiesPosition.forEach(position => {
-         const animationEnemy = new AnimationManager("./assets/sprites/enemy-sprite.png", 67, 99, 11, 18, 0.75, true);
+         const animationEnemy = new AnimationManager(enemyImage, 67, 99, 11, 18, 0.75, true);
          let enemy = null;
 
          if (position.tileNumber === 98) {
@@ -79,7 +84,7 @@ class LevelManager {
       this.lamps = [];
       this.tileMap.startLampsPosition.forEach((position, index) => {
          const lamp = new LampSprite(
-            "./assets/sprites/lamp-sprite.png",
+            lampImage,
             position.x,
             position.y,
             34,
