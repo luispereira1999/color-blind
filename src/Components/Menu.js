@@ -8,9 +8,8 @@ import backgroundImage from '../assets/backgrounds/menu-background.jpg';
 import logoImage from '../assets/logo.png';
 import controlsImage from '../assets/ui/controls-image.png';
 
-function Menu(props) {
-   const drawMenuAnimation = props.drawMenuAnimation;
-   const canvasRef = useMenuAnimation(drawMenuAnimation);
+function Menu() {
+   const canvasRef = useMenuAnimation();
 
    const onStartGame = () => {
       const gameCanvas = document.getElementById("gameScreen");

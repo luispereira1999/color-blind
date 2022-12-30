@@ -4,7 +4,7 @@ import { PlayerSprite } from '../Sprites/PlayerSprite';
 
 import playerMenuImage from '../assets/sprites/player-menu-sprite.png';
 
-const useMenuAnimation = (drawMenuAnimation) => {
+const useMenuAnimation = () => {
    const canvasRef = useRef(null);
 
    useEffect(() => {
@@ -38,7 +38,7 @@ const useMenuAnimation = (drawMenuAnimation) => {
       };
 
       loop();
-   }, [drawMenuAnimation]);
+   }, []);
 
    return canvasRef;
 }
