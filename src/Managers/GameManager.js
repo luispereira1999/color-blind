@@ -2,7 +2,6 @@ import LevelManager from '../Managers/LevelManager';
 import TileMapManager from '../Managers/TileMapManager';
 import { PLAYER_STATE } from '../Sprites/PlayerSprite';
 import UIUtil from '../Utils/UIUtil';
-import { tsParticles } from "tsparticles-engine";
 
 import clockSound from '../assets/sounds/clock-sound.wav';
 import loseSound from '../assets/sounds/lose-sound.wav';
@@ -29,9 +28,11 @@ class GameManager {
       this.fireworksAudio = new Audio(fireworksSound);
       this.winAudio = new Audio(winSound);
 
+      const tsParticles = window.tsParticles;
+
       tsParticles.load("tsparticles", {
          fullScreen: {
-            enable: false
+            enable: true
          },
          detectRetina: true,
          background: {
@@ -56,7 +57,7 @@ class GameManager {
                height: 0
             },
             position: {
-               y: 50,
+               y: 75,
                x: 50
             }
          },
@@ -186,7 +187,7 @@ class GameManager {
    }
 
    startLevel(levelIndex) {
-      this.currentLevelIndex = 3;
+      this.currentLevelIndex = levelIndex;
       const levelProperties = this.getLevelProperties(this.currentLevelIndex);
 
       this.currentLevel = new LevelManager(

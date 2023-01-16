@@ -24,15 +24,16 @@
    right: 0;
    padding: 0;
    margin: 0;
-   z-index: 8;
+   z-index: 4;
    pointer-events: none;
 }
 
-/* canvas das partículas */
+/* classe pertencente ao elemento criado, ao usar partículas */
 .tsparticles-canvas-el {
    position: absolute !important;
    pointer-events: none !important;
-   z-index: 9 !important;
+   width: 896 !important;
+   height: 576 !important;
 }
 
 

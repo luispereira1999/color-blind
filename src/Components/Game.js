@@ -1,31 +1,14 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import '../css/Game.css';
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
 
 import winPopupImage from '../assets/ui/win-popup.png';
 import losePopupImage from '../assets/ui/lose-popup.png';
 
 function Game() {
-   const particlesInit = useCallback(async engine => {
-      await loadFull(engine);
-   }, []);
-
    return (
       <React.Fragment>
          <canvas id="gameScreen" width="896" height="576"></canvas>
-
-         <Particles
-            init={particlesInit}
-            id="tsparticles"
-            canvasClassName="tsparticles-canvas-el"
-
-            options={{
-               fullScreen: {
-                  enable: false
-               },
-            }}
-         />
+         <div id="tsparticles"></div>
 
          <div id="gameScreenUI">
             <div className="gameScreenUI-container">
