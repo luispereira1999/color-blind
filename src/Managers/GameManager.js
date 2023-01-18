@@ -1,18 +1,18 @@
-import LevelManager from '../Managers/LevelManager';
-import TileMapManager from '../Managers/TileMapManager';
-import { PLAYER_STATE } from '../Sprites/PlayerSprite';
-import UIUtil from '../Utils/UIUtil';
+import LevelManager from "../Managers/LevelManager";
+import TileMapManager from "../Managers/TileMapManager";
+import { PLAYER_STATE } from "../Sprites/PlayerSprite";
+import UIUtil from "../Utils/UIUtil";
 
-import clockSound from '../assets/sounds/clock-sound.wav';
-import loseSound from '../assets/sounds/lose-sound.wav';
-import fireworksSound from '../assets/sounds/fireworks-sound.wav';
-import winSound from '../assets/sounds/win-sound.mp3';
+import clockSound from "../assets/sounds/clock-sound.wav";
+import loseSound from "../assets/sounds/lose-sound.wav";
+import fireworksSound from "../assets/sounds/fireworks-sound.wav";
+import winSound from "../assets/sounds/win-sound.mp3";
 
-import level1Music from '../assets/musics/background-1-music.mp3';
-import level2Music from '../assets/musics/background-2-music.mp3';
-import level3Music from '../assets/musics/background-3-music.mp3';
-import level4Music from '../assets/musics/background-4-music.mp3';
-import level5Music from '../assets/musics/background-5-music.mp3';
+import level1Music from "../assets/musics/background-1-music.mp3";
+import level2Music from "../assets/musics/background-2-music.mp3";
+import level3Music from "../assets/musics/background-3-music.mp3";
+import level4Music from "../assets/musics/background-4-music.mp3";
+import level5Music from "../assets/musics/background-5-music.mp3";
 
 class GameManager {
    constructor(canvas, context, numberOfLevels) {
@@ -219,7 +219,7 @@ class GameManager {
             this.currentLevel.stopMusic();
             this.clockAudio.pause();
 
-            UIUtil.toggleScreen('losePopup', true);
+            UIUtil.toggleScreen("losePopup", true);
             this.backToMenu("losePopup");
             this.restartLevel("losePopup");
             this.loseAudio.play();
@@ -232,7 +232,7 @@ class GameManager {
          this.currentLevel.stopMusic();
          this.clockAudio.pause();
 
-         UIUtil.toggleScreen('losePopup', true);
+         UIUtil.toggleScreen("losePopup", true);
          this.backToMenu("losePopup");
          this.restartLevel("losePopup");
          this.loseAudio.play();
@@ -247,7 +247,7 @@ class GameManager {
          if (this.numberOfLevels === this.currentLevelIndex) {
             this.clockAudio.pause();
 
-            UIUtil.toggleScreen('winLastLevelPopup', true);
+            UIUtil.toggleScreen("winLastLevelPopup", true);
             this.backToMenu("winLastLevelPopup");
             this.tsparticlesContainer.playEmitter("win");
             this.fireworksAudio.play();
@@ -257,7 +257,7 @@ class GameManager {
          else {
             this.clockAudio.pause();
 
-            UIUtil.toggleScreen('winPopup', true);
+            UIUtil.toggleScreen("winPopup", true);
             this.backToMenu("winPopup");
             this.goToNextLevel("winPopup");
             this.tsparticlesContainer.playEmitter("win");
@@ -288,9 +288,9 @@ class GameManager {
       document.querySelector(`#${popupID} .popup-back-to-menu-button`).onclick = () => {
          this.tsparticlesContainer.pauseEmitter("win");
          UIUtil.toggleScreen(popupID, false);
-         UIUtil.toggleScreen('menuScreen', true);
-         UIUtil.toggleScreen('gameScreen', false);
-         UIUtil.toggleScreen('gameScreenUI', false);
+         UIUtil.toggleScreen("menuScreen", true);
+         UIUtil.toggleScreen("gameScreen", false);
+         UIUtil.toggleScreen("gameScreenUI", false);
       };
    }
 
@@ -334,6 +334,7 @@ class GameManager {
       let tileMap;
       let time;
       let musicPath;
+      let numberOfTilesInHeight = 9
 
       switch (levelIndex) {
          case 1:
@@ -388,8 +389,8 @@ class GameManager {
                   [3, -1, -1, -1, -1, 4, 4, 4, 4, 4, 7, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, 13, 2, 2, 2, 14, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, 5],
                   [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, 9, 9, 9, 9, 9, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, 5],
                   [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, 5],
-                  [3, -1, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 96, -1, 5],
-                  [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, 5],
+                  [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 96, -1, 5],
+                  [3, -1, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, 5],
                   [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7]
                ]]
             };
@@ -397,10 +398,10 @@ class GameManager {
             tileSize = 32;
             width = map.layers[0][0].length * tileSize;
             height = map.layers[0].length * tileSize;
-            scale = 2.0;
+            scale = (window.innerHeight / numberOfTilesInHeight / tileSize);
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 180000;  // milissegundos
+            time = 120000;  // milissegundos
             musicPath = level1Music;
             break;
          case 2:
@@ -455,8 +456,8 @@ class GameManager {
                   [3, -1, -1, -1, -1, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, -1, -1, -1, -1, 5, -1, -1, -1, -1, 5, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, 5],
                   [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 5, -1, -1, -1, 19, 4, 4, 4, 4, 4, 4, 4, 4, 18, -1, -1, -1, -1, 5],
                   [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 97, -1, 5, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
-                  [3, -1, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 96, -1, 5],
-                  [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
+                  [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 96, -1, 5],
+                  [3, -1, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
                   [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7],
                ]]
             };
@@ -464,10 +465,10 @@ class GameManager {
             tileSize = 32;
             width = map.layers[0][0].length * tileSize;
             height = map.layers[0].length * tileSize;
-            scale = 2.0;
+            scale = (window.innerHeight / numberOfTilesInHeight / tileSize);
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 300000;
+            time = 120000;
             musicPath = level2Music;
             break;
          case 3:
@@ -522,8 +523,8 @@ class GameManager {
                   [3, -1, -1, -1, 5, -1, -1, -1, 16, 4, 4, 4, 4, 4, 17, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, 5],
                   [3, -1, -1, -1, 5, -1, -1, -1, 5, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, -1, -1, -1, 5],
                   [3, -1, -1, -1, 5, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
-                  [3, -1, 99, -1, 5, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, 97, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
-                  [3, -1, -1, -1, 5, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
+                  [3, -1, -1, -1, 5, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, 97, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
+                  [3, -1, 99, -1, 5, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
                   [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7],
                ]]
             };
@@ -531,10 +532,10 @@ class GameManager {
             tileSize = 32;
             width = map.layers[0][0].length * tileSize;
             height = map.layers[0].length * tileSize;
-            scale = 2.0;
+            scale = (window.innerHeight / numberOfTilesInHeight / tileSize);
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 300000;
+            time = 120000;
             musicPath = level3Music;
             break;
          case 4:
@@ -589,8 +590,8 @@ class GameManager {
                   [3, 4, 4, 4, 4, 4, 4, -1, -1, -1, 5, -1, -1, -1, 3, -1, -1, -1, -1, 5, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
                   [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, 8, 4, 4, 4, 4, 7, -1, -1, -1, 5, 4, 4, 4, 4, 4, 4, -1, -1, -1, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5],
                   [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
-                  [3, -1, 99, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, 97, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 96, -1, 5],
-                  [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
+                  [3, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, 97, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 96, -1, 5],
+                  [3, -1, 99, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
                   [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7],
                ]]
             };
@@ -598,10 +599,10 @@ class GameManager {
             tileSize = 32;
             width = map.layers[0][0].length * tileSize;
             height = map.layers[0].length * tileSize;
-            scale = 2.0;
+            scale = (window.innerHeight / numberOfTilesInHeight / tileSize);
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 300000;
+            time = 120000;
             musicPath = level4Music;
             break;
          case 5:
@@ -655,8 +656,8 @@ class GameManager {
                [1, 2, 2, 2, 14, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, 5, -1, -1, -1, 3, -1, -1, 97, -1, 3, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, 5],
                [3, 9, 9, 9, 9, -1, -1, -1, 3, -1, -1, -1, 4, 4, 4, 4, 4, 7, -1, -1, -1, 8, 4, 4, 4, 4, 3, -1, -1, -1, 5, -1, -1, -1, -1, -1, 4, 4, 4, 4, 18, -1, -1, -1, 5],
                [3, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
-               [3, -1, 99, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, 5, -1, -1, -1, 98, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
-               [3, -1, -1, 97, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
+               [3, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, 5, -1, -1, -1, 98, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
+               [3, -1, 99, -1, -1, -1, -1, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 3, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 5],
                [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7],
                ]]
             };
@@ -664,10 +665,10 @@ class GameManager {
             tileSize = 32;
             width = map.layers[0][0].length * tileSize;
             height = map.layers[0].length * tileSize;
-            scale = 2.0;
+            scale = (window.innerHeight / numberOfTilesInHeight / tileSize);
             tileMap = new TileMapManager(tileSize, map, width, height, scale);
 
-            time = 420000;
+            time = 120000;
             musicPath = level5Music;
             break;
          default:

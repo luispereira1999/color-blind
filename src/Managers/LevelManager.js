@@ -1,17 +1,17 @@
-import AnimationManager from '../Managers/AnimationManager';
-import CameraManager from '../Managers/CameraManager';
-import TimerManager from '../Managers/TimerManager';
-import { PlayerSprite } from '../Sprites/PlayerSprite';
-import { ENEMY_TYPE, EnemySprite } from '../Sprites/EnemySprite';
-import DoorSprite from '../Sprites/DoorSprite';
-import { LAMP_STATE, LampSprite } from '../Sprites/LampSprite';
-import ColorService from '../Services/ColorService';
-import UIUtil from '../Utils/UIUtil';
+import AnimationManager from "../Managers/AnimationManager";
+import CameraManager from "../Managers/CameraManager";
+import TimerManager from "../Managers/TimerManager";
+import { PlayerSprite } from "../Sprites/PlayerSprite";
+import { ENEMY_TYPE, EnemySprite } from "../Sprites/EnemySprite";
+import DoorSprite from "../Sprites/DoorSprite";
+import { LAMP_STATE, LampSprite } from "../Sprites/LampSprite";
+import ColorService from "../Services/ColorService";
+import UIUtil from "../Utils/UIUtil";
 
-import playerWalkImage from '../assets/sprites/player-walk-sprite.png';
-import doorImage from '../assets/sprites/door-sprite.png';
-import enemyImage from '../assets/sprites/enemy-sprite.png';
-import lampImage from '../assets/sprites/lamp-sprite.png';
+import playerWalkImage from "../assets/sprites/player-walk-sprite.png";
+import doorImage from "../assets/sprites/door-sprite.png";
+import enemyImage from "../assets/sprites/enemy-sprite.png";
+import lampImage from "../assets/sprites/lamp-sprite.png";
 
 class LevelManager {
    constructor(canvas, context, tileMap, levelTime, musicPath) {
@@ -119,7 +119,7 @@ class LevelManager {
       UIUtil.toggleScreen("gameScreen", true);
       UIUtil.toggleScreen("gameScreenUI", true, "flex");
 
-      document.getElementById("sequence").textContent = '';
+      document.getElementById("sequence").textContent = "";
 
       this.sequence.forEach((element, index) => {
          UIUtil.createCircleElement("sequence", `sequence-element-${index + 1}`, "sequence-circle");

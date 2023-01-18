@@ -1,144 +1,104 @@
-import React from 'react';
-import '../css/Menu.css';
-import useMenuAnimation from '../hooks/useMenuAnimation';
-import GameManager from '../Managers/GameManager';
-import UIUtil from '../Utils/UIUtil';
+import React from "react";
+import "../css/Menu.css";
+import GameManager from "../Managers/GameManager";
+import UIUtil from "../Utils/UIUtil";
 
-import backgroundImage from '../assets/backgrounds/menu-background.jpg';
-import logoImage from '../assets/logo.png';
-import controlsImage from '../assets/ui/controls-image.png';
+import backgroundImage from "../assets/backgrounds/menu-background.png";
+import controlsImage from "../assets/ui/controls-image.png";
 
 function Menu() {
-   const canvasRef = useMenuAnimation();
-
    const onStartGame = () => {
+      hideControls();
+      hideCredits();
+
       const gameCanvas = document.getElementById("gameScreen");
       const gameContext = gameCanvas.getContext("2d");
+      gameContext.canvas.height = window.innerHeight;
 
       const gameManager = new GameManager(gameCanvas, gameContext, 5);
       gameManager.startLevel(1);
    }
 
-   const onDisplayCredits = () => {
-      const displayStateLogo = UIUtil.getDisplayState("logo");
-      const displayStateControls = UIUtil.getDisplayState("controlsImage");
+   const onDisplayControls = () => {
+      const creditsDisplay = UIUtil.getDisplayState("creditsText");
 
-      if (displayStateControls !== "none") {
-         UIUtil.toggleScreen("creditsText", true);
-         const creditsText = "Jogo desenvolvido no âmbito da unidade curricular de\n" +
-            "Programação e Desenvolvimento Web,\n" +
-            "realizado no Instituto Politécnico do Cávado e do Ave.\n\n" +
-            "Equipa:\n" +
-            "- Luís Pereira\n" +
-            "- Vânia Pereira\n\n" +
-            "Barcelos, Dezembro 2022\n" +
-            "© Direitos reservados.";
-         UIUtil.changeText("creditsText", creditsText);
-
-         UIUtil.toggleScreen("controlsImage", false);
-         UIUtil.toggleScreen("logo", false);
+      if (creditsDisplay !== "none") {
+         hideCredits();
+         showControls();
          return;
       }
 
-      if (displayStateLogo === "none") {
-         UIUtil.toggleScreen("logo", true);
-         UIUtil.toggleScreen("creditsText", false);
-      } else {
-         UIUtil.toggleScreen("logo", false);
-         UIUtil.toggleScreen("creditsText", true);
-
-         const creditsText = "Jogo desenvolvido no âmbito da unidade curricular de\n" +
-            "Programação e Desenvolvimento Web,\n" +
-            "realizado no Instituto Politécnico do Cávado e do Ave.\n\n" +
-            "Equipa:\n" +
-            "- Luís Pereira\n" +
-            "- Vânia Pereira\n\n" +
-            "Barcelos, Dezembro 2022\n" +
-            "© Direitos reservados.";
-         UIUtil.changeText("creditsText", creditsText);
-      }
+      showControls();
    }
 
-   const onDisplayControls = () => {
-      const displayStateLogo = UIUtil.getDisplayState("logo");
-      const displayStateCredits = UIUtil.getDisplayState("creditsText");
+   const onDisplayCredits = () => {
+      const controlsDisplay = UIUtil.getDisplayState("controlsImageContainer");
 
-      if (displayStateCredits !== "none") {
-         UIUtil.toggleScreen("creditsText", false);
-         UIUtil.toggleScreen("controlsImage", true);
-         UIUtil.toggleScreen("logo", false);
+      if (controlsDisplay !== "none") {
+         hideControls();
+         showCredits();
          return;
       }
 
-      if (displayStateLogo === "none") {
-         UIUtil.toggleScreen("logo", true);
-         UIUtil.toggleScreen("controlsImage", false);
-      } else {
-         UIUtil.toggleScreen("controlsImage", true);
-         UIUtil.toggleScreen("logo", false);
-      }
+      showCredits();
+   }
+
+   const showControls = () => {
+      UIUtil.toggleScreen("controlsImageContainer", true);
+      UIUtil.toggleScreen("controlsMovement", true);
+      UIUtil.toggleScreen("controlsAction", true);
+   }
+
+   const hideControls = () => {
+      UIUtil.toggleScreen("controlsImageContainer", false);
+      UIUtil.toggleScreen("controlsMovement", false);
+      UIUtil.toggleScreen("controlsAction", false);
+   }
+
+   const showCredits = () => {
+      UIUtil.toggleScreen("creditsText", true);
+   }
+
+   const hideCredits = () => {
+      UIUtil.toggleScreen("creditsText", false);
    }
 
    return (
       <React.Fragment>
-         <canvas id="menuAnimation" width="896" height="576" ref={canvasRef} />
-
+         {/* FUNDO */}
          <img className="image-background" src={backgroundImage} alt="Imagem de fundo" />
-         <img className="logo" id="logo" src={logoImage} alt="Logótipo" />
-         <img className="controls-image" id="controlsImage" src={controlsImage} alt="Controlos" />
 
-         <p className="credits-text" id="creditsText"></p>
-
-         <div className="buttons" id="buttons">
-            <button className="blob-btn" id="button-start-game" onClick={onStartGame}>
-               Novo Jogo
-               <span className="blob-btn__inner">
-                  <span className="blob-btn__blobs">
-                     <span className="blob-btn__blob"></span>
-                     <span className="blob-btn__blob"></span>
-                     <span className="blob-btn__blob"></span>
-                     <span className="blob-btn__blob"></span>
-                  </span>
-               </span>
-            </button>
-
-            <button className="blob-btn" id="button-display-credits" onClick={onDisplayCredits}>
-               Creditos
-               <span className="blob-btn__inner">
-                  <span className="blob-btn__blobs">
-                     <span className="blob-btn__blob"></span>
-                     <span className="blob-btn__blob"></span>
-                     <span className="blob-btn__blob"></span>
-                     <span className="blob-btn__blob"></span>
-                  </span>
-               </span>
-            </button>
-
-            <button className="blob-btn" id="button-display-controls" onClick={onDisplayControls}>
-               Controlos
-               <span className="blob-btn__inner">
-                  <span className="blob-btn__blobs">
-                     <span className="blob-btn__blob"></span>
-                     <span className="blob-btn__blob"></span>
-                     <span className="blob-btn__blob"></span>
-                     <span className="blob-btn__blob"></span>
-                  </span>
-               </span>
-            </button>
-
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-               <defs>
-                  <filter id="goo">
-                     <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
-                     <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7"
-                        result="goo"></feColorMatrix>
-                     <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
-                  </filter>
-               </defs>
-            </svg>
+         {/* BOTÕES */}
+         <div className="button-container-1">
+            <button id="button-start-game" onClick={onStartGame}></button>
+         </div>
+         <div className="button-container-2">
+            <button id="button-display-controls" onClick={onDisplayControls}></button>
+         </div>
+         <div className="button-container-3">
+            <button id="button-display-credits" onClick={onDisplayCredits}></button>
          </div>
 
-         <h3 className="copyright-text">2022 &#169; Color Blind</h3>
+         {/* CONTROLOS */}
+         <div className="controls-image-container" id="controlsImageContainer">
+            <img className="controls-image" src={controlsImage} alt="Controlos" />
+         </div>
+         <p className="controls-movement" id="controlsMovement">Movimento do jogador</p>
+         <p className="controls-action" id="controlsAction">Ação (ligar lâmpada / abrir porta)</p>
+
+         {/* CRÉDITOS */}
+         <p className="credits-text" id="creditsText">
+            Jogo desenvolvido no âmbito da unidade curricular de
+            Programação e Desenvolvimento Web,
+            realizado no Instituto Politécnico do Cávado e do Ave.<br /><br />
+
+            Equipa:<br />
+            - Luís Pereira<br />
+            - Vânia Pereira<br /><br />
+
+            Barcelos, Dezembro 2022<br />
+            © Direitos reservados.
+         </p>
       </React.Fragment>
    );
 }

@@ -7,7 +7,6 @@ import UIUtil from '../Utils/UIUtil';
 import lampEnableSound from '../assets/sounds/lamp-enable-sound.wav';
 import lampErrorSound from '../assets/sounds/lamp-error-sound.mp3';
 import wallSound from '../assets/sounds/wall-sound.mp3';
-import walkSound from '../assets/sounds/walk-sound.mp3';
 import doorSound from '../assets/sounds/door-sound.mp3';
 
 const PLAYER_STATE = {
@@ -42,7 +41,6 @@ class PlayerSprite {
       this.lampEnableAudio = new Audio(lampEnableSound);
       this.lampErrorAudio = new Audio(lampErrorSound);
       this.wallAudio = new Audio(wallSound);
-      this.walkAudio = new Audio(walkSound);
       this.doorAudio = new Audio(doorSound);
    }
 
@@ -61,23 +59,15 @@ class PlayerSprite {
       switch (keyPressed) {
          case KeyboardManager.Keys.LEFT:
             this.moveLeft = true;
-            this.walkAudio.play();
-            this.walkAudio.volume = 0.75;
             break;
          case KeyboardManager.Keys.RIGHT:
             this.moveRight = true;
-            this.walkAudio.play();
-            this.walkAudio.volume = 0.75;
             break;
          case KeyboardManager.Keys.UP:
             this.moveUp = true;
-            this.walkAudio.play();
-            this.walkAudio.volume = 0.75;
             break;
          case KeyboardManager.Keys.DOWN:
             this.moveDown = true;
-            this.walkAudio.play();
-            this.walkAudio.volume = 0.75;
             break;
          default:
             break;

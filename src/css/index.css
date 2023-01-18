@@ -1,19 +1,19 @@
 /*** GLOBAL ***/
 
 @font-face {
-  font-family: blomberg;
+  font-family: "Candy Pop!", sans-serif;
   font-style: normal;
   font-weight: 400;
-  src: local('BLOMBERG'), url(../fonts/blomberg.woff) format('woff');
+  src: local("Candy Pop!"), url(../fonts/candy-pop.ttf) format("ttf");
 }
 
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+  font-family: "Candy Pop!", sans-serif;
   margin: 0;
   padding: 0;
-  font-family: blomberg;
 }
 
 html,

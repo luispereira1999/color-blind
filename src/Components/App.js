@@ -1,6 +1,6 @@
-import React from 'react';
-import Menu from './Menu';
-import Game from './Game';
+import React from "react";
+import Menu from "./Menu";
+import Game from "./Game";
 
 function App() {
   return (

@@ -10,11 +10,6 @@ class UIUtil {
       return element.style.display;
    }
 
-   static changeText(elementID, text) {
-      let element = document.getElementById(elementID);
-      element.innerText = text;
-   }
-
    static createCircleElement(parentID, idName, className) {
       const newElement = document.createElement("div");
 

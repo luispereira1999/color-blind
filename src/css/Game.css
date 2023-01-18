@@ -1,10 +1,10 @@
 /*** GLOBAL DO JOGO ***/
 
 .gameScreen-container {
-   position: relative;
+   align-items: center;
    display: flex;
    justify-content: center;
-   align-items: center;
+   position: relative;
 }
 
 #gameScreen {
@@ -17,15 +17,15 @@
 /*** PARTÍCULAS ***/
 
 #tsparticles {
-   position: absolute;
-   top: 0;
    left: 0;
-   bottom: 0;
+   top: 0;
    right: 0;
-   padding: 0;
+   bottom: 0;
    margin: 0;
-   z-index: 4;
+   padding: 0;
+   position: absolute;
    pointer-events: none;
+   z-index: 4;
 }
 
 /* classe pertencente ao elemento criado, ao usar partículas */
@@ -41,45 +41,44 @@
 
 #gameScreenUI {
    display: none;
+   top: 0%;
    position: absolute;
    width: 608px;
    height: 50px;
-   top: 0%;
    z-index: 2;
 }
 
 .gameScreenUI-container {
+   display: flex;
    margin-left: -130px;
    position: relative;
-   display: flex;
 }
 
 
 /*** UI - RELÓGIO ***/
 
 .clock-container {
-   padding-top: 20px;
    display: flex;
+   padding-top: 20px;
 }
 
 .clock-col {
-   text-align: center;
    margin-right: 10px;
    margin-left: 10px;
    min-width: 60px;
    position: relative;
-   font-family: 'Montserrat', 'sans-serif' !important;
+   text-align: center;
 }
 
 .clock-col:not(:last-child):before,
 .clock-col:not(:last-child):after {
-   content: "";
    background-color: rgba(255, 255, 255, .3);
-   height: 5px;
-   width: 5px;
    border-radius: 50%;
-   position: absolute;
+   content: "";
    right: -12px;
+   position: absolute;
+   width: 5px;
+   height: 5px;
 }
 
 .clock-col:not(:last-child):before {
@@ -113,25 +112,26 @@
    font-weight: 100;
    margin-top: 5px;
    text-transform: uppercase;
+   user-select: none;
 }
 
 
 /*** UI - SEQUÊNCIA DE CORES ***/
 
 #sequence {
+   display: flex;
    padding-left: 30px;
    padding-top: 25px;
-   display: flex;
 }
 
 .sequence-circle {
-   height: 30px;
-   width: 30px;
    background-color: black;
-   border-radius: 50%;
-   margin-right: 10px;
    border: 4px solid black;
+   border-radius: 50%;
    display: inline-block;
+   margin-right: 10px;
+   width: 30px;
+   height: 30px;
 }
 
 
@@ -139,136 +139,143 @@
 
 #winPopup {
    display: none;
+   top: 12%;
+   margin-left: 5.5px;
    position: absolute;
-   z-index: 3;
    text-align: center;
-   top: 6%;
+   z-index: 3;
 }
 
 #winPopup .popup-background-image {
+   box-shadow: 3px 3px 10px 7px rgba(0, 0, 0, 0.3);
    width: 75%;
 }
 
 #winPopup .popup-description-label {
-   color: white;
-   top: 37%;
-   left: 27%;
-   position: absolute;
+   color: rgba(255, 255, 255, 0.764);
    font-size: 19px;
    font-weight: 100;
    display: block;
-   width: 200px;
+   left: 19.3%;
+   top: 41.2%;
+   position: absolute;
+   width: 280px;
+   user-select: none;
 }
 
 #winPopup .popup-back-to-menu-button {
-   background-image: url("../assets/ui/back-to-menu-button.png");
+   background-image: url("../assets/ui/home-button.png");
    background-size: cover;
    background-color: Transparent;
-   width: 56px;
-   height: 56px;
-   cursor: pointer;
    border: 0;
-   top: 65%;
-   left: 36%;
+   cursor: pointer;
+   left: 25%;
+   top: 68%;
    position: absolute;
+   width: 85px;
+   height: 80px;
 }
 
 #winPopup .popup-go-to-next-level-button {
-   background-image: url("../assets/ui/next-level-button.png");
+   background-image: url("../assets/ui/play-2-button.png");
    background-size: cover;
    background-color: Transparent;
-   width: 56px;
-   height: 56px;
-   cursor: pointer;
    border: 0;
-   top: 65%;
-   left: 54%;
+   cursor: pointer;
+   left: 56%;
+   top: 68%;
+   width: 85px;
+   height: 80px;
    position: absolute;
 }
 
 #winLastLevelPopup {
    display: none;
+   top: 12%;
+   margin-left: 5.5px;
    position: absolute;
-   z-index: 3;
    text-align: center;
-   top: 6%;
+   z-index: 3;
 }
 
 #winLastLevelPopup .popup-background-image {
+   box-shadow: 3px 3px 10px 7px rgba(0, 0, 0, 0.3);
    width: 75%;
 }
 
 #winLastLevelPopup .popup-description-label {
-   color: white;
-   top: 38%;
-   left: 27%;
-   position: absolute;
+   color: rgba(255, 255, 255, 0.764);
+   display: block;
    font-size: 19px;
    font-weight: 100;
-   display: block;
-   width: 200px;
+   left: 22.6%;
+   top: 41.2%;
+   position: absolute;
+   width: 250px;
+   user-select: none;
 }
 
 #winLastLevelPopup .popup-back-to-menu-button {
-   background-image: url("../assets/ui/back-to-menu-button.png");
-   background-size: cover;
    background-color: Transparent;
-   width: 56px;
-   height: 56px;
-   cursor: pointer;
+   background-image: url("../assets/ui/home-button.png");
+   background-size: cover;
    border: 0;
-   top: 65%;
-   left: 44%;
+   cursor: pointer;
+   left: 40.7%;
+   top: 68.3%;
    position: absolute;
+   width: 85px;
+   height: 80px;
 }
 
 #losePopup {
    display: none;
+   top: 12%;
+   margin-left: 5.5px;
    position: absolute;
-   z-index: 2;
    text-align: center;
-   top: 6.5%;
-   margin-left: 35px;
+   z-index: 2;
 }
 
 #losePopup .popup-background-image {
+   box-shadow: 3px 3px 10px 7px rgba(0, 0, 0, 0.3);
    width: 75%;
 }
 
 #losePopup .popup-description-label {
-   color: white;
-   top: 43%;
-   left: 24%;
-   left: 24%;
-   position: absolute;
+   color: rgba(255, 255, 255, 0.764);
+   display: block;
    font-size: 19px;
    font-weight: 100;
-   display: block;
-   width: 200px;
+   left: 22.6%;
+   top: 41.2%;
+   position: absolute;
+   width: 250px;
+   user-select: none;
 }
 
 #losePopup .popup-back-to-menu-button {
-   background-image: url("../assets/ui/back-to-menu-button.png");
+   background-image: url("../assets/ui/home-button.png");
    background-size: cover;
    background-color: Transparent;
-   width: 56px;
-   height: 56px;
-   cursor: pointer;
    border: 0;
-   top: 65%;
-   left: 31%;
+   cursor: pointer;
+   left: 25%;
+   top: 68%;
    position: absolute;
+   width: 85px;
+   height: 80px;
 }
 
 #losePopup .popup-restart-level-button {
-   background-image: url("../assets/ui/restart-level-button.png");
+   background-image: url("../assets/ui/play-2-button.png");
    background-size: cover;
    background-color: Transparent;
-   width: 56px;
-   height: 56px;
-   cursor: pointer;
    border: 0;
-   top: 65%;
-   left: 49%;
+   cursor: pointer;
+   left: 56%;
+   top: 68%;
    position: absolute;
+   width: 85px;
+   height: 80px;
 }

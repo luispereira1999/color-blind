@@ -1,4 +1,4 @@
-import { TILE_TYPE, TileSprite } from '../Sprites/TileSprite';
+import { TILE_TYPE, TileSprite } from "../Sprites/TileSprite";
 
 class TileMapManager {
    constructor(tileSize, map, width, height, scale = 1) {

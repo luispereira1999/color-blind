@@ -1,187 +1,130 @@
 /*** GLOBAL DO MENU ***/
 
 #menuScreen {
-  position: relative;
-  width: 896px;
-  height: 576px;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-#menuAnimation {
-  position: absolute;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 
 .image-background {
-  flex-shrink: 0;
-  min-width: 100%;
-  min-height: 100%;
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
 }
 
-.logo {
+.controls-image-container {
+  display: none;
+  left: 51%;
+  top: 62%;
   position: absolute;
-  top: 13%;
-  left: 35%;
 }
 
 .controls-image {
+  width: 7.5vw;
+  height: 20vh;
+}
+
+.controls-movement {
+  color: rgba(255, 255, 255, 0.764);
   display: none;
+  font-size: 2.8vh;
+  left: 61%;
+  top: 64.5%;
   position: absolute;
-  top: 10%;
-  left: 39%;
+  width: 26vw;
+  user-select: none;
+}
+
+.controls-action {
+  color: rgba(255, 255, 255, 0.764);
+  display: none;
+  font-size: 2.8vh;
+  left: 61%;
+  top: 76%;
+  position: absolute;
+  width: 26vw;
+  user-select: none;
 }
 
 .credits-text {
-  color: white;
+  color: rgba(255, 255, 255, 0.764);
+  display: none;
+  font-size: 2.4vh;
+  left: 51%;
+  top: 62%;
   position: absolute;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 18px;
-  text-align: center;
-  top: 6%;
-  left: 32%;
-  width: 575px;
+  text-align: left;
+  width: 32vw;
+  user-select: none;
 }
 
 .copyright-text {
   color: white;
-  position: absolute;
-  top: 96%;
-  left: 76%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 12px;
+  left: 76%;
+  top: 96%;
+  position: absolute;
   text-align: right;
   width: 200px;
+  user-select: none;
 }
 
 
 /*** BOTÕES DO MENU  ***/
 
-.buttons {
-  text-align: center;
+.button-container-1 {
+  left: 15.6%;
+  top: 60%;
   position: absolute;
-  top: 49%;
-  left: 46%;
 }
 
-.blob-btn {
-  display: block;
-  z-index: 2;
-  position: relative;
-  padding: 17px 30px 15px 30px;
-  margin-bottom: 35px;
-  text-align: center;
-  text-transform: uppercase;
-  color: #333;
-  font-size: 26px;
-  font-weight: bold;
+.button-container-2 {
+  left: 23.8%;
+  top: 70%;
+  position: absolute;
+}
+
+.button-container-3 {
+  left: 32.7%;
+  top: 70%;
+  position: absolute;
+}
+
+#button-start-game {
+  background-image: url("../assets/ui/play-1-button.png");
+  background-repeat: no-repeat;
   background-color: transparent;
-  outline: none;
+  background-position: center center;
+  background-size: 100% 100%;
   border: none;
-  transition: color 0.5s;
   cursor: pointer;
-  border-radius: 30px;
-  width: 200px;
+  width: 7.5vw;
+  height: 13.8vh;
 }
 
-.blob-btn:before {
-  content: "";
-  z-index: 1;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border: 2px solid #333;
-  border-radius: 30px;
+#button-display-controls {
+  background-image: url("../assets/ui/controls-button.png");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center center;
+  background-size: 100% 100%;
+  border: none;
+  cursor: pointer;
+  width: 7.5vw;
+  height: 13.8vh;
 }
 
-.blob-btn:after {
-  content: "";
-  z-index: -2;
-  position: absolute;
-  left: 3px;
-  top: 3px;
-  width: 100%;
-  height: 100%;
-  transition: all 0.3s 0.2s;
-  border-radius: 30px;
-}
-
-.blob-btn:hover {
-  color: #fff;
-  border-radius: 30px;
-}
-
-.blob-btn:hover:after {
-  transition: all 0.3s;
-  left: 0;
-  top: 0;
-  border-radius: 30px;
-}
-
-.blob-btn__inner {
-  z-index: -1;
-  overflow: hidden;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 30px;
-  background: #fff;
-}
-
-.blob-btn__blobs {
-  position: relative;
-  display: block;
-  height: 100%;
-  filter: url('#goo');
-}
-
-.blob-btn__blob {
-  position: absolute;
-  top: 2px;
-  width: 25%;
-  height: 100%;
-  background: #333;
-  border-radius: 100%;
-  transform: translate3d(0, 150%, 0) scale(1.7);
-  transition: transform 0.45s;
-}
-
-@supports (filter: url('#goo')) {
-  .blob-btn__blob {
-    transform: translate3d(0, 150%, 0) scale(1.4);
-  }
-}
-
-.blob-btn__blob:nth-child(1) {
-  left: 0%;
-  transition-delay: 0s;
-}
-
-.blob-btn__blob:nth-child(2) {
-  left: 30%;
-  transition-delay: 0.08s;
-}
-
-.blob-btn__blob:nth-child(3) {
-  left: 60%;
-  transition-delay: 0.16s;
-}
-
-.blob-btn__blob:nth-child(4) {
-  left: 90%;
-  transition-delay: 0.24s;
-}
-
-.blob-btn:hover .blob-btn__blob {
-  transform: translateZ(0) scale(1.7);
-}
-
-@supports (filter: url('#goo')) {
-  .blob-btn:hover .blob-btn__blob {
-    transform: translateZ(0) scale(1.4);
-  }
+#button-display-credits {
+  background-image: url("../assets/ui/about-button.png");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center center;
+  background-size: 100% 100%;
+  border: none;
+  cursor: pointer;
+  width: 7.5vw;
+  height: 13.8vh;
 }
