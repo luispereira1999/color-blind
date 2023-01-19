@@ -24,7 +24,7 @@ class LevelManager {
    }
 
    async init(levelTime, musicPath) {
-      const animationPlayer = new AnimationManager(playerWalkImage, 64, 100, 4, 21, 0.75);
+      const animationPlayer = new AnimationManager(playerWalkImage, 64, 100, 4, 21, this.tileMap.scale / 2.8);
       this.player = new PlayerSprite(
          animationPlayer,
          this.tileMap.startPlayerPosition.x,
@@ -34,7 +34,7 @@ class LevelManager {
          4.0
       );
 
-      const animationDoor = new AnimationManager(doorImage, 141.25, 128, 4, 50, 1, true);
+      const animationDoor = new AnimationManager(doorImage, 141.25, 128, 4, 50, this.tileMap.scale / 2.0, true);
       this.door = new DoorSprite(
          animationDoor,
          this.tileMap.startDoorPosition.x - 14,
@@ -45,7 +45,7 @@ class LevelManager {
 
       this.enemies = [];
       this.tileMap.startEnemiesPosition.forEach(position => {
-         const animationEnemy = new AnimationManager(enemyImage, 67, 99, 11, 18, 0.75, true);
+         const animationEnemy = new AnimationManager(enemyImage, 67, 99, 11, 18, this.tileMap.scale / 3.0, true);
          let enemy = null;
 
          if (position.tileNumber === 98) {
@@ -89,7 +89,7 @@ class LevelManager {
             position.y,
             34,
             28,
-            2.0,
+            this.tileMap.scale,
             this.colors[index].hex,
             LAMP_STATE.DISABLE
          );

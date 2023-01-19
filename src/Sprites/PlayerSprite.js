@@ -141,8 +141,8 @@ class PlayerSprite {
                // só quando o jogador tiver ao nível do chão, é que pode entrar na porta
                if (Math.abs((this.getBounds().top + this.getBounds().bottom) - (door.getBounds().top + door.getBounds().bottom)) < 5) {
                   // quando o jogador atingir o centro da porta, parar de andar
-                  if (this.x > door.x + 48) {
-                     this.x = door.x + 48;
+                  if (this.x > door.x + (tileMapScale * 24)) {
+                     this.x = door.x + (tileMapScale * 24);
                      this.state = PLAYER_STATE.ALIVE_AND_FREE;
                   }
 
@@ -150,7 +150,7 @@ class PlayerSprite {
                   this.x += 0.5;
 
                   // iniciar animação de abrir a porta
-                  if (this.x > door.x - 32) {
+                  if (this.x > door.x - (tileMapScale * 16)) {
                      door.animation.stop = false;
                      if (!this.audioIsPlaying(this.doorAudio)) {
                         this.doorAudio.play();
