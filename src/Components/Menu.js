@@ -10,6 +10,7 @@ function Menu() {
    const onStartGame = () => {
       hideControls();
       hideCredits();
+      UIUtil.toggleScreen("tsparticlesCursor", false);
 
       const gameCanvas = document.getElementById("gameScreen");
       const gameContext = gameCanvas.getContext("2d");

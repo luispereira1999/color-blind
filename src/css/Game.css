@@ -168,7 +168,7 @@
    background-size: cover;
    background-color: Transparent;
    border: 0;
-   cursor: pointer;
+   cursor: none;
    left: 25%;
    top: 68%;
    position: absolute;
@@ -181,7 +181,7 @@
    background-size: cover;
    background-color: Transparent;
    border: 0;
-   cursor: pointer;
+   cursor: none;
    left: 56%;
    top: 68%;
    width: 85px;
@@ -220,7 +220,7 @@
    background-image: url("../assets/ui/home-button.png");
    background-size: cover;
    border: 0;
-   cursor: pointer;
+   cursor: none;
    left: 40.7%;
    top: 68.3%;
    position: absolute;
@@ -259,7 +259,7 @@
    background-size: cover;
    background-color: Transparent;
    border: 0;
-   cursor: pointer;
+   cursor: none;
    left: 25%;
    top: 68%;
    position: absolute;
@@ -272,7 +272,7 @@
    background-size: cover;
    background-color: Transparent;
    border: 0;
-   cursor: pointer;
+   cursor: none;
    left: 56%;
    top: 68%;
    position: absolute;

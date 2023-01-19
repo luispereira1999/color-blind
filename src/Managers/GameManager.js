@@ -183,7 +183,8 @@ class GameManager {
          }
       });
 
-      this.tsparticlesContainer = tsParticles.domItem(0);
+      // 1 - div das partículas dos foguetes
+      this.tsparticlesContainer = tsParticles.domItem(1);
    }
 
    startLevel(levelIndex) {
@@ -232,6 +233,7 @@ class GameManager {
          this.currentLevel.stopMusic();
          this.clockAudio.pause();
 
+         UIUtil.toggleScreen("tsparticlesCursor", true);
          UIUtil.toggleScreen("losePopup", true);
          this.backToMenu("losePopup");
          this.restartLevel("losePopup");
@@ -247,6 +249,7 @@ class GameManager {
          if (this.numberOfLevels === this.currentLevelIndex) {
             this.clockAudio.pause();
 
+            UIUtil.toggleScreen("tsparticlesCursor", true);
             UIUtil.toggleScreen("winLastLevelPopup", true);
             this.backToMenu("winLastLevelPopup");
             this.tsparticlesContainer.playEmitter("win");
@@ -257,6 +260,7 @@ class GameManager {
          else {
             this.clockAudio.pause();
 
+            UIUtil.toggleScreen("tsparticlesCursor", true);
             UIUtil.toggleScreen("winPopup", true);
             this.backToMenu("winPopup");
             this.goToNextLevel("winPopup");
@@ -298,6 +302,7 @@ class GameManager {
       document.querySelector(`#${popupID} .popup-restart-level-button`).onclick = () => {
          this.tsparticlesContainer.pauseEmitter("win");
          UIUtil.toggleScreen(popupID, false);
+         UIUtil.toggleScreen("tsparticlesCursor", false);
          this.startLevel(this.currentLevelIndex);
       };
    }
@@ -306,6 +311,7 @@ class GameManager {
       document.querySelector(`#${popupID} .popup-go-to-next-level-button`).onclick = () => {
          this.tsparticlesContainer.pauseEmitter("win");
          UIUtil.toggleScreen(popupID, false);
+         UIUtil.toggleScreen("tsparticlesCursor", false);
          this.currentLevelIndex = this.getNextLevelIndex();
          this.startLevel(this.currentLevelIndex);
       };

@@ -9,8 +9,8 @@ function Game() {
       <React.Fragment>
          {/* ECRÃ DO JOGO */}
          <canvas id="gameScreen" width="1152" height="576"></canvas>
-       
-         {/* PARTÍCULAS */}
+
+         {/* PARTÍCULAS - FOGUETES */}
          <div id="tsparticles"></div>
 
          {/* TEMPO E SEQUÊNCIA DE CORES */}
