@@ -1,12 +1,12 @@
-import AnimationManager from "../Managers/AnimationManager";
-import CameraManager from "../Managers/CameraManager";
-import TimerManager from "../Managers/TimerManager";
-import { PlayerSprite } from "../Sprites/PlayerSprite";
-import { ENEMY_TYPE, EnemySprite } from "../Sprites/EnemySprite";
-import DoorSprite from "../Sprites/DoorSprite";
-import { LAMP_STATE, LampSprite } from "../Sprites/LampSprite";
-import ColorService from "../Services/ColorService";
-import UIUtil from "../Utils/UIUtil";
+import AnimationManager from "./AnimationManager";
+import CameraManager from "./CameraManager";
+import TimerManager from "./TimerManager";
+import { PlayerSprite } from "../sprites/PlayerSprite";
+import { ENEMY_TYPE, EnemySprite } from "../sprites/EnemySprite";
+import DoorSprite from "../sprites/DoorSprite";
+import { LAMP_STATE, LampSprite } from "../sprites/LampSprite";
+import ColorService from "../services/ColorService";
+import UIUtil from "../utils/UIUtil";
 
 import playerWalkImage from "../assets/sprites/player-walk-sprite.png";
 import doorImage from "../assets/sprites/door-sprite.png";
@@ -80,6 +80,12 @@ class LevelManager {
       // o número de lâmpadas é igual ao número de cores, visto que cada lâmpada tem uma cor
       const numberOfColors = this.tileMap.startLampsPosition.length;
       this.colors = await this.getColors(numberOfColors);
+
+      for (let i = 0; i < this.colors.length; i++) {
+         if (this.colors[i].hex === "") {
+            this.colors[i].hex = "f4f4f4";
+         }
+      }
 
       this.lamps = [];
       this.tileMap.startLampsPosition.forEach((position, index) => {

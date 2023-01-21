@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/Menu.css";
-import GameManager from "../Managers/GameManager";
-import UIUtil from "../Utils/UIUtil";
+import GameManager from "../managers/GameManager";
+import UIUtil from "../utils/UIUtil";
 
 import backgroundImage from "../assets/backgrounds/menu-background.png";
 import controlsImage from "../assets/ui/controls-image.png";
@@ -25,8 +25,6 @@ function Menu() {
 
       if (creditsDisplay !== "none") {
          hideCredits();
-         showControls();
-         return;
       }
 
       showControls();
@@ -37,8 +35,6 @@ function Menu() {
 
       if (controlsDisplay !== "none") {
          hideControls();
-         showCredits();
-         return;
       }
 
       showCredits();
@@ -97,7 +93,7 @@ function Menu() {
             - Luís Pereira<br />
             - Vânia Pereira<br /><br />
 
-            Barcelos, Dezembro 2022<br />
+            Barcelos, Janeiro 2023<br />
             © Direitos reservados.
          </p>
       </React.Fragment>

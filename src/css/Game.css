@@ -1,6 +1,6 @@
 /*** GLOBAL DO JOGO ***/
 
-.gameScreen-container {
+#gameScreen-container {
    align-items: center;
    display: flex;
    justify-content: center;
@@ -16,7 +16,8 @@
 
 /*** PARTÍCULAS ***/
 
-#tsparticles {
+#tsparticlesFireworks,
+#tsparticlesLamp {
    left: 0;
    top: 0;
    right: 0;
@@ -29,7 +30,8 @@
 }
 
 /* classe pertencente ao elemento criado, ao usar partículas */
-.tsparticles-canvas-el {
+#tsparticlesFireworks .tsparticles-canvas-el,
+#tsparticlesLamp .tsparticles-canvas-el {
    position: absolute !important;
    pointer-events: none !important;
    width: 896 !important;
