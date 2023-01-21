@@ -1,8 +1,8 @@
-import KeyboardManager from '../Managers/KeyboardManager';
-import { LAMP_STATE } from '../Sprites/LampSprite';
-import { TILE_TYPE } from '../Sprites/TileSprite';
-import CollisionUtil from '../Utils/CollisionUtil';
-import UIUtil from '../Utils/UIUtil';
+import KeyboardManager from '../managers/KeyboardManager';
+import { LAMP_STATE } from './LampSprite';
+import { TILE_TYPE } from './TileSprite';
+import CollisionUtil from '../utils/CollisionUtil';
+import UIUtil from '../utils/UIUtil';
 
 import lampEnableSound from '../assets/sounds/lamp-enable-sound.wav';
 import lampErrorSound from '../assets/sounds/lamp-error-sound.mp3';
@@ -42,6 +42,10 @@ class PlayerSprite {
       this.lampErrorAudio = new Audio(lampErrorSound);
       this.wallAudio = new Audio(wallSound);
       this.doorAudio = new Audio(doorSound);
+
+      this.tsParticles = window.tsParticles;
+      // 2 - referência à div das partículas das lâmpadas
+      this.tsparticlesContainer = this.tsParticles.domItem(2);
    }
 
    getBounds() {
@@ -105,6 +109,10 @@ class PlayerSprite {
          default:
             break;
       }
+   }
+
+   sleep = (m) => {
+      return new Promise(r => setTimeout(r, m));
    }
 
    update(tiles, tileSize, tileMapScale, door, enemies, lamps, sequence) {
@@ -213,6 +221,14 @@ class PlayerSprite {
 
                   const opacity = lamps[collider.collidingLampIndex].getOpacity();
                   const color = lamps[collider.collidingLampIndex].changeOpacityFromRGBA(lamps[collider.collidingLampIndex].color, opacity);
+
+                  // mostrar partículas
+                  (async () => {
+                     this.tsparticlesContainer.actualOptions.particles.color.value = color;
+                     this.tsparticlesContainer.playEmitter("light");
+                     await this.sleep(500)
+                     this.tsparticlesContainer.pauseEmitter("light");
+                  })()
 
                   const numberOfElementsRegistered = UIUtil.countSequenceElementsRegistered("sequence", "sequence-circle", "sequence-registered");
 

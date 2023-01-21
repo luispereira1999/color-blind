@@ -11,7 +11,10 @@ function Game() {
          <canvas id="gameScreen" width="1152" height="576"></canvas>
 
          {/* PARTÍCULAS - FOGUETES */}
-         <div id="tsparticles"></div>
+         <div id="tsparticlesFireworks"></div>
+
+         {/* PARTÍCULAS - LÂMPADA */}
+         <div id="tsparticlesLamp"></div>
 
          {/* TEMPO E SEQUÊNCIA DE CORES */}
          <div id="gameScreenUI">
