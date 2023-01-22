@@ -73,6 +73,7 @@ class GameManager {
             this.currentLevel.stopMusic();
             this.clockAudio.pause();
 
+            UIUtil.toggleScreen("tsparticlesCursor", true);
             UIUtil.toggleScreen("losePopup", true);
             this.backToMenu("losePopup");
             this.restartLevel("losePopup");
