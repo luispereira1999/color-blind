@@ -85,6 +85,8 @@ function Menu() {
 
          {/* CRÉDITOS */}
          <p className="credits-text" id="creditsText">
+            LIGHT UP! Liga todas as lâmpadas pela sequência correta.<br /><br />
+            
             Jogo desenvolvido no âmbito da unidade curricular de
             Programação e Desenvolvimento Web,
             realizado no Instituto Politécnico do Cávado e do Ave.<br /><br />
