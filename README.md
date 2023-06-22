@@ -1,10 +1,11 @@
 # Color Blind
-Jogo 2D de puzzle para ser jogado no navegador em desktop.
+Jogo 2D de puzzle para ser jogado no navegador em um dispositivo desktop.
 
 <img width="475" height="300" src="src/assets/backgrounds/menu-background.png">
 
 
-# Informações
+## Informações
+
 LIGHT UP! Liga todas as lâmpadas pela sequência correta.<br /><br />
 
 Jogo desenvolvido no âmbito da unidade curricular de
@@ -19,7 +20,7 @@ Barcelos, Janeiro 2023<br />
 © Direitos reservados.
 
 
-# Configurações
+## Configurações
 
 ### `npm install`
 Instalar pacotes e dependências do projeto.
