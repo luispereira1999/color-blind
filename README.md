@@ -1,35 +1,56 @@
-# Color Blind
-Jogo 2D de puzzle para ser jogado no navegador em um dispositivo desktop.
+<p align="center"><img width="425" src="http://luispereiralabs.com/assets/color-blind/page-cover.png" alt="Imagem de Apresentação"></p>
 
-<img width="475" height="300" src="src/assets/backgrounds/menu-background.png">
+## ⚡️ O que é o Color Blind?
 
+Um jogo 2D do género quebra-cabeça, para ser jogado diretamente no navegador em dispositivos desktop. Explora os 4 níveis de modo a ligar todas as luzes pela ordem certa sem o tempo acabar.
 
-## Informações
+Color Blind é um jogo desenvolvida em ambiente Web com React.js.
 
-LIGHT UP! Liga todas as lâmpadas pela sequência correta.<br /><br />
+> Esta não é um aplicação oficializada no mercado, foi construida no âmbito académico de forma aumentar as nossas capacidades técnicas e interpessoais.
 
-Jogo desenvolvido no âmbito da unidade curricular de
-Programação e Desenvolvimento Web,
-realizado no Instituto Politécnico do Cávado e do Ave.<br /><br />
+## 💡 Pré-Requisitos
 
-Equipa:<br />
-- Luís Pereira<br />
-- Vânia Pereira<br /><br />
+Para comerçar a usar o software localmente na sua máquina, basta instalar o [Node.js](https://nodejs.org/pt/download/prebuilt-installer).
 
-Barcelos, Janeiro 2023<br />
-© Direitos reservados.
+## ⚙️ Instalação
 
+Para colocar o projeto a funcionar localmente na sua máquina basta:
 
-## Configurações
+1. Clonar o repositório.
 
-### `npm install`
-Instalar pacotes e dependências do projeto.
+2. Abrir a linha de comandos.
 
-### `npm start`
-Iniciar projeto localmente.
+3. Ir para a pasta do projeto:
+   ```sh
+   cd "pasta_do_projeto"
+   ```
 
-### `npm run build`
-Fazer build do projeto para produção.
+4. Instalar todos os pacotes e dependências necessárias do projeto (apenas necessário uma vez quando se faz clone do repositório):
+   ```sh
+   npm install
+   ```
 
-### `npm test`
-Iniciar testes.
+5. Iniciar o servidor:
+   ```sh
+   npm start
+   ```
+
+6. Abrir no browser:
+   ```sh
+   http://localhost:3000
+   ```
+
+## 👍 Contribuições
+
+As contribuições são o que tornam a comunidade de código aberto um lugar incrível para aprender, inspirar e criar. Quaisquer contribuições que você faça são muito apreciadas.
+
+Se você tiver uma sugestão de melhoria, por favor, faça fork do repositório e crie uma pull request. Ou pode simplesmente abrir um issue. Não se esqueça de dar uma estrela ao projeto! Obrigado mais uma vez!
+
+## ⭐️ Colaboradores
+
+- Luís Pereira
+- Vânia Pereira
+
+## ⚠️ Licença
+
+Ao contribuir para este projeto, você concorda com as políticas da licença [MIT](LICENSE).
