@@ -6,7 +6,7 @@ Um jogo 2D do género quebra-cabeça, para ser jogado diretamente no navegador e
 
 Color Blind é um jogo desenvolvido em ambiente Web com React.js.
 
-> Esta não é um aplicação oficializada no mercado, foi construida no âmbito académico de forma aumentar as nossas capacidades técnicas e interpessoais.
+> Esta não é um jogo oficializado no mercado, foi construida no âmbito académico de forma aumentar as nossas capacidades técnicas e interpessoais.
 
 ## 💡 Pré-Requisitos
 
